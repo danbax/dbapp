@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Product implements Serializable {
-	private String pname;
 	private int pid;
+	private String pname;
 	private String ptype;
 	
 	
@@ -37,7 +37,7 @@ public class Product implements Serializable {
 	}
 	
 	public String toString() { 
-	    return "id:"+this.pid +" Name: '" + this.pname + "', Type: '" + this.ptype;
+	    return "Name: '" + this.pname + "', Type: '" + this.ptype;
 	} 
 	
 	

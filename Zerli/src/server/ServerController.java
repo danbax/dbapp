@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import client.Product;
-import client.Request;
 import database.*;
 import enums.Actions;
 
@@ -42,22 +41,27 @@ public class ServerController extends AbstractServer {
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+DBName, DBUserName, DBPassward);
 			System.out.println("SQL connection succeed");
+		
 			
-			System.out.println(msg);
-	
-			ArrayList<Object> arr = (ArrayList<Object>) msg;
-			Actions act = (Actions) arr.get(0);
+			@SuppressWarnings("unchecked")
+			ArrayList<String> msgArr = (ArrayList<String>) msg; // cast to array list
 			
-			if(act.equals(Actions.getProducts))
+			// switch - which action to do
+			if((msgArr.get(0)).equals(Actions.getProducts.toString()))
 			{
-				productManager.readStrFromDB((com.mysql.jdbc.Connection) conn,client);
+				// get products data from database
+				productManagerDatabase.readStrFromDB((com.mysql.jdbc.Connection) conn,client);
 				
 			}
-			if(act.equals(Actions.updateProducts))
+			if((msgArr.get(0)).equals(Actions.updateProducts.toString()))
 			{
 				// update product
-				Product p = (Product) arr.get(1);
-				productManager.updateProduct(p, (com.mysql.jdbc.Connection) conn);
+				int id = Integer.parseInt(msgArr.get(1));
+				String pname = msgArr.get(2);
+				String ptype = msgArr.get(3);
+				Product p = new Product(id,pname,ptype);
+				productManagerDatabase.updateProduct(p, (com.mysql.jdbc.Connection) conn,client);
+				
 				
 			}
 				
@@ -82,22 +86,12 @@ public class ServerController extends AbstractServer {
 	protected void serverStopped() {
 		System.out.println("Server has stopped listening for connections.");
 	}
-
-	public static void main(String[] args) {
-		// conect to server
-		int port;
-
-		port = DEFAULT_PORT; // Set port to 5555
-		ServerController server = new ServerController(port);
-
-		DBUserName= "root";
-		DBPassward= "dbapp1605";
-
-		try {
-			server.listen(); // Start listening for connections.
-		} catch (Exception ex) {
-			System.out.println("ERROR - Could not listen for clients!");
-		}
-		// TODO Auto-generated method stub
+	
+	public static void serverDetailsUpdate(String name,String user,String pass)
+	{
+		ServerController.DBName = name;
+		ServerController.DBUserName = user;
+		ServerController.DBPassward = pass;
 	}
+
 }
