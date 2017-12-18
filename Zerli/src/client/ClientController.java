@@ -2,10 +2,7 @@ package client;
 
 import ocsf.client.*;
 import java.io.*;
-import java.util.ArrayList;
-
 import ClientControllers.ProductManager;
-import enums.Actions;
 import server.ConIF;
 
 public class ClientController extends AbstractClient {
@@ -22,18 +19,25 @@ public class ClientController extends AbstractClient {
 
 	@Override
 	protected void handleMessageFromServer(Object msg) {
-		 ProductManager.setStudentComboBox(msg);
+		/*
+		 * return message from server
+		 */
+		 ProductManager.setProductComboBox(msg); // fill the product combobox
 	}
 
-	public void handleMessageFromClientUI(Object message) {
-		ArrayList<String> msg = (ArrayList<String>) message;
-System.out.println(msg);
+	public void handleMessageFromClientUI(Object req) {
+		/*
+		 * send arraylist<string> to server
+		 * req.get(0) = action
+		 * req.get(1) = value
+		 */
 		try {
-			sendToServer(msg);
+			sendToServer(req);
 		} catch (IOException e) {
 			clientUI.display("Could not send message to server.  Terminating client.");
 			quit();
 		}
+
 	}
 
 	public void quit() {

@@ -33,6 +33,9 @@ public class SelectProductController implements Initializable {
 	private Button btnExit = null;
 		
 	public void itemInfo(ActionEvent event) throws Exception {
+		/*
+		 * move to update product screen
+		 */
 		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		Stage primaryStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
@@ -45,18 +48,24 @@ public class SelectProductController implements Initializable {
 		scene.getStylesheets().add(getClass().getResource("/gui/updateProductForm.css").toExternalForm());
 		
 		primaryStage.setScene(scene);		
-		primaryStage.show();
+		primaryStage.show(); 
 	}
 
-	public void start(Stage primaryStage) throws Exception {	
+	public void start(Stage primaryStage) throws Exception {
+		
+		/*
+		 * start select product frame
+		 */
+		
 		Parent root = FXMLLoader.load(getClass().getResource("/gui/selectProductFrame.fxml"));
 		
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("/gui/selectProductFrame.css").toExternalForm());
-		primaryStage.setTitle("Academic Managment Tool");
+		primaryStage.setTitle("Product update tool");
 		primaryStage.setScene(scene);
 		
-		primaryStage.show();		
+		primaryStage.show();
+		
 	}
 	
 	public void getExitBtn(ActionEvent event) throws Exception {
@@ -70,7 +79,7 @@ public class SelectProductController implements Initializable {
 		this.sfc.loadStudent(p1);
 		}
 	
-	// creating list of Faculties
+	// creating list of Products
 		@SuppressWarnings("unchecked")
 		public void setStudentComboBox(Object msg) {
 			if(msg instanceof ArrayList)

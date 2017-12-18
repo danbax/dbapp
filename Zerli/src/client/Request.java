@@ -2,6 +2,12 @@ package client;
 import enums.Actions;;
 
 public class Request {
+	/*
+	 * object represent request to server
+	 * instead of sending arraylist
+	 * 
+	 * ********** NOT WORKING YET ********** *
+	 */
 	private Actions action;
 	private Object value;
 	

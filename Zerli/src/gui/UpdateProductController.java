@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import ClientControllers.ProductManager;
-import client.Main;
+import client.Client;
 import client.Product;
-import database.productManager;
 import enums.Actions;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,8 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class UpdateProductController extends productManager implements Initializable  {
-	ArrayList<String> str = new ArrayList<String>();
+public class UpdateProductController implements Initializable  {
 	private Product p;
 		
 	@FXML
@@ -44,6 +42,9 @@ public class UpdateProductController extends productManager implements Initializ
 	
 	@FXML
 	private Button btnClose;
+	
+	@FXML
+	private Label txtUpdate;
 		
 	
 	ObservableList<String> list;
@@ -51,11 +52,12 @@ public class UpdateProductController extends productManager implements Initializ
 	public void loadStudent(Product product){
 		this.p=product;
 		this.txtName.setText(p.getProductName());
-		this.txtSurname.setText(p.getProductType());
+		this.txtSurname.setText(p.getProductType()); 
 	}
 	
-	@FXML
+	
 		public void backBtnAction(ActionEvent event) throws Exception {
+			ProductManager.updateDataComboBox();
 			((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 			Stage primaryStage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
@@ -67,22 +69,28 @@ public class UpdateProductController extends productManager implements Initializ
 			primaryStage.setScene(scene);		
 			primaryStage.show();
 		}
-		@FXML
+		
 		public void saveBtnAction(ActionEvent event) throws Exception {
+			String host = "localhost";
+			
+			Client mainWindow = new Client(host, Client.DEFAULT_PORT);	
+			
+			// show success message
+			if (mainWindow != null)
+				System.out.println("Connection to " + host + " succeeded!");
+			
+			int id = p.getProductID();
 			String pname = txtName.getText();
 			String ptype = txtSurname.getText();
-			int pid = p.getProductID();
+			String idString = Integer.toString(id);
 			
-			//debug
-			System.out.println(pname+"-"+ptype+"-"+pid);
-			
-			ArrayList<Object> updateProduct = new ArrayList<Object>();
-			updateProduct.add(Actions.updateProducts);
-			updateProduct.add(Integer.toString(pid));
-			updateProduct.add(pname);
-			updateProduct.add(ptype);
-			//ProductManager.updateProduct(updateProduct);
-			Main.clientConn.handleMessageFromClientUI(updateProduct);
+			ArrayList<String> up = new ArrayList<String>();
+			up.add(Actions.updateProducts.toString());
+			up.add(idString);
+			up.add(pname);
+			up.add(ptype);
+			mainWindow.Accept(up);
+			txtUpdate.setText("updated!");
 		}
 
 		@Override
