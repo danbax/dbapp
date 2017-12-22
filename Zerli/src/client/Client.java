@@ -10,7 +10,6 @@ public class Client implements ConIF {
 	final public static int DEFAULT_PORT = 5551;
 	public static ClientController clientConn;
 	public static String host = "localhost"; 
-	int t;
 
 	// setup client connection
 	public Client(String host, int port) {
