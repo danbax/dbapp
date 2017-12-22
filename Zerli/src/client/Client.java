@@ -15,9 +15,10 @@ public class Client implements ConIF {
 
 	// setup client connection
 	public Client(String host, int port) {
-
+		System.out.println("Gay");
 		try {
 			clientConn = new ClientController(Client.host, Client.DEFAULT_PORT, this);
+			
 
 		} catch (IOException exception) {
 			System.out.println("Error: Can't setup connection!"
