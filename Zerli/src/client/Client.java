@@ -15,7 +15,7 @@ public class Client implements ConIF {
 
 	// setup client connection
 	public Client(String host, int port) {
-		System.out.println("Gayxxx");
+		System.out.println("lior ata cocksinal!!! ");
 		try {
 			clientConn = new ClientController(Client.host, Client.DEFAULT_PORT, this);
 			
