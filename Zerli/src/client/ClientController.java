@@ -2,7 +2,9 @@ package client;
 
 import ocsf.client.*;
 import java.io.*;
-import ClientControllers.ProductManager;
+import java.util.ArrayList;
+import enums.Actions;
+import gui.LoginController;
 import server.ConIF;
 
 public class ClientController extends AbstractClient {
@@ -14,7 +16,7 @@ public class ClientController extends AbstractClient {
 			throws IOException {
 		super(host, port);
 		this.clientUI = clientUI;
-		openConnection();
+		openConnection(); 
 	}
 
 	@Override
@@ -22,7 +24,36 @@ public class ClientController extends AbstractClient {
 		/*
 		 * return message from server
 		 */
-		 ProductManager.setProductComboBox(msg); // fill the product combobox
+		@SuppressWarnings("unchecked")
+		ArrayList<String> serverMesseage = (ArrayList<String>) msg;
+		System.out.println(serverMesseage);
+		// decide which action perform
+		if (serverMesseage.get(0).equals(Actions.ValidLoginDataCheck.toString())) {
+			// checked id login data correct
+			LoginController loginc = (LoginController)LoginController.last;
+        	if(serverMesseage.get(1).equals(Actions.UsernameExist.toString()))
+        	{
+        		// login user
+        		System.out.println("login");
+        		try {
+					loginc.ShowLoginMessage(true);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	}
+        	else
+        	{
+        		// show error
+        		System.out.println("error");
+        		try {
+					loginc.ShowLoginMessage(false);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	}
+		}
 	}
 
 	public void handleMessageFromClientUI(Object req) {

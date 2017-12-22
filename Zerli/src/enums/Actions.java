@@ -1,6 +1,11 @@
 package enums;
 
 public enum Actions {
-	getProducts,
-	updateProducts
+	/*login*/
+	ValidLoginDataCheck,
+	// options:
+	UsernameExist,
+	UsernameDoesNotExist;
+	
+	
 }

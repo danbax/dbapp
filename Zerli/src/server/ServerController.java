@@ -2,9 +2,8 @@ package server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
-import client.Product;
+import client.Request;
+import client.User;
 import database.*;
 import enums.Actions;
 
@@ -40,33 +39,26 @@ public class ServerController extends AbstractServer {
 
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+DBName, DBUserName, DBPassward);
-			System.out.println("SQL connection succeed");
 		
-			
+		
+			/*
 			@SuppressWarnings("unchecked")
 			ArrayList<String> msgArr = (ArrayList<String>) msg; // cast to array list
+			System.out.println(msgArr);
+			*/
+			
+			Request req = (Request) msg;
+			
 			
 			// switch - which action to do
-			if((msgArr.get(0)).equals(Actions.getProducts.toString()))
+			if(req.getAction() == Actions.ValidLoginDataCheck)
 			{
 				// get products data from database
-				productManagerDatabase.readStrFromDB((com.mysql.jdbc.Connection) conn,client);
+				User u = (User) req.getValue();
+				LoginManagerDatabase.isValidData((com.mysql.jdbc.Connection) conn,client,u.getUsername(),u.getPassword());
 				
 			}
-			if((msgArr.get(0)).equals(Actions.updateProducts.toString()))
-			{
-				// update product
-				int id = Integer.parseInt(msgArr.get(1));
-				String pname = msgArr.get(2);
-				String ptype = msgArr.get(3);
-				Product p = new Product(id,pname,ptype);
-				productManagerDatabase.updateProduct(p, (com.mysql.jdbc.Connection) conn,client);
-				
-				
-			}
-				
-		
-			conn.close();
+			conn.close(); 
 
 		} catch (SQLException ex) {/* handle any errors */
 			System.out.println("SQLException: " + ex.getMessage());

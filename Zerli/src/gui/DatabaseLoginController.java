@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import server.ServerController;
@@ -20,13 +21,14 @@ public class DatabaseLoginController implements Initializable  {
 	@FXML
 	private TextField dbUserName;
 	@FXML
-	private TextField dbPassword;
+	private PasswordField dbPassword;
 	
 	@FXML
-	private Button saveDbBtn;
+	private Button start;
 	
-		public void saveBtnAction(ActionEvent event) throws Exception {
-			Stage stage = (Stage) saveDbBtn.getScene().getWindow();
+	@FXML
+		public void onServerStart(ActionEvent event) throws Exception {
+			Stage stage = (Stage) start.getScene().getWindow(); 
 			/*
 			 * updates data to server controller. 
 			 * close screen
@@ -61,7 +63,7 @@ public class DatabaseLoginController implements Initializable  {
 			Parent root = FXMLLoader.load(getClass().getResource("/gui/databaseLoginForm.fxml"));
 			
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/gui/databaseLoginForm.css").toExternalForm());
+			//scene.getStylesheets().add(getClass().getResource("/gui/databaseLoginForm.css").toExternalForm());
 			primaryStage.setTitle("Product update tool");
 			primaryStage.setScene(scene);
 			

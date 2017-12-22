@@ -1,12 +1,20 @@
 package client;
+import java.io.Serializable;
+
 import enums.Actions;;
 
-public class Request {
+public class Request implements Serializable {
+	/**
+	 *  Object sent to server determine what server should do
+	 *  action - ENUM : what action we should do
+	 *  value - parameters for action
+	 */
+	private static final long serialVersionUID = -1373387327000104528L;
+	// all entities implements Serializable so they could be sent to server 
+
 	/*
 	 * object represent request to server
 	 * instead of sending arraylist
-	 * 
-	 * ********** NOT WORKING YET ********** *
 	 */
 	private Actions action;
 	private Object value;

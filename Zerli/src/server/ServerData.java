@@ -17,7 +17,7 @@ public class ServerData extends Application {
 	public void start(Stage arg0) throws Exception {
   	
 		dbFrame = new DatabaseLoginController(); // create StudentFrame
-		dbFrame.start(arg0); 
+		dbFrame.start(arg0);  
 	}
 
 	

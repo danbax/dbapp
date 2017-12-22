@@ -15,9 +15,9 @@ public class ClientData extends Application {
 	
 	@Override
 	public void start(Stage arg0) throws Exception {
-  	
+		
 		ipFrame = new ClientIpSetController(); // create StudentFrame
-		ipFrame.start(arg0);
+		ipFrame.start(arg0); 
 	}
 
 	
