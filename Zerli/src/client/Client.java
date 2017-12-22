@@ -7,6 +7,8 @@ public class Client implements ConIF {
 	/*
 	 * Client is connecting the client to the server
 	 */
+	
+	//Daniel
 	final public static int DEFAULT_PORT = 5551;
 	public static ClientController clientConn;
 	public static String host = "localhost"; 
