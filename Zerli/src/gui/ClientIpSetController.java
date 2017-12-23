@@ -3,8 +3,6 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 import client.Client;
-import client.Request;
-import enums.Actions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,10 +46,8 @@ public class ClientIpSetController implements Initializable  {
 			primaryStage.setScene(scene); 		
 			primaryStage.show(); 
 			*/
-			
 			GUIcontroller guic = new GUIcontroller();
-			guic.loadFxmlwithCSS("loginForm.fxml","loginForm.css");
-			
+			guic.loadFxml("loginForm.fxml");
 		}
 		
 		public void start(Stage primaryStage) throws Exception {
@@ -71,7 +67,6 @@ public class ClientIpSetController implements Initializable  {
 			//scene.getStylesheets().add(getClass().getResource("/gui/ClientIpSetForm.css").toExternalForm());
 			primaryStage.setTitle("Set IP");
 			primaryStage.setScene(scene);
-			
 			
 			primaryStage.show();
 		}

@@ -3,10 +3,8 @@ package client;
 import ocsf.client.*;
 import java.io.*;
 import java.util.ArrayList;
-
 import enums.Actions;
 import gui.LoginController;
-import gui.UpdateCatalogController;
 import server.ConIF;
 
 public class ClientController extends AbstractClient {
@@ -26,12 +24,14 @@ public class ClientController extends AbstractClient {
 		/*
 		 * return message from server
 		 */
-		ServerResponse sr = (ServerResponse) msg;
+		@SuppressWarnings("unchecked")
+		ArrayList<String> serverMesseage = (ArrayList<String>) msg;
+		System.out.println(serverMesseage);
 		// decide which action perform
-		if (sr.getAction() == Actions.ValidLoginDataCheck) {
+		if (serverMesseage.get(0).equals(Actions.ValidLoginDataCheck.toString())) {
 			// checked id login data correct
 			LoginController loginc = (LoginController)LoginController.last;
-        	if(sr.getAnswer() == Actions.UsernameExist)
+        	if(serverMesseage.get(1).equals(Actions.UsernameExist.toString()))
         	{
         		// login user
         		System.out.println("login");
@@ -42,7 +42,7 @@ public class ClientController extends AbstractClient {
 					e.printStackTrace();
 				}
         	}
-        	else if(sr.getAnswer() == Actions.UsernameDoesNotExist)
+        	else
         	{
         		// show error
         		System.out.println("error");
@@ -53,15 +53,6 @@ public class ClientController extends AbstractClient {
 					e.printStackTrace();
 				}
         	}
-		}
-		
-		if (sr.getAction() == Actions.GetProducts) {
-			@SuppressWarnings("unchecked")
-			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
-			UpdateCatalogController.last.fillProductsInTable(products);
-		}
-		if (sr.getAction() == Actions.AddProduct) {
-			
 		}
 	}
 

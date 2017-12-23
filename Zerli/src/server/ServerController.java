@@ -2,8 +2,6 @@ package server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import client.Product;
 import client.Request;
 import client.User;
 import database.*;
@@ -59,14 +57,6 @@ public class ServerController extends AbstractServer {
 				User u = (User) req.getValue();
 				LoginManagerDatabase.isValidData((com.mysql.jdbc.Connection) conn,client,u.getUsername(),u.getPassword());
 				
-			}
-			if(req.getAction() == Actions.GetProducts)
-			{
-				UpdateCatalogDatabase.getProducts((com.mysql.jdbc.Connection)conn, client);
-			}
-			if(req.getAction() == Actions.AddProduct)
-			{
-				UpdateCatalogDatabase.addProduct((com.mysql.jdbc.Connection)conn, client,(Product) req.getValue());
 			}
 			conn.close(); 
 

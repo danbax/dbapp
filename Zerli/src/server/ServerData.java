@@ -1,12 +1,12 @@
-package client;
+package server;
 
-import gui.ClientIpSetController;
+import gui.DatabaseLoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class ClientData extends Application {
+public class ServerData extends Application {
 	
-	private static ClientIpSetController ipFrame;
+	private static DatabaseLoginController dbFrame;
 		
 	public static void main( String args[] ) throws Exception
 	   { 
@@ -15,9 +15,9 @@ public class ClientData extends Application {
 	
 	@Override
 	public void start(Stage arg0) throws Exception {
-		
-		ipFrame = new ClientIpSetController(); // create StudentFrame
-		ipFrame.start(arg0); 
+  	
+		dbFrame = new DatabaseLoginController(); // create StudentFrame
+		dbFrame.start(arg0);  
 	}
 
 	

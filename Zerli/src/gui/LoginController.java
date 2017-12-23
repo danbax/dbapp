@@ -17,22 +17,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable  {
 	public static LoginController last;
-	
 	@FXML
 	private TextField loginUsername;
-	
 	@FXML
 	private PasswordField loginPassword;
-	
 	@FXML
 	private Button loginButton;
-	
 	@FXML
 	private Text loginMessage;
 	
@@ -53,6 +48,16 @@ public class LoginController implements Initializable  {
 		
 	}
 	
+	@FXML
+	public void moveTofucntion(ActionEvent event) throws Exception {
+		
+		// clicking on logging button
+		
+		GUIcontroller guic = new GUIcontroller();
+		guic.loadFxml("MainMenu.fxml");
+		
+		
+	}
 	
 	@FXML
 	public void ShowLoginMessage(Boolean isValid) throws IOException
@@ -60,7 +65,6 @@ public class LoginController implements Initializable  {
 		/*
 		 * show error message if data is invalid
 		 */
-		
 		if(isValid)
 		{
 			// GO to main menu
@@ -95,21 +99,15 @@ public class LoginController implements Initializable  {
 	}
 	
 	
-		@FXML
 		
 		public void start(Stage primaryStage) throws Exception {
 			
 			/*
 			 * start frame
 			 */
-			
-
-			
 			Parent root = FXMLLoader.load(getClass().getResource("/gui/loginForm.fxml"));
 			
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/gui/loginForm.css").toExternalForm());
-			
 			//scene.getStylesheets().add(getClass().getResource("/gui/ClientIpSetForm.css").toExternalForm());
 			primaryStage.setTitle("Set IP");
 			primaryStage.setScene(scene);

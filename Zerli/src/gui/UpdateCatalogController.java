@@ -1,39 +1,34 @@
 package gui;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import client.Client;
-import client.Product;
-import client.Request;
-import enums.Actions;
+
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class UpdateCatalogController extends Application implements Initializable  {
-	
-	public static UpdateCatalogController last;
-	private ObservableList<Product> ObserProducts;
 	@FXML
-	private TableView<Product> ProductsTable = new TableView<Product>(); // table of products
-	
-	
+	private TableView ProductsTable;
+	/*
+	 @FXML private TableColumn<User, String> UserId;
+	 @FXML private TableColumn<User, String> UserName;
+	 @FXML private TableColumn<User, String> Active;
+	*/
+	 
 	@FXML
 	private TextField txtFieldPname;
 	@FXML
@@ -66,97 +61,20 @@ public class UpdateCatalogController extends Application implements Initializabl
 		@FXML
 		public void onBtnAddClicked(ActionEvent event) throws Exception {
 			// add product to database, clean form, show message "added succefully"
-			String pname = txtFieldPname.getText();
-			String ptype = txtFieldPtype.getText();
-			
-			Product p = new Product(pname,ptype);
-			Request req = new Request(Actions.AddProduct,p);
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			Client.clientConn.handleMessageFromClientUI(req);
-			req.setAction(Actions.GetProducts); 
-			Client.clientConn.handleMessageFromClientUI(req);
 		}
 		
 		@FXML
 		public void onMenuClick(ActionEvent event) throws Exception {
 			// add product to database, clean form, show message "added succefully"
 
-			/*
-			 *  Move to main menu
-			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxml("MainMenu.fxml");
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			//GUIcontroller guic = new GUIcontroller();
+			//guic.loadFxml("loginForm.fxml");
 			
-		}
-		
-		public void refreshTableView(ArrayList<Product> products)
-		{
-			ObserProducts = FXCollections.observableArrayList(products);
-			ProductsTable.refresh();
-		}
-		
-		@SuppressWarnings("unchecked")
-		public void fillProductsInTable(ArrayList<Product> products)
-		{
-			/*
-			 * This function fill the products table with data in ArrayList products
-			 * Works only for first load of tableView
-			 */
-			if(ObserProducts != null) {
-				// if table alredy populate
-				/*Dani: didn't find better solution */
-				ObserProducts.removeAll(ObserProducts);
-				for(Product p : products)
-				{
-					ObserProducts.add(p);
-				}
-				
-			}
-			else
-			{
-				//casting ArrayList to ObservableList
-				ObserProducts = FXCollections.observableArrayList(products);
-				
-				// defining table columns
-				TableColumn<Product, String> nameCol = new TableColumn<Product, String>("Name");
-				TableColumn<Product, String> typeCol = new TableColumn<Product, String>("Type");
-				
-				//add data to columns
-		        nameCol.setCellValueFactory(
-		        	    new PropertyValueFactory<Product,String>("productName")
-		        	);
-		        
-		        typeCol.setCellValueFactory(
-		        	    new PropertyValueFactory<Product,String>("productType")
-		        	);
-		        
-		        
-		        ProductsTable.setItems(ObserProducts);
-		        ProductsTable.getColumns().addAll(nameCol, typeCol);
-			}
 		}
 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	
-			last = this;
 			
-			// getProducts from database
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.GetProducts); 
-			Client.clientConn.handleMessageFromClientUI(req);
 		}
 	
 }

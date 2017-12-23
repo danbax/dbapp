@@ -5,38 +5,40 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Product implements Serializable {
 	private int pid;
-	private String productName;
-	private String productType;
+	private String pname;
+	private String ptype;
 	
 	
 	public Product(	String name, String type) {
-		this.setProductName(name);
-		this.setProductType(type);
+		this.pname = name;
+		this.ptype = type;
 	}
 	
 	public Product(	int id, String name, String type) {
 		this.pid = id;
-		this.setProductName(name);
-		this.setProductType(type);
+		this.pname = name;
+		this.ptype = type;
 	}
-
-	public String getProductType() {
-		return productType;
-	}
-
-	public void setProductType(String productType) {
-		this.productType = productType;
-	}
-
+	
 	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
+		return this.pname;
 	}
 	
+	public int getProductID() {
+		return this.pid;
+	}
 	
+	public String getProductType() {
+		return this.ptype;
+	}
+	
+	public void setProductName(String name) {
+		this.pname = name;
+	}
+	
+	public String toString() { 
+	    return "Name: '" + this.pname + "', Type: '" + this.ptype;
+	} 
 	
 	
 }

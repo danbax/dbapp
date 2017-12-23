@@ -17,7 +17,7 @@
          <children>
             <ImageView layoutX="21.0" layoutY="19.0">
                <image>
-                  <Image url="@../images/logo.png" />
+                  <Image url="images/logo.png" />
                </image>
             </ImageView>
             <Text fill="WHITE" layoutX="140.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
@@ -37,7 +37,7 @@
             </Text>
             <ImageView fx:id="menu" layoutX="846.0" layoutY="19.0" onMouseClicked="#onMenuClick">
                <image>
-                  <Image url="@../images/lines-menu.png" />
+                  <Image url="images/lines-menu.png" />
                </image>
             </ImageView>
          </children>
@@ -53,9 +53,7 @@
                   </Text>
                   <TextField fx:id="txtFieldPname" layoutX="32.0" layoutY="107.0" prefHeight="33.0" prefWidth="252.0" promptText="Product name" />
                   <TextField fx:id="txtFieldPtype" layoutX="32.0" layoutY="153.0" prefHeight="33.0" prefWidth="252.0" promptText="Product type" />
-                  <Button fx:id="btnAdd" layoutX="116.0" layoutY="326.0" mnemonicParsing="false" onAction="#onBtnAddClicked" prefHeight="34.0" prefWidth="84.0" text="Add" />
-                  <TextField fx:id="txtPid" layoutX="32.0" layoutY="204.0" prefHeight="33.0" prefWidth="252.0" promptText="Product ID" />
-                  <TextField fx:id="txtPrice" layoutX="32.0" layoutY="256.0" prefHeight="33.0" prefWidth="252.0" promptText="price" />
+                  <Button fx:id="btnAdd" layoutX="116.0" layoutY="228.0" mnemonicParsing="false" onAction="#onBtnAddClicked" prefHeight="34.0" prefWidth="84.0" text="Add" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="315.0" prefHeight="442.0" prefWidth="586.0">
