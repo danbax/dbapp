@@ -60,14 +60,7 @@
             </AnchorPane>
             <AnchorPane layoutX="315.0" prefHeight="442.0" prefWidth="586.0">
                <children>
-                  <TableView fx:id="ProductsTable" layoutX="83.0" layoutY="54.0" prefHeight="442.4" prefWidth="586.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Product ID" />
-                      <TableColumn prefWidth="75.0" text="name" />
-                        <TableColumn prefWidth="75.0" text="type" />
-                        <TableColumn prefWidth="75.0" text="update" />
-                        <TableColumn prefWidth="75.0" text="delete" />
-                    </columns>
+                  <TableView id="ProductsTable" fx:id="ProductsTable" layoutX="83.0" layoutY="54.0" prefHeight="442.4" prefWidth="586.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   </TableView>
                </children>
             </AnchorPane>

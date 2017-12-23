@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import enums.Actions;
 import gui.LoginController;
+import gui.UpdateCatalogController;
 import server.ConIF;
 
 public class ClientController extends AbstractClient {
@@ -58,6 +59,7 @@ public class ClientController extends AbstractClient {
 			@SuppressWarnings("unchecked")
 			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
 			System.out.println("products:"+products);
+			UpdateCatalogController.last.fillProductsInTable(products);
 		}
 	}
 
