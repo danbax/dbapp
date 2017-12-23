@@ -18,7 +18,7 @@ public class GUIcontroller {
 	
 	public void loadFxml(String fxmlFile) throws IOException
 	{
-		System.out.println("fix lior balagan");
+		
 		currentScene.getWindow().hide(); //hiding primary window
 		primaryStage = new Stage();
 		loader = new FXMLLoader();
