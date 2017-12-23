@@ -29,7 +29,7 @@ public class UpdateCatalogDatabase {
 				while ( rs.next() )
 				{
 					// create product
-					Product product = new Product(rs.getString("pname"),
+					Product product = new Product(rs.getInt("id"),rs.getString("pname"),
 							rs.getString("ptype"));
 					products.add(product);
 				}
@@ -75,6 +75,32 @@ public class UpdateCatalogDatabase {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} // send messeage to client
+		}
+	}
+	
+	public static void updateProduct(Connection conn,  ConnectionToClient client,Product product) throws SQLException {
+		/*
+		 * updateProductInDatabase
+		 */
+		ServerResponse sr = new ServerResponse(); // create server response
+		sr.setAction(Actions.AddProduct);
+		System.out.println(product.getProductName());
+		PreparedStatement ps;
+		String s1 = "update products set pname=?,ptype=? where id=?;";
+		try {
+				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setString(1, product.getProductName());
+				ps.setString(2, product.getProductType());
+				ps.setInt(3, product.getPid());
+				ps.executeUpdate();
+
+				
+				sr.setAnswer(Actions.ProductAdded);
+				client.sendToClient(sr); // send messeage to client
+			}
+		catch (Exception e)
+		{
+			
 		}
 	}
 }

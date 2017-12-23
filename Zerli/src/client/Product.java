@@ -15,7 +15,7 @@ public class Product implements Serializable {
 	}
 	
 	public Product(	int id, String name, String type) {
-		this.pid = id;
+		this.setPid(id);
 		this.setProductName(name);
 		this.setProductType(type);
 	}
@@ -34,6 +34,14 @@ public class Product implements Serializable {
 
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+
+	public int getPid() {
+		return pid;
+	}
+
+	public void setPid(int pid) {
+		this.pid = pid;
 	}
 	
 	

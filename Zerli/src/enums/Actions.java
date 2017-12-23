@@ -9,6 +9,7 @@ public enum Actions {
 	
 	// update catalog
 	GetProducts, // return arrayList<Product> of all Products
+	UpdateProduct,
 	AddProduct,
 	// response from server:
 	ProductAdded, // product added to database

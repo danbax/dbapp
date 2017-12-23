@@ -68,8 +68,12 @@ public class ServerController extends AbstractServer {
 			{
 				UpdateCatalogDatabase.addProduct((com.mysql.jdbc.Connection)conn, client,(Product) req.getValue());
 			}
+			if(req.getAction() == Actions.UpdateProduct)
+			{
+				UpdateCatalogDatabase.updateProduct((com.mysql.jdbc.Connection)conn, client,(Product) req.getValue());
+			}
 			conn.close(); 
-
+			
 		} catch (SQLException ex) {/* handle any errors */
 			System.out.println("SQLException: " + ex.getMessage());
 			System.out.println("SQLState: " + ex.getSQLState());
