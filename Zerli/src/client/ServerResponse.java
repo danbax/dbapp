@@ -3,7 +3,7 @@ import java.io.Serializable;
 
 import enums.Actions;;
 
-public class Request implements Serializable {
+public class ServerResponse implements Serializable {
 	/**
 	 *  Object sent to server determine what server should do
 	 *  action - ENUM : what action we should do
@@ -17,19 +17,20 @@ public class Request implements Serializable {
 	 * instead of sending arraylist
 	 */
 	private Actions action;
+	private Actions answer;
 	private Object value;
 	
-	public Request()
+	public ServerResponse()
 	{
 		
 	}
-	public Request(Actions act)
+	public ServerResponse(Actions act)
 	{
 		this.action = act;
 		value = null;
 	}
 	
-	public Request(Actions act,Object val)
+	public ServerResponse(Actions act,Object val)
 	{
 		action = act;
 		value = val;
@@ -47,6 +48,12 @@ public class Request implements Serializable {
 	}
 	public void setValue(Object values) {
 		this.value = values;
+	}
+	public Actions getAnswer() {
+		return answer;
+	}
+	public void setAnswer(Actions answer) {
+		this.answer = answer;
 	}
 	
 	

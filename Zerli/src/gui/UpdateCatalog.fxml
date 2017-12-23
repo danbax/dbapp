@@ -53,19 +53,14 @@
                   </Text>
                   <TextField fx:id="txtFieldPname" layoutX="32.0" layoutY="107.0" prefHeight="33.0" prefWidth="252.0" promptText="Product name" />
                   <TextField fx:id="txtFieldPtype" layoutX="32.0" layoutY="153.0" prefHeight="33.0" prefWidth="252.0" promptText="Product type" />
-                  <Button fx:id="btnAdd" layoutX="116.0" layoutY="228.0" mnemonicParsing="false" onAction="#onBtnAddClicked" prefHeight="34.0" prefWidth="84.0" text="Add" />
+                  <Button fx:id="btnAdd" layoutX="116.0" layoutY="326.0" mnemonicParsing="false" onAction="#onBtnAddClicked" prefHeight="34.0" prefWidth="84.0" text="Add" />
+                  <TextField fx:id="txtPid" layoutX="32.0" layoutY="204.0" prefHeight="33.0" prefWidth="252.0" promptText="Product ID" />
+                  <TextField fx:id="txtPrice" layoutX="32.0" layoutY="256.0" prefHeight="33.0" prefWidth="252.0" promptText="price" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="315.0" prefHeight="442.0" prefWidth="586.0">
                <children>
-                  <TableView fx:id="ProductsTable" layoutX="83.0" layoutY="54.0" prefHeight="442.4" prefWidth="586.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="Product ID" />
-                      <TableColumn prefWidth="75.0" text="name" />
-                        <TableColumn prefWidth="75.0" text="type" />
-                        <TableColumn prefWidth="75.0" text="update" />
-                        <TableColumn prefWidth="75.0" text="delete" />
-                    </columns>
+                  <TableView id="ProductsTable" fx:id="ProductsTable" layoutX="83.0" layoutY="54.0" prefHeight="442.4" prefWidth="586.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   </TableView>
                </children>
             </AnchorPane>

@@ -53,16 +53,6 @@ public class LoginController implements Initializable  {
 		
 	}
 	
-	@FXML
-	public void moveTofucntion(ActionEvent event) throws Exception {
-		
-		// clicking on logging button
-		
-		GUIcontroller guic = new GUIcontroller();
-		guic.loadFxml("MainMenu.fxml");
-		
-		
-	}
 	
 	@FXML
 	public void ShowLoginMessage(Boolean isValid) throws IOException
@@ -70,6 +60,7 @@ public class LoginController implements Initializable  {
 		/*
 		 * show error message if data is invalid
 		 */
+		
 		if(isValid)
 		{
 			// GO to main menu

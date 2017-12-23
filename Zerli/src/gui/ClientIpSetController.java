@@ -3,6 +3,8 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 import client.Client;
+import client.Request;
+import enums.Actions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
