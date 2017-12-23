@@ -58,8 +58,10 @@ public class ClientController extends AbstractClient {
 		if (sr.getAction() == Actions.GetProducts) {
 			@SuppressWarnings("unchecked")
 			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
-			System.out.println("products:"+products);
 			UpdateCatalogController.last.fillProductsInTable(products);
+		}
+		if (sr.getAction() == Actions.AddProduct) {
+			
 		}
 	}
 

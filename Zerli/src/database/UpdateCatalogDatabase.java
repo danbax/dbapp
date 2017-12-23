@@ -1,6 +1,8 @@
 package database;
 
 import ocsf.server.ConnectionToClient;
+
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,6 +43,38 @@ public class UpdateCatalogDatabase {
 		catch (Exception e)
 		{
 			// TODO: handle exception
+		}
+	}
+	
+	public static void addProduct(Connection conn,  ConnectionToClient client,Product product) throws SQLException {
+		/*
+		 * Checks if username,password exist in database
+		 */
+		ServerResponse sr = new ServerResponse(); // create server response
+		sr.setAction(Actions.AddProduct);
+		System.out.println(product.getProductName());
+		PreparedStatement ps;
+		String s1 = "INSERT INTO products (pname, ptype) VALUES (?,?);";
+		try {
+				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setString(1, product.getProductName());
+				ps.setString(2, product.getProductType());
+				ps.executeUpdate();
+
+				
+				sr.setAnswer(Actions.ProductAdded);
+				client.sendToClient(sr); // send messeage to client
+			}
+		catch (Exception e)
+		{
+			// TODO: handle exception
+			sr.setAnswer(Actions.ProductAddedError);
+			try {
+				client.sendToClient(sr);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} // send messeage to client
 		}
 	}
 }
