@@ -58,6 +58,11 @@ public class ServerController extends AbstractServer {
 				LoginManagerDatabase.isValidData((com.mysql.jdbc.Connection) conn,client,u.getUsername(),u.getPassword());
 				
 			}
+			if(req.getAction() == Actions.GetProducts)
+			{
+				System.out.println("prod");
+				UpdateCatalogDatabase.getProducts((com.mysql.jdbc.Connection)conn, client);
+			}
 			conn.close(); 
 
 		} catch (SQLException ex) {/* handle any errors */

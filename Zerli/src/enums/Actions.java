@@ -2,10 +2,13 @@ package enums;
 
 public enum Actions {
 	/*login*/
-	ValidLoginDataCheck,
+	ValidLoginDataCheck, // checks if user exist in the database
 	// options:
 	UsernameExist,
-	UsernameDoesNotExist;
+	UsernameDoesNotExist,
+	
+	// update catalog
+	GetProducts; // return arrayList<Product> of all Products
 	
 	
 }

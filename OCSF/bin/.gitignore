@@ -1,7 +1,5 @@
-/client/
 /database/
+/client/
 /enums/
-/gui/
-/images/
-/ocsf/
 /server/
+/gui/

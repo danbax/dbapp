@@ -3,6 +3,7 @@ package client;
 import ocsf.client.*;
 import java.io.*;
 import java.util.ArrayList;
+
 import enums.Actions;
 import gui.LoginController;
 import server.ConIF;
@@ -24,14 +25,12 @@ public class ClientController extends AbstractClient {
 		/*
 		 * return message from server
 		 */
-		@SuppressWarnings("unchecked")
-		ArrayList<String> serverMesseage = (ArrayList<String>) msg;
-		System.out.println(serverMesseage);
+		ServerResponse sr = (ServerResponse) msg;
 		// decide which action perform
-		if (serverMesseage.get(0).equals(Actions.ValidLoginDataCheck.toString())) {
+		if (sr.getAction() == Actions.ValidLoginDataCheck) {
 			// checked id login data correct
 			LoginController loginc = (LoginController)LoginController.last;
-        	if(serverMesseage.get(1).equals(Actions.UsernameExist.toString()))
+        	if(sr.getAnswer() == Actions.UsernameExist)
         	{
         		// login user
         		System.out.println("login");
@@ -42,7 +41,7 @@ public class ClientController extends AbstractClient {
 					e.printStackTrace();
 				}
         	}
-        	else
+        	else if(sr.getAnswer() == Actions.UsernameDoesNotExist)
         	{
         		// show error
         		System.out.println("error");
@@ -53,6 +52,12 @@ public class ClientController extends AbstractClient {
 					e.printStackTrace();
 				}
         	}
+		}
+		
+		if (sr.getAction() == Actions.GetProducts) {
+			@SuppressWarnings("unchecked")
+			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
+			System.out.println("products:"+products);
 		}
 	}
 

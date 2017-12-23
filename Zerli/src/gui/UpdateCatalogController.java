@@ -1,10 +1,14 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+import client.Client;
+import client.Request;
+import enums.Actions;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,14 +71,33 @@ public class UpdateCatalogController extends Application implements Initializabl
 		public void onMenuClick(ActionEvent event) throws Exception {
 			// add product to database, clean form, show message "added succefully"
 
-			//GUIcontroller guic = new GUIcontroller();
-			//guic.loadFxml("loginForm.fxml");
+			/*
+			 *  Move to main menu
+			 */
+			Platform.runLater(new Runnable(){
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					GUIcontroller guic = new GUIcontroller();
+					try {
+						guic.loadFxml("MainMenu.fxml");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				});
 			
 		}
 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	
-			
+			// getProducts from database
+			Request req = new Request();
+			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+			req.setAction(Actions.GetProducts); 
+			Client.clientConn.handleMessageFromClientUI(req);	
 		}
 	
 }

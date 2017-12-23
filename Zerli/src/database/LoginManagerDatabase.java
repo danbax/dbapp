@@ -3,14 +3,12 @@ package database;
 import ocsf.server.ConnectionToClient;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
+import client.ServerResponse;
 import enums.Actions;
 public class LoginManagerDatabase {
-	static ArrayList<String> arr = new ArrayList<String>();
 	
 	public static void isValidData(Connection conn,  ConnectionToClient client,String user,String pass) throws SQLException {
 		/*
@@ -24,27 +22,25 @@ public class LoginManagerDatabase {
 				ps.setString(1, user);
 				ps.setString(2, pass);
 				rs = ps.executeQuery();
+				ServerResponse sr = new ServerResponse(); // create server response
 				if ( rs.next() )
 				{
 					// username exist
-					System.out.println("exist");
 					
 					// response from server
-					arr.clear();
-					arr.add(Actions.ValidLoginDataCheck.toString());
-					arr.add(Actions.UsernameExist.toString());
+					sr.setAction(Actions.ValidLoginDataCheck);
+					sr.setAnswer(Actions.UsernameExist);
 					System.out.println("login");
 				}
 				else
 				{
 					// username does not exist
-					arr.clear();
-					arr.add(Actions.ValidLoginDataCheck.toString());
-					arr.add(Actions.UsernameDoesNotExist.toString());
-					System.out.println("error");
+					sr.setAction(Actions.ValidLoginDataCheck);
+					sr.setAnswer(Actions.UsernameDoesNotExist);
+					System.out.println("wrong data");
 					
 				}
-				client.sendToClient(arr); // send messeage to client
+				client.sendToClient(sr); // send messeage to client
 			}
 		catch (Exception e)
 		{
