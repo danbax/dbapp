@@ -190,7 +190,7 @@ public class UpdateCatalogController extends Application implements Initializabl
 		                    Product productToUpdate = (Product) t.getTableView().getItems().get(
 			                        t.getTablePosition().getRow());
 		                    productToUpdate.setProductType(newType);
-		                    int x;
+		                    
 		                    //send request to server
 		                    Request req = new Request();
 		        			req.setAction(Actions.UpdateProduct);
