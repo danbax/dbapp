@@ -23,7 +23,7 @@
                <children>
                   <ImageView layoutX="136.0" layoutY="22.0">
                      <image>
-                       	<Image url="images/server.png" />
+                       	<Image url="@../images/server.png" />
                      </image>
                   </ImageView>
                   <TextField fx:id="dbName" layoutX="73.0" layoutY="167.0" prefHeight="26.0" prefWidth="268.0" promptText="Database name" text="zerli" />

@@ -30,6 +30,22 @@ public class GUIcontroller {
 		primaryStage.setScene(scene); 		
 		primaryStage.show(); 
 	}
+	
+	public void loadFxmlwithCSS(String fxmlFile, String cssFile) throws IOException
+	{
+		
+		currentScene.getWindow().hide(); //hiding primary window
+		primaryStage = new Stage();
+		loader = new FXMLLoader();
+		root = loader.load(getClass().getResource("/gui/"+fxmlFile).openStream());
+		
+		
+		Scene scene = new Scene(root);	
+		scene.getStylesheets().add(getClass().getResource("/gui/"+cssFile).toExternalForm());
+		GUIcontroller.currentScene = scene;
+		primaryStage.setScene(scene); 		
+		primaryStage.show(); 
+	}
 
 	public static Scene getCurrentScene() {
 		return currentScene;

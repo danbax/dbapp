@@ -1,0 +1,41 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+/* #loginForm {*/
+.button {	
+	-fx-background-color: #294A5D;
+	-fx-border-color: gray;
+	-fx-text-fill: #FBFCFC;
+}
+#loginButton:hover {
+	-fx-background-color:#496173;
+}
+
+#loginButton:pressed {
+	-fx-background-color:#D9B984;
+	-fx-text-fill: #FBFCFC;
+}
+
+.root {
+	-fx-background-color: #000027;
+}
+
+#loginPassword {
+	-fx-background-color: #000027;    
+	-fx-border-color: gray;     
+	-fx-highlight-text-fill: white;    
+	-fx-text-fill: #EFEFEF;   
+}
+
+#loginUsername {
+	-fx-background-color: #000027;    
+	-fx-border-color: gray;     
+	-fx-highlight-text-fill: white;    
+	-fx-text-fill: #EFEFEF;    
+}
+
+#SignInLabel {
+	-fx-text-fill: #D9B984;
+}
+
+
+
+

@@ -46,8 +46,10 @@ public class ClientIpSetController implements Initializable  {
 			primaryStage.setScene(scene); 		
 			primaryStage.show(); 
 			*/
+			
 			GUIcontroller guic = new GUIcontroller();
-			guic.loadFxml("loginForm.fxml");
+			guic.loadFxmlwithCSS("loginForm.fxml","loginForm.css");
+			
 		}
 		
 		public void start(Stage primaryStage) throws Exception {
@@ -67,6 +69,7 @@ public class ClientIpSetController implements Initializable  {
 			//scene.getStylesheets().add(getClass().getResource("/gui/ClientIpSetForm.css").toExternalForm());
 			primaryStage.setTitle("Set IP");
 			primaryStage.setScene(scene);
+			
 			
 			primaryStage.show();
 		}
