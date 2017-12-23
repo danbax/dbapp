@@ -29,7 +29,8 @@ public class UpdateCatalogDatabase {
 				while ( rs.next() )
 				{
 					// create product
-					Product product = new Product(rs.getInt("id"),rs.getString("pname"),
+					Product product = new Product(rs.getInt("id"),
+							rs.getString("pname"),
 							rs.getString("ptype"));
 					products.add(product);
 				}

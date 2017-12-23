@@ -129,7 +129,7 @@ public class UpdateCatalogController extends Application implements Initializabl
 			}
 			else
 			{
-				ProductsTable.setEditable(true);
+				ProductsTable.setEditable(true); // for updating
 				
 				//casting ArrayList to ObservableList
 				ObserProducts = FXCollections.observableArrayList(products);
@@ -143,17 +143,28 @@ public class UpdateCatalogController extends Application implements Initializabl
 		        	    new PropertyValueFactory<Product,String>("productName")
 		        	);
 		        
+		        //update name
 		        nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
 		        nameCol.setOnEditCommit(
 		            new EventHandler<CellEditEvent<Product, String>>() {
 		                @Override
 		                public void handle(CellEditEvent<Product, String> t) {
+		                	// show new name in column
 		                    ((Product) t.getTableView().getItems().get(
 		                        t.getTablePosition().getRow())
 		                        ).setProductName(t.getNewValue());
-		                    String xx = t.getNewValue();
-		                    System.out.println( t.getTableView().getItems().get(
-			                        t.getTablePosition().getRow()).getPid());
+		                    
+		                    //update new name to database
+		                    String newName = t.getNewValue();
+		                    Product productToUpdate = (Product) t.getTableView().getItems().get(
+			                        t.getTablePosition().getRow());
+		                    productToUpdate.setProductName(newName);
+		                    
+		                    //send request to server
+		                    Request req = new Request();
+		        			req.setAction(Actions.UpdateProduct);
+		        			req.setValue(productToUpdate);
+		        			Client.clientConn.handleMessageFromClientUI(req);
 		                }
 		            }
 		        );
@@ -162,6 +173,32 @@ public class UpdateCatalogController extends Application implements Initializabl
 		        typeCol.setCellValueFactory(
 		        	    new PropertyValueFactory<Product,String>("productType")
 		        	);
+		        
+		      //update type
+		        typeCol.setCellFactory(TextFieldTableCell.forTableColumn());
+		        typeCol.setOnEditCommit(
+		            new EventHandler<CellEditEvent<Product, String>>() {
+		                @Override
+		                public void handle(CellEditEvent<Product, String> t) {
+		                	// show new name in column
+		                    ((Product) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow())
+		                        ).setProductName(t.getNewValue());
+		                    
+		                    //update new name to database
+		                    String newType = t.getNewValue();
+		                    Product productToUpdate = (Product) t.getTableView().getItems().get(
+			                        t.getTablePosition().getRow());
+		                    productToUpdate.setProductType(newType);
+		                    
+		                    //send request to server
+		                    Request req = new Request();
+		        			req.setAction(Actions.UpdateProduct);
+		        			req.setValue(productToUpdate);
+		        			Client.clientConn.handleMessageFromClientUI(req);
+		                }
+		            }
+		        );
 		        
 		        
 		        ProductsTable.setItems(ObserProducts);
