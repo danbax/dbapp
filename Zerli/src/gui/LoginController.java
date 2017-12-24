@@ -22,6 +22,9 @@ import javafx.stage.Stage;
 
 public class LoginController implements Initializable  {
 	public static LoginController last;
+	
+	public static User myUser;  // reference to my user data (logged user)
+	
 	@FXML
 	private TextField loginUsername;
 	@FXML
@@ -61,7 +64,7 @@ public class LoginController implements Initializable  {
 			// GO to main menu
 			
 			loginMessage.setText("valid data!");
-			
+
 			/*
 			 *  Move to main menu
 			 */
@@ -111,6 +114,18 @@ public class LoginController implements Initializable  {
 			last=this;
 			
 		}
+
+
+		public User getMyUser() {
+			return myUser;
+		}
+
+
+		public void setMyUser(User myUser) {
+			this.myUser = myUser;
+		}
+		
+		
 		
 		
 	
