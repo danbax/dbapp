@@ -6,6 +6,8 @@ public enum Actions {
 	// response from server:
 		UsernameExist,
 		UsernameDoesNotExist,
+		
+	Logout,
 	// update catalog
 	GetProducts, // return arrayList<Product> of all Products
 	

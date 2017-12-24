@@ -11,6 +11,11 @@
    <children>
       <AnchorPane prefHeight="166.0" prefWidth="900.0" style="-fx-background-color: #0074D9;">
          <children>
+         	<ImageView layoutX="860.0" layoutY="19.0" onMouseClicked="#onLogout">
+               <image>
+                  <Image url="images/logout.png" />
+               </image>
+            </ImageView>
             <ImageView layoutX="21.0" layoutY="19.0">
                <image>
                   <Image url="images/logo.png" />

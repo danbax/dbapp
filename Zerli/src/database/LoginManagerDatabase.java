@@ -32,7 +32,22 @@ public class LoginManagerDatabase {
 					sr.setAction(Actions.ValidLoginDataCheck);
 					sr.setAnswer(Actions.UsernameExist);
 					User myuser = new User(rs.getString("username"),rs.getString("password"));
-					myuser.setId(rs.getInt(1));
+					myuser.setId(rs.getInt("ID"));
+					myuser.setFname("fname");
+					myuser.setLname("lname");
+					myuser.setPhone("phone");
+					
+					String s2 = "update users set logged=1 where id=?";
+					try {
+							ps = (PreparedStatement) conn.prepareStatement(s2);
+							ps.setInt(1, myuser.getId());
+							ps.executeUpdate();
+					}
+					catch (Exception e)
+					{
+						// TODO: handle exception
+					}
+					
 					sr.setValue(myuser);
 					System.out.println("login");
 				}
@@ -46,6 +61,20 @@ public class LoginManagerDatabase {
 				}
 				client.sendToClient(sr); // send messeage to client
 			}
+		catch (Exception e)
+		{
+			// TODO: handle exception
+		}
+	}
+	
+	public static void logout(Connection conn,  ConnectionToClient client,User user) throws SQLException {
+		PreparedStatement ps;
+		String s1 = "update users set logged=0 where id=?";
+		try {
+				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, user.getId());
+				ps.executeUpdate();
+		}
 		catch (Exception e)
 		{
 			// TODO: handle exception

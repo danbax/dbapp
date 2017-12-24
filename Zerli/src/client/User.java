@@ -11,6 +11,11 @@ public class User implements Serializable {
 	private String username;
 	private String password;
 	
+	private String fname;
+	private String lname;
+	private String phone;
+	
+	
 	public User(String user,String pass) {
 		this.setUsername(user);
 		this.setPassword(pass);
@@ -44,5 +49,29 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	public String getLname() {
+		return lname;
+	}
+
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 }
