@@ -7,6 +7,7 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
 import client.ServerResponse;
+import client.User;
 import enums.Actions;
 public class LoginManagerDatabase {
 	
@@ -16,7 +17,7 @@ public class LoginManagerDatabase {
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select id from users where username=? and password=?";
+		String s1 = "select * from users where username=? and password=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setString(1, user);
@@ -30,6 +31,9 @@ public class LoginManagerDatabase {
 					// response from server
 					sr.setAction(Actions.ValidLoginDataCheck);
 					sr.setAnswer(Actions.UsernameExist);
+					User myuser = new User(rs.getString("username"),rs.getString("password"));
+					myuser.setId(rs.getInt(1));
+					sr.setValue(myuser);
 					System.out.println("login");
 				}
 				else

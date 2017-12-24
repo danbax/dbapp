@@ -34,7 +34,7 @@ public class ClientController extends AbstractClient {
         	if(sr.getAnswer() == Actions.UsernameExist)
         	{
         		// login user
-        		System.out.println("login");
+        		LoginController.myUser = (User) sr.getValue();
         		try {
 					loginc.ShowLoginMessage(true);
 				} catch (IOException e) {

@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 public class LoginController implements Initializable  {
 	public static LoginController last;
+	public static User myUser;
 	@FXML
 	private TextField loginUsername;
 	@FXML
@@ -61,6 +62,7 @@ public class LoginController implements Initializable  {
 			// GO to main menu
 			
 			loginMessage.setText("valid data!");
+			
 			
 			/*
 			 *  Move to main menu
