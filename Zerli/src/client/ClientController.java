@@ -63,6 +63,18 @@ public class ClientController extends AbstractClient {
 		if (sr.getAction() == Actions.AddProduct) {
 			
 		}
+		if (sr.getAction() == Actions.DeleteProduct) {
+			if(sr.getAnswer() == Actions.DeletedProduct)
+			{
+				// deleted
+			}
+			else
+			{
+				// not deleted
+			}
+		}
+		
+		
 	}
 
 	public void handleMessageFromClientUI(Object req) {

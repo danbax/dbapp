@@ -85,7 +85,6 @@ public class UpdateCatalogDatabase {
 		 */
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddProduct);
-		System.out.println(product.getProductName());
 		PreparedStatement ps;
 		String s1 = "update products set pname=?,ptype=? where id=?;";
 		try {
@@ -102,6 +101,35 @@ public class UpdateCatalogDatabase {
 		catch (Exception e)
 		{
 			
+		}
+	}
+	
+	public static void deleteProduct(Connection conn,  ConnectionToClient client,Product product) throws SQLException {
+		/*
+		 * delete product from database
+		 */
+		ServerResponse sr = new ServerResponse(); // create server response
+		sr.setAction(Actions.DeleteProduct);
+		PreparedStatement ps;
+		String s1 = "delete from products where id=?";
+		try {
+				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, product.getPid());
+				ps.executeUpdate();
+
+				
+				sr.setAnswer(Actions.DeletedProduct);
+				client.sendToClient(sr); // send messeage to client
+			}
+		catch (Exception e)
+		{
+			sr.setAnswer(Actions.DeletedProductError);
+			try {
+				client.sendToClient(sr);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} // send messeage to client
 		}
 	}
 }

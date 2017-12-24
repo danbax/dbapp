@@ -5,12 +5,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.sun.prism.impl.Disposer.Record;
+
 import client.Client;
 import client.Product;
 import client.Request;
 import enums.Actions;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,13 +25,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class UpdateCatalogController extends Application implements Initializable  {
 	
@@ -81,7 +88,7 @@ public class UpdateCatalogController extends Application implements Initializabl
 		}
 		
 		@FXML
-		public void onMenuClick(ActionEvent event) throws Exception {
+		public void onMenuClick(MouseEvent event) throws Exception {
 			// add product to database, clean form, show message "added succefully"
 
 			/*
@@ -104,11 +111,35 @@ public class UpdateCatalogController extends Application implements Initializabl
 			
 		}
 		
-		public void refreshTableView(ArrayList<Product> products)
-		{
-			ObserProducts = FXCollections.observableArrayList(products);
-			ProductsTable.refresh();
+		@FXML
+		public void deleteSelectedRow(MouseEvent event)  throws Exception {
+			// add product to database, clean form, show message "added succefully"
+
+			/*
+			 *  delete selected row from database
+			 */
+			
+			// get selected item
+			Product product = ProductsTable.getSelectionModel().getSelectedItem();
+			if(product!= null)
+			{
+				
+				System.out.println(product.getPid());
+				// delete
+				Request req = new Request();
+    			req.setAction(Actions.DeleteProduct);
+    			req.setValue(product);
+    			Client.clientConn.handleMessageFromClientUI(req);	
+    			
+    			// refresh table
+    			Request req2 = new Request();
+    			req2.setAction(Actions.GetProducts);
+    			Client.clientConn.handleMessageFromClientUI(req2);
+				
+			}
 		}
+		
+		
 		
 		@SuppressWarnings("unchecked")
 		public void fillProductsInTable(ArrayList<Product> products)
@@ -199,7 +230,7 @@ public class UpdateCatalogController extends Application implements Initializabl
 		                }
 		            }
 		        );
-		        
+
 		        
 		        ProductsTable.setItems(ObserProducts);
 		        ProductsTable.getColumns().addAll(nameCol, typeCol);

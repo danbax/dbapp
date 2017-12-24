@@ -72,6 +72,10 @@ public class ServerController extends AbstractServer {
 			{
 				UpdateCatalogDatabase.updateProduct((com.mysql.jdbc.Connection)conn, client,(Product) req.getValue());
 			}
+			if(req.getAction() == Actions.DeleteProduct)
+			{
+				UpdateCatalogDatabase.deleteProduct((com.mysql.jdbc.Connection)conn, client,(Product) req.getValue());
+			}
 			conn.close(); 
 			
 		} catch (SQLException ex) {/* handle any errors */
