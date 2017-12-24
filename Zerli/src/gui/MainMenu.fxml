@@ -26,16 +26,11 @@
                   <Font size="25.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="textHello" text="Hello, {user name}" wrappingWidth="350.06597900390625">
+            <Text fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, {user name}" wrappingWidth="350.06597900390625">
                <font>
                   <Font size="38.0" />
                </font>
             </Text>
-            <ImageView fx:id="logoutButton" layoutX="854.0" layoutY="14.0" onMouseClicked="#onLogout">
-               <image>
-                  <Image url="images/logout.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="428.0" prefWidth="900.0">

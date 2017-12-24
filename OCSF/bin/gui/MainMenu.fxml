@@ -13,7 +13,7 @@
          <children>
             <ImageView layoutX="21.0" layoutY="19.0">
                <image>
-                  <Image url="@../images/logo.png" />
+                  <Image url="images/logo.png" />
                </image>
             </ImageView>
             <Text fill="WHITE" layoutX="140.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
@@ -26,16 +26,11 @@
                   <Font size="25.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="textHello" text="Hello, {user name}" wrappingWidth="350.06597900390625">
+            <Text fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, {user name}" wrappingWidth="350.06597900390625">
                <font>
                   <Font size="38.0" />
                </font>
             </Text>
-            <ImageView fx:id="logoutButton" layoutX="854.0" layoutY="14.0" onMouseClicked="#onLogout">
-               <image>
-                  <Image url="@../images/logout.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="428.0" prefWidth="900.0">
@@ -49,7 +44,7 @@
                   </Text>
                   <ImageView fitHeight="60.0" fitWidth="65.0" layoutX="43.0" layoutY="35.0">
                      <image>
-                        <Image url="@../images/catalog.png" />
+                        <Image url="images/catalog.png" />
                      </image>
                   </ImageView>
                </children>
