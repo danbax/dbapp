@@ -33,9 +33,6 @@ public class ClientController extends AbstractClient {
 			LoginController loginc = (LoginController)LoginController.last;
         	if(sr.getAnswer() == Actions.UsernameExist)
         	{
-        		// save my user data
-        		LoginController.myUser = (User) sr.getValue();
-        		
         		// login user
         		System.out.println("login");
         		try {
