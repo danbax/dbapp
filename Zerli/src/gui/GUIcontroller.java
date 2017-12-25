@@ -18,7 +18,6 @@ public class GUIcontroller {
 	
 	public void loadFxml(String fxmlFile) throws IOException
 	{
-		int x;
 		currentScene.getWindow().hide(); //hiding primary window
 		primaryStage = new Stage();
 		loader = new FXMLLoader();

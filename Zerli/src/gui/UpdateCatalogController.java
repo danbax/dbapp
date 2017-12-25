@@ -100,7 +100,7 @@ public class UpdateCatalogController extends Application implements Initializabl
 					// TODO Auto-generated method stub
 					GUIcontroller guic = new GUIcontroller();
 					try {
-						guic.loadFxml("/main/resources/MainMenu.fxml");
+						guic.loadFxml("MainMenu.fxml");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

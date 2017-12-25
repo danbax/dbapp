@@ -46,7 +46,7 @@ public class MainMenuController extends Application implements Initializable  {
 			 * start select product frame
 			 */
 			
-			Parent root = FXMLLoader.load(getClass().getResource("/gui/MainMenu.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/MainMenu.fxml"));
 			
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);

@@ -16,7 +16,7 @@
          <children>
             <ImageView layoutX="21.0" layoutY="19.0">
                <image>
-                  <Image url="@../images/logo.png" />
+                  <Image url="images/logo.png" />
                </image>
             </ImageView>
             <Text fill="WHITE" layoutX="140.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
@@ -36,7 +36,7 @@
             </Text>
             <ImageView fx:id="menu" layoutX="846.0" layoutY="19.0" onMouseClicked="#onMenuClick">
                <image>
-                  <Image url="@../images/lines-menu.png" />
+                  <Image url="images/lines-menu.png" />
                </image>
             </ImageView>
          </children>
@@ -54,7 +54,7 @@
                   <TextField fx:id="txtSearch" layoutX="32.0" layoutY="85.0" prefHeight="33.0" prefWidth="252.0" promptText="search query" />
                   <ImageView fx:id="deleteButton" accessibleText="delete selected row" layoutX="16.0" layoutY="396.0" onMouseClicked="#deleteSelectedRow">
                      <image>
-                        <Image url="@../images/delete.png" />
+                        <Image url="images/delete.png" />
                      </image>
                   </ImageView>
                </children>
