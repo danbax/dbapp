@@ -18,7 +18,7 @@
             </ImageView>
             <ImageView layoutX="21.0" layoutY="19.0">
                <image>
-                  <Image url="images/logo.png" />
+                  <Image url="@../@../images/logo.png" />
                </image>
             </ImageView>
             <Text fill="WHITE" layoutX="140.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
@@ -49,7 +49,7 @@
                   </Text>
                   <ImageView fitHeight="60.0" fitWidth="65.0" layoutX="43.0" layoutY="35.0">
                      <image>
-                        <Image url="images/catalog.png" />
+                        <Image url="@../images/catalog.png" />
                      </image>
                   </ImageView>
                </children>
@@ -63,7 +63,7 @@
                   </Text>
                   <ImageView fitHeight="60.0" fitWidth="65.0" layoutX="43.0" layoutY="45.0">
                      <image>
-                        <Image url="images/user_info.png" />
+                        <Image url="@../images/user_info.png" />
                      </image>
                   </ImageView>
                </children>

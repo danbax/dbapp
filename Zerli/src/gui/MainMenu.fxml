@@ -31,7 +31,7 @@
                   <Font size="25.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="helloText" text="Hello, {user name}" wrappingWidth="350.06597900390625">
+            <Text fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, {user name}" wrappingWidth="350.06597900390625">
                <font>
                   <Font size="38.0" />
                </font>
