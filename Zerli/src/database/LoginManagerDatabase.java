@@ -30,6 +30,14 @@ public class LoginManagerDatabase {
 					
 					// response from server
 					sr.setAction(Actions.ValidLoginDataCheck);
+					
+					if(rs.getInt("logged")==1)
+					{
+						// if user already logged from different device
+						sr.setAnswer(Actions.AlreadyLoggedIn);
+						client.sendToClient(sr);
+					}
+					
 					sr.setAnswer(Actions.UsernameExist);
 					User myuser = new User(rs.getString("username"),rs.getString("password"));
 					myuser.setId(rs.getInt("ID"));

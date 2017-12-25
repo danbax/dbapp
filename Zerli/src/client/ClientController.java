@@ -37,7 +37,7 @@ public class ClientController extends AbstractClient {
         		// login user
         		LoginController.myUser = (User) sr.getValue();
         		try {
-					loginc.ShowLoginMessage(true);
+					loginc.ShowLoginMessage(1);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -48,7 +48,17 @@ public class ClientController extends AbstractClient {
         		// show error
         		System.out.println("error");
         		try {
-					loginc.ShowLoginMessage(false);
+					loginc.ShowLoginMessage(0);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	}
+        	else if(sr.getAnswer() == Actions.AlreadyLoggedIn)
+        	{
+        		// show error
+        		try {
+					loginc.ShowLoginMessage(2);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

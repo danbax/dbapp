@@ -6,6 +6,7 @@ public enum Actions {
 	// response from server:
 		UsernameExist,
 		UsernameDoesNotExist,
+		AlreadyLoggedIn,
 		
 	Logout,
 

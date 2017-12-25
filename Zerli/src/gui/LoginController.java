@@ -51,13 +51,13 @@ public class LoginController implements Initializable  {
 	
 	
 	@FXML
-	public void ShowLoginMessage(Boolean isValid) throws IOException
+	public void ShowLoginMessage(int isValid) throws IOException
 	{
 		/*
 		 * show error message if data is invalid
 		 */
 		
-		if(isValid)
+		if(isValid==1)
 		{
 			// GO to main menu
 			
@@ -83,10 +83,13 @@ public class LoginController implements Initializable  {
 				});
 			
 		}
-		else
+		else if(isValid==0)
 		{
 			loginMessage.setText("Wrong username or password");
-			System.out.println("Wrong username or password");
+		}
+		else if(isValid==2)
+		{
+			loginMessage.setText("User already logged in");
 		}
 		
 	}
