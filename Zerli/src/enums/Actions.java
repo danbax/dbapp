@@ -27,5 +27,15 @@ public enum Actions {
 	/*users manager	 */
 	GetUsers,
 	updateUser,
-	DeleteUser;
+	DeleteUser,
+	
+	/*surveys manager */
+	AddSurvey,
+		SurveyAdded,
+		SurveyNotAdded,
+	GetSurveys,
+	UpdateSurvey,
+	DeleteSurvey,
+		SurveyDeleted,
+		SurveyNotDeleted;
 }

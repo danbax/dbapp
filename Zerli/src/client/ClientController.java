@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import enums.Actions;
 import gui.LoginController;
+import gui.ManageSatisfactionSurvey;
 import gui.UpdateCatalogController;
 import gui.UpdateUsersController;
 import server.ConIF;
@@ -88,6 +89,12 @@ public class ClientController extends AbstractClient {
 		{
 			ArrayList<User> users = (ArrayList<User>) sr.getValue();
 			UpdateUsersController.last.fillUsersInTable(users);
+		}
+		
+		if (sr.getAction() == Actions.GetSurveys) {
+			@SuppressWarnings("unchecked")
+			ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
+			ManageSatisfactionSurvey.last.fillTable(surveys);
 		}
 		
 		

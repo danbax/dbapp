@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import client.Product;
 import client.Request;
+import client.Survey;
 import client.User;
 import database.*;
 import enums.Actions;
@@ -91,6 +92,22 @@ public class ServerController extends AbstractServer {
 			if(req.getAction() == Actions.updateUser)
 			{
 				UpdateUsersDatabase.updateUsers((com.mysql.jdbc.Connection)conn, client,(User) req.getValue());
+			}
+			if(req.getAction() == Actions.GetSurveys)
+			{
+				SurveyManagerDatabase.getSurveys((com.mysql.jdbc.Connection)conn, client);
+			}
+			if(req.getAction() == Actions.UpdateSurvey)
+			{
+				SurveyManagerDatabase.updateSurvey((com.mysql.jdbc.Connection)conn, client,(Survey) req.getValue());
+			}
+			if(req.getAction() == Actions.DeleteSurvey)
+			{
+				SurveyManagerDatabase.deleteSurvey((com.mysql.jdbc.Connection)conn, client,(Survey) req.getValue());
+			}
+			if(req.getAction() == Actions.AddSurvey)
+			{
+				SurveyManagerDatabase.addSurvey((com.mysql.jdbc.Connection)conn, client,(Survey) req.getValue());
 			}
 			
 		} catch (SQLException ex) {/* handle any errors */
