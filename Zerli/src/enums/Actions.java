@@ -8,9 +8,9 @@ public enum Actions {
 		UsernameDoesNotExist,
 		
 	Logout,
+
 	// update catalog
 	GetProducts, // return arrayList<Product> of all Products
-	
 	
 	/*products*/
 	UpdateProduct,
@@ -21,6 +21,10 @@ public enum Actions {
 	AddProduct,
 	// response from server:
 		ProductAdded, // product added to database
-		ProductAddedError; // error while adding product to database
-	
+		ProductAddedError, // error while adding product to database
+		
+	/*users manager	 */
+	GetUsers,
+	updateUser,
+	DeleteUser;
 }

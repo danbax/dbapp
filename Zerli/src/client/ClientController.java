@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import enums.Actions;
 import gui.LoginController;
 import gui.UpdateCatalogController;
+import gui.UpdateUsersController;
 import server.ConIF;
 
 public class ClientController extends AbstractClient {
@@ -72,6 +73,11 @@ public class ClientController extends AbstractClient {
 			{
 				// not deleted
 			}
+		}
+		if(sr.getAction() == Actions.GetUsers)
+		{
+			ArrayList<User> users = (ArrayList<User>) sr.getValue();
+			UpdateUsersController.last.fillUsersInTable(users);
 		}
 		
 		

@@ -80,7 +80,18 @@ public class ServerController extends AbstractServer {
 			{
 				LoginManagerDatabase.logout((com.mysql.jdbc.Connection)conn, client,(User) req.getValue());
 			}
-			conn.close(); 
+			if(req.getAction() == Actions.GetUsers)
+			{
+				UpdateUsersDatabase.getUsers((com.mysql.jdbc.Connection)conn, client,(String) req.getValue());
+			}
+			if(req.getAction() == Actions.DeleteUser)
+			{
+				UpdateUsersDatabase.deleteUser((com.mysql.jdbc.Connection)conn, client,(User) req.getValue());
+			}
+			if(req.getAction() == Actions.updateUser)
+			{
+				UpdateUsersDatabase.updateUsers((com.mysql.jdbc.Connection)conn, client,(User) req.getValue());
+			}
 			
 		} catch (SQLException ex) {/* handle any errors */
 			System.out.println("SQLException: " + ex.getMessage());

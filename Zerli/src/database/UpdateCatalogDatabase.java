@@ -17,7 +17,7 @@ public class UpdateCatalogDatabase {
 	
 	public static void getProducts(Connection conn,  ConnectionToClient client) throws SQLException {
 		/*
-		 * Checks if username,password exist in database
+		 * get list of products from database
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
