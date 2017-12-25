@@ -58,7 +58,7 @@ public class UpdateUsersController extends Application implements Initializable 
 			 * start select product frame
 			 */
 			
-			Parent root = FXMLLoader.load(getClass().getResource("/gui/updateUsers.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/updateUsers.fxml"));
 			Scene scene = new Scene(root);
 			GUIcontroller.setCurrentScene(scene); // save scene
 			primaryStage.setScene(scene);

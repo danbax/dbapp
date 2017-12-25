@@ -62,7 +62,7 @@ public class UpdateCatalogController extends Application implements Initializabl
 			 * start select product frame
 			 */
 			
-			Parent root = FXMLLoader.load(getClass().getResource("/gui/updateCatalog.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/updateCatalog.fxml"));
 			Scene scene = new Scene(root);
 			GUIcontroller.setCurrentScene(scene); // save scene
 			primaryStage.setScene(scene);

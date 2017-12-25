@@ -22,7 +22,7 @@ public class GUIcontroller {
 		currentScene.getWindow().hide(); //hiding primary window
 		primaryStage = new Stage();
 		loader = new FXMLLoader();
-		root = loader.load(getClass().getResource("/gui/"+fxmlFile).openStream());
+		root = loader.load(getClass().getResource("/main/resources/"+fxmlFile).openStream());
 		
 		//scene.getStylesheets().add(getClass().getResource("/gui/selectProductFrame.css").toExternalForm());
 		Scene scene = new Scene(root);	

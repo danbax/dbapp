@@ -59,8 +59,8 @@ public class ClientIpSetController implements Initializable  {
 			 * start frame
 			 */
 			
-			Parent root = FXMLLoader.load(getClass().getResource("/gui/ClientIpSetForm.fxml"));
-			
+			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/ClientIpSetForm.fxml"));
+					
 			Scene scene = new Scene(root);
 			
 			//gui controller

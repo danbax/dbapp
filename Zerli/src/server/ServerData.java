@@ -1,5 +1,4 @@
 package server;
-
 import gui.DatabaseLoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;

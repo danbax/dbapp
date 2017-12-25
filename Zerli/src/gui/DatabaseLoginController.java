@@ -60,7 +60,7 @@ public class DatabaseLoginController implements Initializable  {
 			 * start select product frame
 			 */
 			
-			Parent root = FXMLLoader.load(getClass().getResource("/gui/databaseLoginForm.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/databaseLoginForm.fxml"));
 			
 			Scene scene = new Scene(root);
 			//scene.getStylesheets().add(getClass().getResource("/gui/databaseLoginForm.css").toExternalForm());
