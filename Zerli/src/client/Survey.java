@@ -117,5 +117,7 @@ public class Survey implements Serializable {
 		this.surveyName = surveyName;
 	}
 	
-
+	public String toString() { 
+		return surveyName;
+	}
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import enums.Actions;
 import gui.LoginController;
 import gui.ManageSatisfactionSurvey;
+import gui.SurveyResultsController;
 import gui.UpdateCatalogController;
 import gui.UpdateUsersController;
 import server.ConIF;
@@ -94,6 +95,23 @@ public class ClientController extends AbstractClient {
 			@SuppressWarnings("unchecked")
 			ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
 			ManageSatisfactionSurvey.last.fillTable(surveys);
+		}
+		if (sr.getAction() == Actions.GetSurveyNames) {
+			@SuppressWarnings("unchecked")
+			ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
+			SurveyResultsController.last.fillComboSurveys(surveys);
+		}
+		if (sr.getAction() == Actions.GetSurveyData) {
+			@SuppressWarnings("unchecked")
+			Survey survey = (Survey) sr.getValue();
+			System.out.println(survey.getQ1());
+			SurveyResultsController.last.showBoxes(survey);
+		}
+		if (sr.getAction() == Actions.GetSurveyResults) {
+			@SuppressWarnings("unchecked")
+			ArrayList<SurveyResults> surveys = (ArrayList<SurveyResults>) sr.getValue();
+			SurveyResultsController.last.fillTable(surveys);
+			
 		}
 		
 		

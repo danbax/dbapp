@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import client.Product;
 import client.Request;
 import client.Survey;
+import client.SurveyResults;
 import client.User;
 import database.*;
 import enums.Actions;
@@ -113,6 +114,24 @@ public class ServerController extends AbstractServer {
 			{
 				SurveyResultDatabase.getSurveys((com.mysql.jdbc.Connection)conn, client);
 			}
+			if(req.getAction() == Actions.GetSurveyData)
+			{
+				SurveyResultDatabase.getSurveyData((com.mysql.jdbc.Connection)conn, client, (Survey) req.getValue());
+			}
+			if(req.getAction() == Actions.AddSurveyResults)
+			{
+				SurveyResultDatabase.addSurvey((com.mysql.jdbc.Connection)conn, client, (SurveyResults) req.getValue());
+			}
+			if(req.getAction() == Actions.GetSurveyResults)
+			{
+				SurveyResultDatabase.getSurveysResults((com.mysql.jdbc.Connection)conn, client);
+			}
+			if(req.getAction() == Actions.DeleteSurveyResults)
+			{
+				SurveyResultDatabase.deleteSurvey((com.mysql.jdbc.Connection)conn, client, (SurveyResults) req.getValue());
+			}
+			
+			
 			
 			
 		} catch (SQLException ex) {/* handle any errors */

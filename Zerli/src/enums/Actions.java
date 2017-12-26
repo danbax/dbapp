@@ -41,9 +41,11 @@ public enum Actions {
 	
 	/*surveys results manager */
 	GetSurveyNames,
+	GetSurveyData,
 	AddSurveyResults,
 	UpdateSurveyResults,
 	DeleteSurveyResults,
+	GetSurveyResults,
 	
 	/*Complains management*/ 
 	 AddComplain,
