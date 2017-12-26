@@ -14,6 +14,7 @@ public class User implements Serializable {
 	private String fname;
 	private String lname;
 	private String phone;
+	private int permissions;
 	
 	
 	public User(String user,String pass) {
@@ -73,5 +74,13 @@ public class User implements Serializable {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public int getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(int permissions) {
+		this.permissions = permissions;
 	}
 }

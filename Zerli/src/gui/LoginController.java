@@ -62,7 +62,26 @@ public class LoginController implements Initializable  {
 			// GO to main menu
 			
 			loginMessage.setText("valid data!");
-			
+			// permissions - show right menu
+			if(LoginController.myUser.getPermissions() == 1)
+			{
+				// employee
+				Platform.runLater(new Runnable(){
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						GUIcontroller guic = new GUIcontroller();
+						try {
+							guic.loadFxml("MenuEmployee.fxml");
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+			else
+			{
 			
 			/*
 			 *  Move to main menu
@@ -81,6 +100,7 @@ public class LoginController implements Initializable  {
 				}
 				
 				});
+			}
 			
 		}
 		else if(isValid==0)

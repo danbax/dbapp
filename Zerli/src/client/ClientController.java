@@ -4,6 +4,7 @@ import ocsf.client.*;
 import java.io.*;
 import java.util.ArrayList;
 import enums.Actions;
+import gui.GUIcontroller;
 import gui.LoginController;
 import gui.ManageSatisfactionSurvey;
 import gui.SurveyResultsController;

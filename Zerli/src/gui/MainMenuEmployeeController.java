@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import client.Client;
@@ -15,7 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class MainMenuController extends Application implements Initializable  {
+public class MainMenuEmployeeController extends Application implements Initializable  {
 	
 	@FXML Text helloText;
 	
@@ -33,6 +34,30 @@ public class MainMenuController extends Application implements Initializable  {
 		guic.loadFxml("loginForm.fxml");
 	}
 	
+	@FXML
+	public void updateCatalog(MouseEvent event)  throws Exception {
+		// Move to UpdateCatalog
+		GUIcontroller guic = new GUIcontroller();
+				try {
+					guic.loadFxml("UpdateCatalog.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	}
+	
+	@FXML
+	public void surveyResult(MouseEvent event)  throws Exception {
+		// Move to SatisfactionSurveyResult
+		GUIcontroller guic = new GUIcontroller();
+				try {
+					guic.loadFxml("SurveyResult.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	}
+	
 	public static void main( String args[] ) throws Exception
 	   { 
      launch(args);		
@@ -44,9 +69,10 @@ public class MainMenuController extends Application implements Initializable  {
 			 * start select product frame
 			 */
 			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/MainMenu.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/MenuEmployee.fxml"));
 			
 			Scene scene = new Scene(root);
+			GUIcontroller.setCurrentScene(scene);
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();

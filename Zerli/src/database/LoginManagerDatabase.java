@@ -41,9 +41,10 @@ public class LoginManagerDatabase {
 					sr.setAnswer(Actions.UsernameExist);
 					User myuser = new User(rs.getString("username"),rs.getString("password"));
 					myuser.setId(rs.getInt("ID"));
-					myuser.setFname("fname");
-					myuser.setLname("lname");
-					myuser.setPhone("phone");
+					myuser.setFname(rs.getString("fname"));
+					myuser.setLname(rs.getString("lname"));
+					myuser.setPhone(rs.getString("phone"));
+					myuser.setPermissions(rs.getInt("permissions"));
 					
 					String s2 = "update users set logged=1 where id=?";
 					try {

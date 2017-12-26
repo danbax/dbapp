@@ -76,7 +76,7 @@ public class SurveyResultsController extends Application implements Initializabl
 			 * start select product frame
 			 */
 			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/SatisfactionSurveyResults.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/SurveyResults.fxml"));
 			Scene scene = new Scene(root);
 			GUIcontroller.setCurrentScene(scene); // save scene
 			primaryStage.setScene(scene);
@@ -98,7 +98,7 @@ public class SurveyResultsController extends Application implements Initializabl
 					// TODO Auto-generated method stub
 					GUIcontroller guic = new GUIcontroller();
 					try {
-						guic.loadFxml("MainMenu.fxml");
+						guic.loadFxml("MenuEmployee.fxml");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
