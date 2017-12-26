@@ -64,6 +64,7 @@ public class SurveyResultsController extends Application implements Initializabl
 	@FXML private Text txtq4 = new Text();
 	@FXML private Text txtq5 = new Text();
 	@FXML private Text txtq6 = new Text();
+	ObservableList<Integer> observableList;
 	
 	public static void main( String args[] ) throws Exception
 	   { 
@@ -409,15 +410,17 @@ public class SurveyResultsController extends Application implements Initializabl
 			{
 				results.add(i);
 			}
-			
-			//cast results to ObservableList
-		    ObservableList<Integer> observableList = FXCollections.observableList(results);
-		    this.cmbq1.setItems(observableList);
-		    this.cmbq2.setItems(observableList);
-		    this.cmbq3.setItems(observableList);
-		    this.cmbq4.setItems(observableList);
-		    this.cmbq5.setItems(observableList);
-		    this.cmbq6.setItems(observableList);
+			if(observableList == null)
+			{
+				//cast results to ObservableList
+			    observableList = FXCollections.observableList(results);
+			    this.cmbq1.setItems(observableList);
+			    this.cmbq2.setItems(observableList);
+			    this.cmbq3.setItems(observableList);
+			    this.cmbq4.setItems(observableList);
+			    this.cmbq5.setItems(observableList);
+			    this.cmbq6.setItems(observableList);
+			}
 			
 			this.cmbq1.setOpacity(1);
 			this.cmbq2.setOpacity(1);
