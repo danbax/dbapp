@@ -43,5 +43,10 @@ public enum Actions {
 	GetSurveyNames,
 	AddSurveyResults,
 	UpdateSurveyResults,
-	DeleteSurveyResults;
+	DeleteSurveyResults,
+	
+	/*Complains management*/ 
+	 AddComplain,
+	 GetComplain,
+	 DeleteComplain;
 }
