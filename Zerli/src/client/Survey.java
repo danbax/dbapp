@@ -16,17 +16,19 @@ public class Survey implements Serializable {
 	private String q4;
 	private String q5;
 	private String q6;
+	private String surveyName;
 	
-	public Survey(String q1,String q2,String q3,String q4,String q5,String q6) {
+	public Survey(String q1,String q2,String q3,String q4,String q5,String q6,String surveyName) {
 		this.setQ1(q1);
 		this.setQ2(q2);
 		this.setQ3(q3);
 		this.setQ4(q4);
 		this.setQ5(q5);
 		this.setQ6(q6);
+		this.setSurveyName(surveyName);
 	}
 	
-	public Survey(int id,String q1,String q2,String q3,String q4,String q5,String q6) {
+	public Survey(int id,String q1,String q2,String q3,String q4,String q5,String q6,String surveyName) {
 		this.setId(id);
 		this.setQ1(q1);
 		this.setQ2(q2);
@@ -34,6 +36,7 @@ public class Survey implements Serializable {
 		this.setQ4(q4);
 		this.setQ5(q5);
 		this.setQ6(q6);
+		this.setSurveyName(surveyName);
 	}
 
 
@@ -104,6 +107,14 @@ public class Survey implements Serializable {
 
 	public void setQ6(String q6) {
 		this.q6 = q6;
+	}
+
+	public String getSurveyName() {
+		return surveyName;
+	}
+
+	public void setSurveyName(String surveyName) {
+		this.surveyName = surveyName;
 	}
 	
 

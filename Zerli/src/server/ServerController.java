@@ -109,6 +109,11 @@ public class ServerController extends AbstractServer {
 			{
 				SurveyManagerDatabase.addSurvey((com.mysql.jdbc.Connection)conn, client,(Survey) req.getValue());
 			}
+			if(req.getAction() == Actions.GetSurveyNames)
+			{
+				SurveyResultDatabase.getSurveys((com.mysql.jdbc.Connection)conn, client);
+			}
+			
 			
 		} catch (SQLException ex) {/* handle any errors */
 			System.out.println("SQLException: " + ex.getMessage());

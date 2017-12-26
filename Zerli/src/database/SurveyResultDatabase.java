@@ -11,7 +11,7 @@ import com.mysql.jdbc.PreparedStatement;
 import client.ServerResponse;
 import client.Survey;
 import enums.Actions;
-public class SurveyManagerDatabase {
+public class SurveyResultDatabase {
 	
 	public static void getSurveys(Connection conn,  ConnectionToClient client) throws SQLException {
 		/*
@@ -40,7 +40,7 @@ public class SurveyManagerDatabase {
 				}
 				
 				ServerResponse sr = new ServerResponse(); // create server response
-				sr.setAction(Actions.GetSurveys);
+				sr.setAction(Actions.GetSurveyNames);
 				sr.setValue(surveys);
 				
 				client.sendToClient(sr); // send messeage to client
@@ -50,7 +50,7 @@ public class SurveyManagerDatabase {
 			// TODO: handle exception
 		}
 	}
-	
+	/*
 	public static void addSurvey(Connection conn,  ConnectionToClient client,Survey survey) throws SQLException {
 		
 		ServerResponse sr = new ServerResponse(); // create server response
@@ -86,9 +86,7 @@ public class SurveyManagerDatabase {
 	}
 	
 	public static void updateSurvey(Connection conn,  ConnectionToClient client,Survey survey) throws SQLException {
-		/*
-		 * update
-		 */
+		//update
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.UpdateSurvey);
 		PreparedStatement ps;
@@ -114,9 +112,7 @@ public class SurveyManagerDatabase {
 	}
 	
 	public static void deleteSurvey(Connection conn,  ConnectionToClient client,Survey survey) throws SQLException {
-		/*
-		 * delete
-		 */
+		// delete
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.DeleteSurvey);
 		PreparedStatement ps;
@@ -141,4 +137,5 @@ public class SurveyManagerDatabase {
 			} // send messeage to client
 		}
 	}
+	*/
 }

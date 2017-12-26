@@ -52,6 +52,7 @@ public class ManageSatisfactionSurvey extends Application implements Initializab
 	@FXML private TextArea q4;
 	@FXML private TextArea q5;
 	@FXML private TextArea q6;
+	@FXML private TextField surveyName;
 	
 	public static void main( String args[] ) throws Exception
 	   { 
@@ -107,9 +108,10 @@ public class ManageSatisfactionSurvey extends Application implements Initializab
 			String q4String = q4.getText();
 			String q5String = q5.getText();
 			String q6String = q6.getText();
+			String surveyNameString = surveyName.getText();
 			
 			
-			Survey survey = new Survey(q1String,q2String,q3String,q4String,q5String,q6String);
+			Survey survey = new Survey(q1String,q2String,q3String,q4String,q5String,q6String,surveyNameString);
 			Request req = new Request(Actions.AddSurvey,survey);
 			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
 			Client.clientConn.handleMessageFromClientUI(req);
@@ -175,6 +177,7 @@ public class ManageSatisfactionSurvey extends Application implements Initializab
 				
 				// defining table columns
 				TableColumn<Survey, String> idCol = new TableColumn<Survey, String>("ID");
+				TableColumn<Survey, String> surveyNameCol = new TableColumn<Survey, String>("Survey Name");
 				TableColumn<Survey, String> q1Col = new TableColumn<Survey, String>("q1");
 				TableColumn<Survey, String> q2Col = new TableColumn<Survey, String>("q2");
 				TableColumn<Survey, String> q3Col = new TableColumn<Survey, String>("q3");
@@ -185,6 +188,10 @@ public class ManageSatisfactionSurvey extends Application implements Initializab
 				//add data to columns
 				idCol.setCellValueFactory(
 		        	    new PropertyValueFactory<Survey,String>("id")
+		        	);
+
+				surveyNameCol.setCellValueFactory(
+		        	    new PropertyValueFactory<Survey,String>("surveyName")
 		        	);
 
 		        
@@ -370,7 +377,7 @@ public class ManageSatisfactionSurvey extends Application implements Initializab
 				        
 		        
 				surveyTable.setItems(ObserSurveys);
-				surveyTable.getColumns().addAll(idCol, q1Col,q2Col, q3Col,q4Col, q5Col,q6Col);
+				surveyTable.getColumns().addAll(idCol,surveyNameCol, q1Col,q2Col, q3Col,q4Col, q5Col,q6Col);
 			}
 		} 
 

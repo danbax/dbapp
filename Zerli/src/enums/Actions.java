@@ -37,5 +37,11 @@ public enum Actions {
 	UpdateSurvey,
 	DeleteSurvey,
 		SurveyDeleted,
-		SurveyNotDeleted;
+		SurveyNotDeleted,
+	
+	/*surveys results manager */
+	GetSurveyNames,
+	AddSurveyResults,
+	UpdateSurveyResults,
+	DeleteSurveyResults;
 }

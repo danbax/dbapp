@@ -3,7 +3,6 @@ package client;
 import ocsf.client.*;
 import java.io.*;
 import java.util.ArrayList;
-
 import enums.Actions;
 import gui.LoginController;
 import gui.ManageSatisfactionSurvey;
