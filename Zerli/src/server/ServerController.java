@@ -131,6 +131,11 @@ public class ServerController extends AbstractServer {
 				SurveyResultDatabase.deleteSurvey((com.mysql.jdbc.Connection)conn, client, (SurveyResults) req.getValue());
 			}
 			
+			if(req.getAction() == Actions.GetNotAuthorizedUsers)
+			{
+				AuthorizeUsersDatabase.getUsersNotAuthorized((com.mysql.jdbc.Connection)conn, client);
+			}
+			
 			
 			
 			

@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UpdateCatalogController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UpdateUsersController">
    <children>
       <AnchorPane prefHeight="166.0" prefWidth="900.0" style="-fx-background-color: #0074D9;">
          <children>
@@ -29,7 +29,7 @@
                   <Font size="25.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Catalog" wrappingWidth="350.06597900390625">
+            <Text fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage users" wrappingWidth="350.06597900390625">
                <font>
                   <Font size="38.0" />
                </font>
@@ -45,16 +45,13 @@
          <children>
             <AnchorPane prefHeight="442.0" prefWidth="315.0" style="-fx-background-color: #DDDDDD;">
                <children>
-                  <Text fill="#111111" layoutX="47.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product">
+                  <Text fill="#111111" layoutX="47.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search user">
                      <font>
                         <Font size="40.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="txtFieldPname" layoutX="32.0" layoutY="126.0" prefHeight="33.0" prefWidth="252.0" promptText="Product name" />
-                  <TextField fx:id="txtFieldPtype" layoutX="32.0" layoutY="167.0" prefHeight="33.0" prefWidth="252.0" promptText="Product type" />
-                  <Button fx:id="btnAdd" layoutX="116.0" layoutY="265.0" mnemonicParsing="false" onAction="#onBtnAddClicked" prefHeight="34.0" prefWidth="84.0" text="Add" />
-                  <TextField fx:id="txtPid" layoutX="32.0" layoutY="85.0" prefHeight="33.0" prefWidth="252.0" promptText="Product ID" />
-                  <TextField fx:id="txtPrice" layoutX="32.0" layoutY="211.0" prefHeight="33.0" prefWidth="252.0" promptText="price" />
+                  <Button fx:id="btnSearch" layoutX="116.0" layoutY="132.0" mnemonicParsing="false" onAction="#onBtnSearchClick" prefHeight="34.0" prefWidth="84.0" text="search" />
+                  <TextField fx:id="txtSearch" layoutX="32.0" layoutY="85.0" prefHeight="33.0" prefWidth="252.0" promptText="search query" />
                   <ImageView fx:id="deleteButton" accessibleText="delete selected row" layoutX="16.0" layoutY="396.0" onMouseClicked="#deleteSelectedRow">
                      <image>
                         <Image url="images/delete.png" />
@@ -64,7 +61,7 @@
             </AnchorPane>
             <AnchorPane layoutX="315.0" prefHeight="442.0" prefWidth="586.0">
                <children>
-                  <TableView fx:id="ProductsTable" prefHeight="442.4" prefWidth="586.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="UsersTable" prefHeight="442.4" prefWidth="586.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   </TableView>
                </children>
             </AnchorPane>

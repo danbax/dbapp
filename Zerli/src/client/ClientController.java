@@ -2,8 +2,12 @@ package client;
 
 import ocsf.client.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import enums.Actions;
+import gui.AuthorizeUsersController;
 import gui.GUIcontroller;
 import gui.LoginController;
 import gui.ManageSatisfactionSurvey;
@@ -114,13 +118,18 @@ public class ClientController extends AbstractClient {
 			SurveyResultsController.last.fillTable(surveys);
 			
 		}
+		if (sr.getAction() == Actions.GetNotAuthorizedUsers) {
+			@SuppressWarnings("unchecked")
+			ArrayList<User> users = (ArrayList<User>) sr.getValue();
+			AuthorizeUsersController.last.fillTable(users);
+			
+		}
 		
 		
 	}
 
 	public void handleMessageFromClientUI(Object req) {
 		/*
-		 * send arraylist<string> to server
 		 * req.get(0) = action
 		 * req.get(1) = value
 		 */
@@ -130,8 +139,8 @@ public class ClientController extends AbstractClient {
 			clientUI.display("Could not send message to server.  Terminating client.");
 			quit();
 		}
-
 	}
+	
 
 	public void quit() {
 		try {

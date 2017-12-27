@@ -1,2 +1,5 @@
 /gui/
-/main/
+/client/
+/enums/
+/database/
+/serverImages/

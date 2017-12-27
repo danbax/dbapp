@@ -2,10 +2,15 @@ package database;
 
 import ocsf.server.ConnectionToClient;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -13,6 +18,8 @@ import com.mysql.jdbc.PreparedStatement;
 import client.Product;
 import client.ServerResponse;
 import enums.Actions;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 public class UpdateCatalogDatabase {
 	
 	public static void getProducts(Connection conn,  ConnectionToClient client) throws SQLException {
@@ -29,9 +36,18 @@ public class UpdateCatalogDatabase {
 				while ( rs.next() )
 				{
 					// create product
-					Product product = new Product(rs.getInt("id"),
+					Product product = new Product(
+							rs.getInt("id"),
 							rs.getString("pname"),
-							rs.getString("ptype"));
+							rs.getString("ptype")
+							//,"serverImages/"+rs.getString("img")
+							);
+					
+					
+					product.setPrice(rs.getFloat("price"));
+					product.setProductId(rs.getString("product_id"));
+					
+					// add to product array
 					products.add(product);
 				}
 				
@@ -51,15 +67,35 @@ public class UpdateCatalogDatabase {
 		/*
 		 * Checks if username,password exist in database
 		 */
+		
+		File file = new File("");
+		String fileName = new SimpleDateFormat("ssmmyyyyHHMMdd").format(new Date()); // create filename by date
+		String filePath = file.getAbsolutePath()+"\\Zerli\\src\\serverImages\\"+fileName+"."+product.getImgf().getExe();
+		
+		// save image to serverImages folder
+		try (FileOutputStream fos = new FileOutputStream(filePath)) {
+			   fos.write(product.getImgf().getMybytearray());
+			   fos.close();
+			} catch (FileNotFoundException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddProduct);
 		System.out.println(product.getProductName());
 		PreparedStatement ps;
-		String s1 = "INSERT INTO products (pname, ptype) VALUES (?,?);";
+		String s1 = "INSERT INTO products (pname, ptype,price,img,product_ID) VALUES (?,?,?,?,?);";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setString(1, product.getProductName());
 				ps.setString(2, product.getProductType());
+				ps.setFloat(3, product.getPrice());
+				ps.setString(4, fileName+"."+product.getImgf().getExe());
+				ps.setString(5, product.getProductId());
 				ps.executeUpdate();
 
 				
@@ -86,12 +122,13 @@ public class UpdateCatalogDatabase {
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddProduct);
 		PreparedStatement ps;
-		String s1 = "update products set pname=?,ptype=? where id=?;";
+		String s1 = "update products set pname=?,ptype=?,price=? where id=?;";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setString(1, product.getProductName());
 				ps.setString(2, product.getProductType());
-				ps.setInt(3, product.getPid());
+				ps.setFloat(3, product.getPrice());
+				ps.setInt(4, product.getPid());
 				ps.executeUpdate();
 
 				

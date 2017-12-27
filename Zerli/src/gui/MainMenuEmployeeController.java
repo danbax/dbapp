@@ -39,7 +39,7 @@ public class MainMenuEmployeeController extends Application implements Initializ
 		// Move to UpdateCatalog
 		GUIcontroller guic = new GUIcontroller();
 				try {
-					guic.loadFxml("UpdateCatalog.fxml");
+					guic.loadFxml("UpdateCatalogProducts.fxml");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

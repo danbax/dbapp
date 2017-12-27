@@ -47,6 +47,13 @@ public enum Actions {
 	DeleteSurveyResults,
 	GetSurveyResults,
 	
+	/*authorize users*/
+	GetNotAuthorizedUsers,
+	AuthorizeUser,
+	
+	/*send image to server */
+	SendImgToServer,
+	
 	/*Complains management*/ 
 	 AddComplain,
 	 GetComplain,
