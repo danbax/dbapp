@@ -10,9 +10,13 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -79,6 +83,7 @@ public class MainMenuService extends Application implements Initializable  {
 			primaryStage.show();
 			
 		}
+	
 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	

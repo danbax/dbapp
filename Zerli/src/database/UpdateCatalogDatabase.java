@@ -42,6 +42,7 @@ public class UpdateCatalogDatabase {
 					
 					product.setPrice(rs.getFloat("price"));
 					product.setProductId(rs.getString("product_id"));
+					product.setImage("/serverImages/"+rs.getString("img"));
 					
 					// add to product array
 					products.add(product);

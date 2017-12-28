@@ -30,6 +30,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -193,8 +195,6 @@ public class UpdateCatalogController extends Application implements Initializabl
 				
 				//casting ArrayList to ObservableList
 				ObserProducts = FXCollections.observableArrayList(products);
-				for(Product p: products)
-				System.out.println("p"+p.getPrice());
 				
 				// defining table columns
 				TableColumn<Product, String> nameCol = new TableColumn<Product, String>("Name");
