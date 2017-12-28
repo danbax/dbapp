@@ -131,6 +131,25 @@ public class LoginController implements Initializable  {
 					});
 				}
 			}
+			else if(LoginController.myUser.getPermissions() == 4)
+			{
+				// Customer Service
+				{
+					Platform.runLater(new Runnable(){
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							GUIcontroller guic = new GUIcontroller();
+							try {
+								guic.loadFxml("MenuShopManager.fxml");
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					});
+				}
+			}
 			else
 			{
 			

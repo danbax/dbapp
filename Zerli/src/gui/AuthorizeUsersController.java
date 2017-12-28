@@ -133,7 +133,7 @@ public class AuthorizeUsersController extends Application implements Initializab
 					// TODO Auto-generated method stub
 					GUIcontroller guic = new GUIcontroller();
 					try {
-						guic.loadFxml("MainMenu.fxml");
+						guic.loadFxml("MenuShopManager.fxml");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
