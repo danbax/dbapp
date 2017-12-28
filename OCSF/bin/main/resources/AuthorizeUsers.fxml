@@ -17,7 +17,7 @@
          <children>
             <ImageView layoutX="21.0" layoutY="19.0">
                <image>
-                  <Image url="@../../images/logo.png" />
+                  <Image url="images/logo.png" />
                </image>
             </ImageView>
             <Text fill="WHITE" layoutX="140.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
@@ -37,7 +37,7 @@
             </Text>
             <ImageView fx:id="menu" layoutX="846.0" layoutY="19.0" onMouseClicked="#onMenuClick">
                <image>
-                  <Image url="@../../images/lines-menu.png" />
+                  <Image url="images/lines-menu.png" />
                </image>
             </ImageView>
          </children>

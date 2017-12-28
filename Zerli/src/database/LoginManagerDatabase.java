@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
+import client.Address;
+import client.CreditCard;
 import client.ServerResponse;
 import client.User;
 import enums.Actions;
@@ -45,6 +47,7 @@ public class LoginManagerDatabase {
 					myuser.setLname(rs.getString("lname"));
 					myuser.setPhone(rs.getString("phone"));
 					myuser.setPermissions(rs.getInt("permissions"));
+					myuser.setAuthorized(rs.getInt("authorized"));
 					
 					String s2 = "update users set logged=1 where id=?";
 					try {
@@ -88,5 +91,78 @@ public class LoginManagerDatabase {
 		{
 			// TODO: handle exception
 		}
+	}
+	
+	public static void GetMyCreditCard(Connection conn,  ConnectionToClient client,User u) throws SQLException {
+		/*
+		 * Checks if username,password exist in database
+		 */
+		PreparedStatement ps;
+		ResultSet rs; 
+		String s1 = "select * from credit_card where user_id=?";
+		try {
+				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, u.getId());
+				rs = ps.executeQuery();
+				ServerResponse sr = new ServerResponse(); // create server response
+				CreditCard cc = new CreditCard();
+				if (rs.next())
+				{
+					// credit card exist
+					cc.setId(rs.getInt("id"));
+					cc.setCardNumber(rs.getString("card_number"));
+					cc.setExpMonth(rs.getInt("expMonth"));
+					cc.setExpYear(rs.getInt("expYear"));
+					cc.setCvv(rs.getString("cvv"));
+				}
+				else
+				{
+					// credit card doesn't exist
+					cc = null;
+				}
+				sr.setAction(Actions.GetMyCreditCard);
+				sr.setValue(cc);
+				client.sendToClient(sr); // send messeage to client
+		}
+		catch (Exception e)
+		{
+			// TODO: handle exception
+		}	
+	}
+	
+	public static void getMyAdress(Connection conn,  ConnectionToClient client,User u) throws SQLException {
+		/*
+		 * Checks if username,password exist in database
+		 */
+		PreparedStatement ps;
+		ResultSet rs; 
+		String s1 = "select * from address where user_id=?";
+		try {
+				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, u.getId());
+				rs = ps.executeQuery();
+				ServerResponse sr = new ServerResponse(); // create server response
+				Address adress = new Address();
+				if (rs.next())
+				{
+					// credit card exist
+					adress.setId(rs.getInt("id"));
+					adress.setCity(rs.getString("city"));
+					adress.setStreet(rs.getString("street"));
+					adress.setNumber(rs.getInt("number"));
+				}
+				else
+				{
+					// credit card doesn't exist
+					adress = null;
+				}
+				sr.setAction(Actions.GetMyAdress);
+				sr.setValue(adress);
+				client.sendToClient(sr); // send messeage to client
+		}
+		catch (Exception e)
+		{
+			// TODO: handle exception
+		}	
 	}
 }

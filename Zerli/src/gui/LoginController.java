@@ -3,7 +3,10 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import client.Address;
 import client.Client;
+import client.CreditCard;
 import client.Request;
 import client.User;
 import enums.Actions;
@@ -23,6 +26,8 @@ import javafx.stage.Stage;
 public class LoginController implements Initializable  {
 	public static LoginController last;
 	public static User myUser;
+	public static CreditCard myCreditCard;
+	public static Address myAddress;
 	@FXML
 	private TextField loginUsername;
 	@FXML
@@ -59,6 +64,14 @@ public class LoginController implements Initializable  {
 		
 		if(isValid==1)
 		{
+			// get my address and credit card
+			Request req = new Request();
+			req.setValue(myUser);
+			req.setAction(Actions.GetMyAdress);
+			Client.clientConn.handleMessageFromClientUI(req);
+			req.setAction(Actions.GetMyCreditCard);
+			
+			
 			// GO to main menu
 			
 			loginMessage.setText("valid data!");
@@ -79,6 +92,44 @@ public class LoginController implements Initializable  {
 						}
 					}
 				});
+			}
+			else if(LoginController.myUser.getPermissions() == 2)
+			{
+				// Expert Manager
+				{
+					Platform.runLater(new Runnable(){
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							GUIcontroller guic = new GUIcontroller();
+							try {
+								guic.loadFxml("ServiceExpert.fxml");
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					});
+				}
+			}
+			else if(LoginController.myUser.getPermissions() == 3)
+			{
+				// Customer Service
+				{
+					Platform.runLater(new Runnable(){
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							GUIcontroller guic = new GUIcontroller();
+							try {
+								guic.loadFxml("MenuService.fxml");
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					});
+				}
 			}
 			else
 			{

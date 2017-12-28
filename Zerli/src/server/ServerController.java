@@ -3,9 +3,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import client.CreditCard;
 import client.Product;
 import client.Request;
 import client.Survey;
+import client.SurveyConclusion;
 import client.SurveyResults;
 import client.User;
 import database.*;
@@ -94,6 +96,14 @@ public class ServerController extends AbstractServer {
 			{
 				UpdateUsersDatabase.updateUsers((com.mysql.jdbc.Connection)conn, client,(User) req.getValue());
 			}
+			if(req.getAction() == Actions.GetMyAdress)
+			{
+				LoginManagerDatabase.getMyAdress((com.mysql.jdbc.Connection)conn, client,(User) req.getValue());
+			}
+			if(req.getAction() == Actions.GetMyCreditCard)
+			{
+				LoginManagerDatabase.GetMyCreditCard((com.mysql.jdbc.Connection)conn, client,(User) req.getValue());
+			}
 			if(req.getAction() == Actions.GetSurveys)
 			{
 				SurveyManagerDatabase.getSurveys((com.mysql.jdbc.Connection)conn, client);
@@ -135,7 +145,34 @@ public class ServerController extends AbstractServer {
 			{
 				AuthorizeUsersDatabase.getUsersNotAuthorized((com.mysql.jdbc.Connection)conn, client);
 			}
-			
+			if(req.getAction() == Actions.AuthorizeUser)
+			{
+				AuthorizeUsersDatabase.AuthorizeUser((com.mysql.jdbc.Connection)conn, client,(CreditCard)req.getValue());
+			}
+			if(req.getAction() == Actions.GetSurveyNamesExpert)
+			{
+				ServiceExpertDatabase.getSurveys((com.mysql.jdbc.Connection)conn, client);
+			}
+			if(req.getAction() == Actions.GetNumberOfVoters)
+			{
+				ServiceExpertDatabase.getSurveyNumOfVoters((com.mysql.jdbc.Connection)conn, client,(Survey) req.getValue());
+			}
+			if(req.getAction() == Actions.GetAvgRes)
+			{
+				ServiceExpertDatabase.getSurveyResultAvg((com.mysql.jdbc.Connection)conn, client, (Survey) req.getValue());
+			}
+			if(req.getAction() == Actions.GetConclusion)
+			{
+				ServiceExpertDatabase.getConclusion((com.mysql.jdbc.Connection)conn, client, (Survey) req.getValue());
+			}
+			if(req.getAction() == Actions.addConclusion)
+			{
+				ServiceExpertDatabase.addConclusion((com.mysql.jdbc.Connection)conn, client, (SurveyConclusion) req.getValue());
+			}
+			if(req.getAction() == Actions.updateConclusion)
+			{
+				ServiceExpertDatabase.updateConclusion((com.mysql.jdbc.Connection)conn, client, (SurveyConclusion) req.getValue());
+			}
 			
 			
 			

@@ -13,7 +13,7 @@ public class Product implements Serializable {
 	private float price;
 	private ImgFile imgf;
 	private String productId;
-	private ImageView image; 
+	private String image; // image path
 	
 	public Product(	String name, String type) {
 		this.setProductName(name);
@@ -31,10 +31,16 @@ public class Product implements Serializable {
 		this.setProductName(name);
 		this.setProductType(type);
 		//image
-		ImageView imageView = new ImageView(img);
+		/*
+		 * image of javafx can't be serializable
+		Image image = new Image("C:\\Users\\danik\\Desktop\\download.jpg");
+		ImageView imageView = new ImageView(image);
+
 		imageView.setFitHeight(50);
 		imageView.setFitWidth(50);
 		this.setImage(imageView);
+		*/
+		this.setImage(img);
 	}
 	
 
@@ -86,14 +92,13 @@ public class Product implements Serializable {
 		this.productId = productId;
 	}
 
-	public ImageView getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(ImageView image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
-	
 	
 	
 	

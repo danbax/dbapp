@@ -11,15 +11,11 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-
 import client.Product;
 import client.ServerResponse;
 import enums.Actions;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 public class UpdateCatalogDatabase {
 	
 	public static void getProducts(Connection conn,  ConnectionToClient client) throws SQLException {

@@ -29,9 +29,9 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class ManageSatisfactionSurvey extends Application implements Initializable  {
+public class SatisfactionSurvey extends Application implements Initializable  {
 	
-	public static ManageSatisfactionSurvey last;
+	public static SatisfactionSurvey last;
 	private ObservableList<Survey> ObserSurveys;
 	@FXML
 	private TableView<Survey> surveyTable = new TableView<Survey>(); // table of products
@@ -55,7 +55,7 @@ public class ManageSatisfactionSurvey extends Application implements Initializab
 			 * start select product frame
 			 */
 			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/ManageSatisfactionSurvey.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/SatisfactionSurvey.fxml"));
 			Scene scene = new Scene(root);
 			GUIcontroller.setCurrentScene(scene); // save scene
 			primaryStage.setScene(scene);
@@ -77,7 +77,7 @@ public class ManageSatisfactionSurvey extends Application implements Initializab
 					// TODO Auto-generated method stub
 					GUIcontroller guic = new GUIcontroller();
 					try {
-						guic.loadFxml("MainMenu.fxml");
+						guic.loadFxml("MenuService.fxml");
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

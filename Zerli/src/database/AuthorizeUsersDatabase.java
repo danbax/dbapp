@@ -51,7 +51,7 @@ public class AuthorizeUsersDatabase {
 		}
 	}
 	
-	public static void AuthorizeUser(Connection conn,  ConnectionToClient client,int subscribe,CreditCard creditCard) throws SQLException {
+	public static void AuthorizeUser(Connection conn,  ConnectionToClient client,CreditCard creditCard) throws SQLException {
 		/*
 		 * update user In Database
 		 * 
@@ -65,7 +65,7 @@ public class AuthorizeUsersDatabase {
 		String s1 = "update users set authorized=? where id=?;";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
-				ps.setInt(1, subscribe);
+				ps.setInt(1, creditCard.getAuthorized());
 				ps.setInt(2, creditCard.getUser().getId());
 				ps.executeUpdate();
 

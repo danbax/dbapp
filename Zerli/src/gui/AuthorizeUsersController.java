@@ -9,8 +9,10 @@ import java.util.ResourceBundle;
 import com.sun.prism.impl.Disposer.Record;
 
 import client.Client;
+import client.CreditCard;
 import client.Product;
 import client.Request;
+import client.Survey;
 import client.User;
 import enums.Actions;
 import javafx.application.Application;
@@ -46,9 +48,10 @@ public class AuthorizeUsersController extends Application implements Initializab
 	private ObservableList<User> ObserUsers;
 	@FXML
 	private TableView<User> UsersTable = new TableView<User>(); // table of products
-	
 	@FXML
-	private DatePicker txtExpiration;
+	private TextField monthTxt;
+	@FXML
+	private TextField YearTxt;
 	@FXML
 	private TextField txtCardNumber;
 	@FXML
@@ -83,16 +86,38 @@ public class AuthorizeUsersController extends Application implements Initializab
 			/* authorize user*/
 			String CreditCardNumber = txtCardNumber.getText();
 			String cvv = txtCVV.getText();
+			int month = Integer.parseInt(monthTxt.getText());
+			int year = Integer.parseInt(YearTxt.getText());
+			String s = this.subscribeCmb.getSelectionModel().getSelectedItem();
+			User userToUpdate = UsersTable.getSelectionModel().getSelectedItem();
+			int authorize=0;
+			switch(s) {
+			case "Regular":
+				authorize=1;
+				break;
+			case "Monthly":
+				authorize=2;
+				break;
+			case "Yearly":
+				authorize=3;
+				break;
+			}
 			
-			System.out.println(CreditCardNumber + " " + cvv );
-			/*
-			Product p = new Product(pname,ptype);
-			Request req = new Request(Actions.AddProduct,p);
+			CreditCard cc = new CreditCard();
+			cc.setCardNumber(CreditCardNumber);
+			cc.setCvv(cvv);
+			cc.setExpMonth(month);
+			cc.setExpYear(year);
+			cc.setAuthorized(authorize);
+			cc.setUser(userToUpdate);
+			
+			
+			Request req = new Request(Actions.AuthorizeUser,cc);
 			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
 			Client.clientConn.handleMessageFromClientUI(req);
-			req.setAction(Actions.GetProducts); 
+			req.setAction(Actions.GetNotAuthorizedUsers); 
 			Client.clientConn.handleMessageFromClientUI(req);
-			*/
+			
 		}
 		
 		@FXML

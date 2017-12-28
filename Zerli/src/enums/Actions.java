@@ -7,6 +7,8 @@ public enum Actions {
 		UsernameExist,
 		UsernameDoesNotExist,
 		AlreadyLoggedIn,
+		GetMyCreditCard,
+		GetMyAdress,
 		
 	Logout,
 
@@ -53,6 +55,15 @@ public enum Actions {
 	
 	/*send image to server */
 	SendImgToServer,
+	
+	/*survey expert*/
+	GetSurveyNamesExpert,
+	GetNumberOfVoters,
+	GetAvgRes,
+	GetConclusion,
+	updateConclusion,
+	addConclusion,
+	checkIfConclusionExist,
 	
 	/*Complains management*/ 
 	 AddComplain,

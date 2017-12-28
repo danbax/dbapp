@@ -10,6 +10,7 @@ public class CreditCard implements Serializable {
 	private int expYear;
 	private String cvv;
 	private User user; // user that credit card belongs to
+	private int authorized;
 	
 	public CreditCard() {
 		// empty constructor
@@ -73,6 +74,14 @@ public class CreditCard implements Serializable {
 	}
 	public void setCvv(String cvv) {
 		this.cvv = cvv;
+	}
+
+	public int getAuthorized() {
+		return authorized;
+	}
+
+	public void setAuthorized(int authorized) {
+		this.authorized = authorized;
 	}
 	
 }

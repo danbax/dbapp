@@ -15,6 +15,7 @@ public class User implements Serializable {
 	private String lname;
 	private String phone;
 	private int permissions;
+	private int authorized;
 	
 	
 	public User(String user,String pass) {
@@ -82,5 +83,13 @@ public class User implements Serializable {
 
 	public void setPermissions(int permissions) {
 		this.permissions = permissions;
+	}
+
+	public int getAuthorized() {
+		return authorized;
+	}
+
+	public void setAuthorized(int authorized) {
+		this.authorized = authorized;
 	}
 }

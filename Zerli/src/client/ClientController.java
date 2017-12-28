@@ -10,7 +10,8 @@ import enums.Actions;
 import gui.AuthorizeUsersController;
 import gui.GUIcontroller;
 import gui.LoginController;
-import gui.ManageSatisfactionSurvey;
+import gui.SatisfactionSurvey;
+import gui.SurveyExpertController;
 import gui.SurveyResultsController;
 import gui.UpdateCatalogController;
 import gui.UpdateUsersController;
@@ -99,7 +100,7 @@ public class ClientController extends AbstractClient {
 		if (sr.getAction() == Actions.GetSurveys) {
 			@SuppressWarnings("unchecked")
 			ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
-			ManageSatisfactionSurvey.last.fillTable(surveys);
+			SatisfactionSurvey.last.fillTable(surveys);
 		}
 		if (sr.getAction() == Actions.GetSurveyNames) {
 			@SuppressWarnings("unchecked")
@@ -123,6 +124,27 @@ public class ClientController extends AbstractClient {
 			ArrayList<User> users = (ArrayList<User>) sr.getValue();
 			AuthorizeUsersController.last.fillTable(users);
 			
+		}
+		
+		if (sr.getAction() == Actions.GetSurveyNamesExpert) {
+			@SuppressWarnings("unchecked")
+			ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
+			SurveyExpertController.last.fillComboSurveys(surveys);
+		}
+		if (sr.getAction() == Actions.GetNumberOfVoters) {
+			SurveyExpertController.last.setNumberVoters((Integer)sr.getValue());
+		}
+		if (sr.getAction() == Actions.GetAvgRes) {
+			SurveyExpertController.last.setAvgResults((SurveyResults)sr.getValue());
+		}
+		if (sr.getAction() == Actions.GetConclusion) {
+			SurveyExpertController.last.setConclusion((String)sr.getValue());
+		}
+		if (sr.getAction() == Actions.GetMyAdress) {
+			LoginController.myAddress = (Address)sr.getValue();
+		}
+		if (sr.getAction() == Actions.GetMyCreditCard) {
+			LoginController.myCreditCard = (CreditCard)sr.getValue();
 		}
 		
 		
