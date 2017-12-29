@@ -23,19 +23,19 @@ public class updateComplainsDatabase {
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select complains.idComplain, complains.desc, users.ID, users.fname, users.lname, "
-				+ "complains.compensation, complains.isAnswered from complains,users where users.id=complains.userID";
+		String s1 = "select * from complains";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				rs = ps.executeQuery();
 				ArrayList<Complain> complains = new ArrayList<Complain>();
 				while ( rs.next() )
 				{//int complainId, User user, String desc, boolean isAnswered, float compensation
-					// create product
-					/*
-					Complain complain = new Complain(rs.getInt("idComplains")));
-					products.add(product);
-					*/
+					Complain complain = new Complain(
+							rs.getInt("idComplains"),
+							rs.getInt("userID"),
+							rs.getString("desc"),
+							rs.getString("status"),
+							rs.getFloat("compensation"));
 				}
 				
 				ServerResponse sr = new ServerResponse(); // create server response
@@ -55,25 +55,24 @@ public class updateComplainsDatabase {
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddComplain);
 		PreparedStatement ps;
-		String s1 = "INSERT INTO complains (idComplains, desc, userID, compensation, isAnswered ) VALUES (?,?,?,?,?);";
+		String s1 = "INSERT INTO complains (idComplain, desc, userID, compensation, isAnswered ) VALUES (?,?,?,?,?);";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, complain.getComplainId());
 				ps.setString(2, complain.getDesc());
 				ps.setInt(3, complain.getUser().getId());
 				ps.setFloat(4, complain.getCompensation());
-				ps.setInt(5, complain.getisAnswered());
+				ps.setString(5, complain.getStatus());
 				
 				ps.executeUpdate();
 				
-				
-				sr.setAnswer(Actions.ProductAdded);
+				sr.setAnswer(Actions.AddComplain);
 				client.sendToClient(sr); // send messeage to client
 			}
 		catch (Exception e)
 		{
 			// TODO: handle exception
-			sr.setAnswer(Actions.ProductAddedError);
+			sr.setAnswer(Actions.AddComplainError);
 			try {
 				client.sendToClient(sr);
 			} catch (IOException e1) {
@@ -82,22 +81,24 @@ public class updateComplainsDatabase {
 			} // send messeage to client
 		}
 	}
-	/*
-	public static void updateProduct(Connection conn,  ConnectionToClient client,Product product) throws SQLException {
+	
+	public static void updateComplain(Connection conn,  ConnectionToClient client,Complain complain) throws SQLException {
 		
 		ServerResponse sr = new ServerResponse(); // create server response
-		sr.setAction(Actions.AddProduct);
+		sr.setAction(Actions.AddComplain);
 		PreparedStatement ps;
-		String s1 = "update products set pname=?,ptype=? where id=?;";
+		String s1 = "update complains set desc=?,userID=?,isAnswered=?,compensation=? where id=?;";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
-				ps.setString(1, product.getProductName());
-				ps.setString(2, product.getProductType());
-				ps.setInt(3, product.getPid());
+				ps.setString(1, complain.getDesc());
+				ps.setInt(2, complain.getUser().getId());
+				ps.setString(3, complain.getStatus());
+				ps.setFloat(4, complain.getCompensation());
+				ps.setInt(5, complain.getComplainId());
 				ps.executeUpdate();
 
 				
-				sr.setAnswer(Actions.ProductAdded);
+				sr.setAnswer(Actions.ComplainAdded);
 				client.sendToClient(sr); // send messeage to client
 			}
 		catch (Exception e)
@@ -106,24 +107,24 @@ public class updateComplainsDatabase {
 		}
 	}
 	
-	public static void deleteProduct(Connection conn,  ConnectionToClient client,Product product) throws SQLException {
+	public static void deleteComplain(Connection conn,  ConnectionToClient client,Complain complain) throws SQLException {
 		
 		ServerResponse sr = new ServerResponse(); // create server response
-		sr.setAction(Actions.DeleteProduct);
+		sr.setAction(Actions.DeleteComplain);
 		PreparedStatement ps;
 		String s1 = "delete from products where id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
-				ps.setInt(1, product.getPid());
+				ps.setInt(1, complain.getComplainId());
 				ps.executeUpdate();
 
 				
-				sr.setAnswer(Actions.DeletedProduct);
+				sr.setAnswer(Actions.DeletedComplain);
 				client.sendToClient(sr); // send messeage to client
 			}
 		catch (Exception e)
 		{
-			sr.setAnswer(Actions.DeletedProductError);
+			sr.setAnswer(Actions.DeletedComplainError);
 			try {
 				client.sendToClient(sr);
 			} catch (IOException e1) {
@@ -132,5 +133,5 @@ public class updateComplainsDatabase {
 			} // send messeage to client
 		}
 	}
-*/
+
 }
