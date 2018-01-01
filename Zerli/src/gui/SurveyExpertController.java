@@ -101,7 +101,7 @@ public class SurveyExpertController extends Application implements Initializable
 					// TODO Auto-generated method stub
 					GUIcontroller guic = new GUIcontroller();
 					try {
-						guic.loadFxml("MenuEmployee.fxml");
+						guic.loadFxmlMenu();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -227,14 +227,14 @@ public class SurveyExpertController extends Application implements Initializable
 			txtAvg5.setOpacity(1);
 			
 			txtAvg6.setText(Integer.toString(sr.getQ6()));
-			txtAvg6.setOpacity(1);
+			txtAvg6.setOpacity(1); 
 		}
 		
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	
 			last = this;
 			
-			// get users from database
+			// get data from database
 			Request req = new Request();
 			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
 			req.setAction(Actions.GetSurveyNamesExpert); 

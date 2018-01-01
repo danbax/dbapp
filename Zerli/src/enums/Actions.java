@@ -27,7 +27,7 @@ public enum Actions {
 		ProductAddedError, // error while adding product to database
 		
 	/*users manager	 */
-	GetUsers,
+	GetUsers, 
 	updateUser,
 	DeleteUser,
 	
@@ -63,10 +63,23 @@ public enum Actions {
 	GetConclusion,
 	updateConclusion,
 	addConclusion,
-	checkIfConclusionExist,
+	checkIfConclusionExist, 
 	
 	/*Complains management*/ 
 	 AddComplain,
 	 GetComplain,
-	 DeleteComplain;
+	 DeleteComplain,
+	 
+	 /*order*/
+	 buyProductFromCatalog,
+	 
+	 /* update my data */
+	 AddCreditCard,
+	 UpdateCreditCard,
+	 AddAddress,
+	 UpdateAddress,
+	 
+	 
+	 /*catalog*/
+	 GetProductCatalog;
 }

@@ -84,7 +84,7 @@ public class UpdateUsersController extends Application implements Initializable 
 					// TODO Auto-generated method stub
 					GUIcontroller guic = new GUIcontroller();
 					try {
-						guic.loadFxml("MainMenu.fxml");
+						guic.loadFxmlMenu();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

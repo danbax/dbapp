@@ -18,7 +18,7 @@ import client.ServerResponse;
 import enums.Actions;
 public class UpdateCatalogDatabase {
 	
-	public static void getProducts(Connection conn,  ConnectionToClient client) throws SQLException {
+	public static void getProducts(Connection conn,  ConnectionToClient client) throws SQLException { 
 		/*
 		 * get list of products from database
 		 */

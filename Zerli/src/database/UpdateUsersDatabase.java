@@ -65,15 +65,18 @@ public class UpdateUsersDatabase {
 		/*
 		 * update user In Database
 		 */
-		ServerResponse sr = new ServerResponse(); // create server response
-		sr.setAction(Actions.updateUser);
+		ServerResponse sr = new ServerResponse(); // create server response 
+		sr.setAction(Actions.updateUser); 
 		PreparedStatement ps;
-		String s1 = "update users set username=?,password=? where id=?;";
+		String s1 = "update users set username=?,password=?,fname=?,lname=?,phone=? where id=?;";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setString(1, user.getUsername());
 				ps.setString(2, user.getPassword());
-				ps.setInt(3, user.getId());
+				ps.setString(3, user.getFname());
+				ps.setString(4, user.getLname());
+				ps.setString(5, user.getPhone());
+				ps.setInt(6, user.getId());
 				ps.executeUpdate();
 
 				

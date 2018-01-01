@@ -7,7 +7,9 @@ import java.util.ResourceBundle;
 
 import com.sun.prism.impl.Disposer.Record;
 
+import client.Address;
 import client.Client;
+import client.CreditCard;
 import client.Product;
 import client.Request;
 import client.User;
@@ -65,7 +67,7 @@ public class UpdateMyDataController extends Application implements Initializable
 	//address
 	@FXML private TextField cityTxt;
 	@FXML private TextField StreetTxt;
-	@FXML private TextField sNumberTxt;
+	@FXML private TextField sNumberTxt; 
 	
 	@FXML private Button updateAdress;
 	
@@ -81,7 +83,7 @@ public class UpdateMyDataController extends Application implements Initializable
 			 * start select product frame
 			 */
 			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/UpdateMyData.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/UpdateMyUserData.fxml"));
 			Scene scene = new Scene(root);
 			GUIcontroller.setCurrentScene(scene); // save scene
 			primaryStage.setScene(scene);
@@ -103,7 +105,7 @@ public class UpdateMyDataController extends Application implements Initializable
 					// TODO Auto-generated method stub
 					GUIcontroller guic = new GUIcontroller();
 					try {
-						guic.loadFxml("MainMenu.fxml");
+						guic.loadFxmlMenu();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -117,24 +119,128 @@ public class UpdateMyDataController extends Application implements Initializable
 		@FXML
 		public void onupdatePayment(ActionEvent event) throws Exception {
 			
+			String creditCard = creditCardTxt.getText();
+			int expMonth = Integer.parseInt(MonthTxt.getText());
+			int expYear = Integer.parseInt(YearTxt.getText());
+			String cvv = CVVTxt.getText();
 			
+			if(LoginController.myCreditCard != null)
+			{
+				// update
+				LoginController.myCreditCard.setCardNumber(creditCard);
+				LoginController.myCreditCard.setExpMonth(expMonth);
+				LoginController.myCreditCard.setExpYear(expYear);
+				LoginController.myCreditCard.setCvv(cvv);
+				
+				Request req = new Request();
+				Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+				req.setAction(Actions.UpdateCreditCard); 
+				ArrayList<Object> arr = new ArrayList<Object>();
+				arr.add(LoginController.myCreditCard);
+				arr.add(LoginController.myUser);
+				req.setValue(arr);
+				Client.clientConn.handleMessageFromClientUI(req);
+			}
+			else
+			{
+				// insert new 
+				CreditCard cc = new CreditCard();
+				cc.setCardNumber(creditCard);
+				cc.setExpMonth(expMonth);
+				cc.setExpYear(expYear);
+				cc.setCvv(cvv);
+				
+				Request req = new Request();
+				Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+				req.setAction(Actions.AddCreditCard); 
+				ArrayList<Object> arr = new ArrayList<Object>();
+				arr.add(cc);
+				arr.add(LoginController.myUser);
+				req.setValue(arr);
+				Client.clientConn.handleMessageFromClientUI(req);
+				
+				
+			}
+			Request req = new Request();
+			req.setValue(LoginController.myUser);
+			req.setAction(Actions.GetMyCreditCard);
+			Client.clientConn.handleMessageFromClientUI(req);
 		}
 		
 		@FXML
 		public void onupdateGeneral(ActionEvent event) throws Exception {
 			
+			String username = usernameTxt.getText();
+			String fname = fnameTxt.getText();
+			String password = passwordTxt.getText();
+			String lname = lnameTxt.getText();
+			String phone = phoneTxt.getText();
 			
+			if(LoginController.myUser != null)
+			{
+				// update my user
+				LoginController.myUser.setUsername(username);
+				LoginController.myUser.setFname(fname);
+				LoginController.myUser.setPassword(password);
+				LoginController.myUser.setLname(lname);
+				LoginController.myUser.setPhone(phone);
+				
+				Request req = new Request();
+				Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+				req.setAction(Actions.updateUser); 
+				req.setValue(LoginController.myUser);
+				Client.clientConn.handleMessageFromClientUI(req);
+			}
 		}
 		
 		@FXML
 		public void onupdateAdress(ActionEvent event) throws Exception {
+			String city = cityTxt.getText();
+			String street = StreetTxt.getText();
+			int number = Integer.parseInt(sNumberTxt.getText());
 			
-			
+			if(LoginController.myAddress != null)
+			{
+				// update
+				LoginController.myAddress.setCity(city);
+				LoginController.myAddress.setStreet(street);
+				LoginController.myAddress.setNumber(number);
+				
+				Request req = new Request();
+				Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+				req.setAction(Actions.UpdateAddress); 
+				ArrayList<Object> arr = new ArrayList<Object>();
+				arr.add(LoginController.myAddress);
+				arr.add(LoginController.myUser);
+				req.setValue(arr);
+				Client.clientConn.handleMessageFromClientUI(req);
+			}
+			else
+			{
+				// insert new 
+				Address address = new Address();
+				address.setCity(city);
+				address.setStreet(street);
+				address.setNumber(number);
+				
+				Request req = new Request();
+				Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+				req.setAction(Actions.AddAddress); 
+				ArrayList<Object> arr = new ArrayList<Object>();
+				arr.add(address);
+				arr.add(LoginController.myUser);
+				req.setValue(arr);
+				Client.clientConn.handleMessageFromClientUI(req);
+			}
+			Request req = new Request();
+			req.setValue(LoginController.myUser);
+			req.setAction(Actions.GetMyAdress);
+			Client.clientConn.handleMessageFromClientUI(req);
 		}
 		
 		public void fillPayment()
 		{
-			if(LoginController.myCreditCard != null)
+			if(LoginController.myCreditCard != null)  
 			{
 			creditCardTxt.setText(LoginController.myCreditCard.getCardNumber());
 			MonthTxt.setText(Integer.toString(LoginController.myCreditCard.getExpMonth()));

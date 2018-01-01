@@ -122,7 +122,7 @@ public class LoginManagerDatabase {
 				}
 				sr.setAction(Actions.GetMyCreditCard);
 				sr.setValue(cc);
-				client.sendToClient(sr); // send messeage to client
+				client.sendToClient(sr); // send messeage to client 
 		}
 		catch (Exception e)
 		{

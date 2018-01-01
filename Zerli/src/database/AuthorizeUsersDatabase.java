@@ -59,7 +59,7 @@ public class AuthorizeUsersDatabase {
 		 * subscribe = authorized = 2 : monthly subscribe
 		 * subscribe = authorized = 3 : yearly subscribe
 		 */
-		ServerResponse sr = new ServerResponse(); // create server response
+		ServerResponse sr = new ServerResponse(); // create server response 
 		sr.setAction(Actions.AuthorizeUser);
 		PreparedStatement ps;
 		String s1 = "update users set authorized=? where id=?;";

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import enums.Actions;
 import gui.AuthorizeUsersController;
+import gui.CatalogController;
 import gui.GUIcontroller;
 import gui.LoginController;
 import gui.SatisfactionSurvey;
@@ -132,7 +133,7 @@ public class ClientController extends AbstractClient {
 			SurveyExpertController.last.fillComboSurveys(surveys);
 		}
 		if (sr.getAction() == Actions.GetNumberOfVoters) {
-			SurveyExpertController.last.setNumberVoters((Integer)sr.getValue());
+			SurveyExpertController.last.setNumberVoters((Integer)sr.getValue()); 
 		}
 		if (sr.getAction() == Actions.GetAvgRes) {
 			SurveyExpertController.last.setAvgResults((SurveyResults)sr.getValue());
@@ -145,6 +146,10 @@ public class ClientController extends AbstractClient {
 		}
 		if (sr.getAction() == Actions.GetMyCreditCard) {
 			LoginController.myCreditCard = (CreditCard)sr.getValue();
+		}
+		
+		if (sr.getAction() == Actions.GetProductCatalog) {
+			CatalogController.last.setCatalogProducts((ArrayList<Product>) sr.getValue());
 		}
 		
 		

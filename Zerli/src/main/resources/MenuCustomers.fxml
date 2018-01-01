@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainMenuCustomer">
+   <children>
+      <AnchorPane prefHeight="166.0" prefWidth="900.0" style="-fx-background-color: #0074D9;">
+         <children>
+         	<ImageView layoutX="860.0" layoutY="19.0" onMouseClicked="#onLogout">
+               <image>
+                  <Image url="images/logout.png" />
+               </image>
+            </ImageView>
+            <ImageView layoutX="21.0" layoutY="19.0">
+               <image>
+                  <Image url="images/logo.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="140.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
+               <font>
+                  <Font size="52.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="140.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower shop">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Text>
+            <Text fx:id="helloText" fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, {user name}" wrappingWidth="350.06597900390625">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="428.0" prefWidth="900.0">
+         <children>
+            <AnchorPane fx:id="catalog" layoutX="143.0" layoutY="45.0" onMouseClicked="#catalog" prefHeight="150.0" prefWidth="270.0" style="-fx-background-color: #DDDDDD;">
+               <children>
+                  <Text fill="#0074d9" layoutX="90.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="70.0" fitWidth="75.0" layoutX="103.0" layoutY="24.0">
+                     <image>
+                        <Image url="images/catalog.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="customMade" layoutX="475.0" layoutY="45.0" onMouseClicked="#customMade" prefHeight="150.0" prefWidth="270.0" style="-fx-background-color: #DDDDDD;">
+               <children>
+                  <Text fill="#0074d9" layoutX="43.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Custome-made order">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Text>
+                  <ImageView layoutX="110.0" layoutY="31.0">
+                     <image>
+                        <Image url="images/custom-made.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="history" layoutX="143.0" layoutY="234.0" onMouseClicked="#orderHistory" prefHeight="150.0" prefWidth="270.0" style="-fx-background-color: #DDDDDD;">
+               <children>
+                  <Text fill="#0074d9" layoutX="43.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="order history">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+                  <ImageView layoutX="103.0" layoutY="31.0">
+                     <image>
+                        <Image url="images/order-history.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="updateAccount" layoutX="475.0" layoutY="234.0" onMouseClicked="#updateAccount" prefHeight="150.0" prefWidth="270.0" style="-fx-background-color: #DDDDDD;">
+               <children>
+                  <Text fill="#0074d9" layoutX="32.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="update account">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Text>
+                  <ImageView layoutX="114.0" layoutY="31.0">
+                     <image>
+                        <Image url="images/update-account.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

@@ -60,7 +60,7 @@ public class SurveyResultsController extends Application implements Initializabl
 	@FXML private ComboBox<Integer> cmbq6 = new ComboBox<Integer>();
 	@FXML private Text txtq1 = new Text();
 	@FXML private Text txtq2 = new Text();
-	@FXML private Text txtq3 = new Text();
+	@FXML private Text txtq3 = new Text(); 
 	@FXML private Text txtq4 = new Text();
 	@FXML private Text txtq5 = new Text();
 	@FXML private Text txtq6 = new Text();
@@ -99,7 +99,7 @@ public class SurveyResultsController extends Application implements Initializabl
 					// TODO Auto-generated method stub
 					GUIcontroller guic = new GUIcontroller();
 					try {
-						guic.loadFxml("MenuEmployee.fxml");
+						guic.loadFxmlMenu();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -114,7 +114,7 @@ public class SurveyResultsController extends Application implements Initializabl
 		public void onBtnAddClicked(ActionEvent event) throws Exception {
 			// add survey results
 			Survey s = this.selectSurvey.getSelectionModel().getSelectedItem();
-			int q1 = this.cmbq1.getSelectionModel().getSelectedItem();
+			int q1 = this.cmbq1.getSelectionModel().getSelectedItem(); 
 			int q2 = this.cmbq2.getSelectionModel().getSelectedItem();
 			int q3 = this.cmbq3.getSelectionModel().getSelectedItem();
 			int q4 = this.cmbq4.getSelectionModel().getSelectedItem();

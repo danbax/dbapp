@@ -31,6 +31,36 @@ public class GUIcontroller {
 		primaryStage.setScene(scene); 		
 		primaryStage.show(); 
 	}
+	
+	public void loadFxmlMenu() throws IOException
+	{
+		/*
+		 * load menu relevant to user
+		 */
+		String fxmlFile = "";
+		int permission = LoginController.myUser.getPermissions();
+		switch(permission)
+		{
+		case 1:
+			fxmlFile = "MenuEmployee.fxml";
+			break;
+		case 2:
+			fxmlFile = "ServiceExpert.fxml";
+			break;
+		case 3:
+			fxmlFile = "MenuService.fxml";
+			break;
+		case 4:
+			fxmlFile = "MenuShopManager.fxml";
+			break;	
+		case 5:
+			fxmlFile = "MenuCustomers.fxml";
+			break;	
+		}
+			
+		
+		loadFxml(fxmlFile);
+	}
 
 	public static Scene getCurrentScene() {
 		return currentScene;
@@ -47,4 +77,5 @@ public class GUIcontroller {
 	public static void setCurrentStage(Stage currentStage) {
 		GUIcontroller.currentStage = currentStage;
 	}
+	
 }

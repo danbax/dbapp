@@ -14,7 +14,7 @@ import client.SurveyConclusion;
 import client.SurveyResults;
 import client.User;
 import enums.Actions;
-public class ServiceExpertDatabase {
+public class ServiceExpertDatabase { 
 	
 	public static void getSurveys(Connection conn,  ConnectionToClient client) throws SQLException {
 		/*

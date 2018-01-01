@@ -20,7 +20,7 @@ public class SurveyResultDatabase {
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select * from Surveys";
+		String s1 = "select * from Surveys"; 
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				rs = ps.executeQuery();

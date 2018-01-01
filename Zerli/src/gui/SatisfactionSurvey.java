@@ -71,13 +71,13 @@ public class SatisfactionSurvey extends Application implements Initializable  {
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
+			Platform.runLater(new Runnable(){  
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
 					GUIcontroller guic = new GUIcontroller();
 					try {
-						guic.loadFxml("MenuService.fxml");
+						guic.loadFxmlMenu();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

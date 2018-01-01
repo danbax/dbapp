@@ -2,13 +2,13 @@ package client;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class Complain implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private int complainId;
-	private User user;
+	private User user; 
 	private int userID;
 	private String desc;
 	private String status;

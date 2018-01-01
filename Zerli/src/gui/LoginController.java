@@ -62,7 +62,7 @@ public class LoginController implements Initializable  {
 		 * show error message if data is invalid
 		 */
 		
-		if(isValid==1)
+		if(isValid==1) 
 		{
 			// get my address and credit card
 			Request req = new Request();
@@ -70,7 +70,7 @@ public class LoginController implements Initializable  {
 			req.setAction(Actions.GetMyAdress);
 			Client.clientConn.handleMessageFromClientUI(req);
 			req.setAction(Actions.GetMyCreditCard);
-			
+			Client.clientConn.handleMessageFromClientUI(req);
 			
 			// GO to main menu
 			
@@ -144,7 +144,26 @@ public class LoginController implements Initializable  {
 								guic.loadFxml("MenuShopManager.fxml");
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
-								e.printStackTrace();
+								e.printStackTrace(); 
+							}
+						}
+					});
+				}
+			}
+			else if(LoginController.myUser.getPermissions() == 5)
+			{
+				// Customer Service
+				{
+					Platform.runLater(new Runnable(){
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							GUIcontroller guic = new GUIcontroller();
+							try {
+								guic.loadFxml("MenuCustomers.fxml");
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace(); 
 							}
 						}
 					});

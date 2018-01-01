@@ -31,7 +31,7 @@ public class MainMenuShopManager extends Application implements Initializable  {
 		
 		// Move to loginForm
 		GUIcontroller guic = new GUIcontroller();
-		guic.loadFxml("loginForm.fxml");
+		guic.loadFxml("loginForm.fxml"); 
 	}
 	
 	@FXML

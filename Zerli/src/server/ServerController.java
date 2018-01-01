@@ -2,8 +2,13 @@ package server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Objects;
 
+import client.Address;
 import client.CreditCard;
+import client.Order;
 import client.Product;
 import client.Request;
 import client.Survey;
@@ -141,7 +146,7 @@ public class ServerController extends AbstractServer {
 				SurveyResultDatabase.deleteSurvey((com.mysql.jdbc.Connection)conn, client, (SurveyResults) req.getValue());
 			}
 			
-			if(req.getAction() == Actions.GetNotAuthorizedUsers)
+			if(req.getAction() == Actions.GetNotAuthorizedUsers) 
 			{
 				AuthorizeUsersDatabase.getUsersNotAuthorized((com.mysql.jdbc.Connection)conn, client);
 			}
@@ -173,6 +178,45 @@ public class ServerController extends AbstractServer {
 			{
 				ServiceExpertDatabase.updateConclusion((com.mysql.jdbc.Connection)conn, client, (SurveyConclusion) req.getValue());
 			}
+			if(req.getAction() == Actions.GetProductCatalog)
+			{
+				CatalogDatabase.getProducts((com.mysql.jdbc.Connection)conn, client,(String) req.getValue());
+			} 
+			if(req.getAction() == Actions.AddAddress)
+			{
+				ArrayList<Object> arr = (ArrayList<Object>) req.getValue();
+				Address ad = (Address) arr.get(0);
+				User u = (User) arr.get(1);
+				UpdateMyUser.addAddress((com.mysql.jdbc.Connection)conn, client,ad,u);
+			} 
+			if(req.getAction() == Actions.AddCreditCard)
+			{
+				ArrayList<Object> arr = (ArrayList<Object>) req.getValue();
+				CreditCard cc = (CreditCard) arr.get(0);
+				User u = (User) arr.get(1);
+				UpdateMyUser.addCreditCard((com.mysql.jdbc.Connection)conn, client,cc,u);
+			} 
+			if(req.getAction() == Actions.UpdateCreditCard)
+			{
+				ArrayList<Object> arr = (ArrayList<Object>) req.getValue();
+				CreditCard cc = (CreditCard) arr.get(0);
+				User u = (User) arr.get(1);
+				UpdateMyUser.updateCreditCard((com.mysql.jdbc.Connection)conn, client,cc,u);
+			} 
+			if(req.getAction() == Actions.UpdateAddress)
+			{
+				ArrayList<Object> arr = (ArrayList<Object>) req.getValue();
+				Address ad = (Address) arr.get(0);
+				User u = (User) arr.get(1);
+				UpdateMyUser.updateAddress((com.mysql.jdbc.Connection)conn, client,ad,u);
+			} 
+			if(req.getAction() == Actions.buyProductFromCatalog)
+			{
+				// add function here
+				orderCatalogDatabase.order((com.mysql.jdbc.Connection)conn, client, (Order) req.getValue());
+			
+			} 
+			
 			
 			
 			

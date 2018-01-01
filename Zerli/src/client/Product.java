@@ -2,9 +2,6 @@ package client;
 
 import java.io.Serializable;
 
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
-
 @SuppressWarnings("serial")
 public class Product implements Serializable {
 	private int pid;
@@ -97,7 +94,7 @@ public class Product implements Serializable {
 	}
 
 	public void setImage(String image) {
-		this.image = image;
+		this.image = image; 
 	}
 	
 	
