@@ -31,7 +31,7 @@ CREATE TABLE `address` (
   `number` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` VALUES (1,'Nahariya','vaizman',82,16);
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +85,7 @@ CREATE TABLE `credit_card` (
   `cvv` varchar(3) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +94,7 @@ CREATE TABLE `credit_card` (
 
 LOCK TABLES `credit_card` WRITE;
 /*!40000 ALTER TABLE `credit_card` DISABLE KEYS */;
-INSERT INTO `credit_card` VALUES (1,'543543453',12,2017,'277',1);
+INSERT INTO `credit_card` VALUES (1,'543543453',12,2017,'277',1),(2,'3134435748',7,2016,'287',16);
 /*!40000 ALTER TABLE `credit_card` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,6 +124,38 @@ INSERT INTO `expert_conclusion` VALUES (1,'1','conclusion text conclusion text c
 UNLOCK TABLES;
 
 --
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` varchar(45) DEFAULT NULL,
+  `user_id` varchar(45) DEFAULT NULL,
+  `order_date` date DEFAULT NULL,
+  `greeting_text` varchar(1500) DEFAULT NULL,
+  `hours` int(11) DEFAULT NULL,
+  `minutes` int(11) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `payment_method` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (2,'37','16','2018-01-10','222222',3,1,100,NULL,0),(3,'37','16','2018-01-18','Yes',2,1,100,2,0),(4,'39','16','2018-01-02','6666',11,2,100,1,0),(5,'35','16','2018-01-17','',1,2,50,1,0),(6,'38','16','2018-01-11','',2,2,100,2,0);
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `products`
 --
 
@@ -137,7 +170,7 @@ CREATE TABLE `products` (
   `img` varchar(145) DEFAULT NULL,
   `product_ID` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=hebrew;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=hebrew;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +179,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'flower super','my flower',NULL,'21462017181227.jpg',NULL),(2,'Roses','Bouqet',NULL,'21462017181227.jpg',NULL),(3,'Ren','Bouqet',NULL,'21462017181227.jpg',NULL),(4,'Petunia','Flower collection',NULL,'21462017181227.jpg',NULL),(5,'Antonio','Flower collection',NULL,'21462017181227.jpg',NULL),(21,'asdgsadg','235',NULL,'21462017181227.jpg',NULL),(26,'pname','ptype',NULL,'21462017181227.jpg',NULL),(27,'dgsdg','sdgdsg',NULL,'21462017181227.jpg',NULL),(29,'asf','asf',20,'44462017181227.jpg',NULL),(30,'flower','flowers',80,'05552017181227.jpg','3EFGH'),(31,'flower','flowers',80.7,'18562017181227.jpg','3EFGH'),(34,'super flower','Super Flowers',500,'28582017201227.jpg','E5G4');
+INSERT INTO `products` VALUES (34,'super flower','Super Flowers',500,'14122017151229.jpg','E5G4'),(35,'dequila','boquet',50,'26132017151229.jpg','E3G43'),(36,'rose','boquet',80,'52122017151229.jpg','E3G43'),(37,'ren','Flower collection',100,'58112017151229.jpg','E3G43'),(38,'Petunia','Flower collection',100,'06132017151229.jpg','E3G433'),(39,'Antonio','Flower collection',100,'xxx.jpg','E3G433'),(40,'Just flower','Flower collection',45.5,'21112017161229.jpg','123123'),(41,'intersting2','intersting2',110,'00122017161229.jpg','12312322');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +261,7 @@ CREATE TABLE `users` (
   `logged` int(11) DEFAULT NULL,
   `authorized` int(2) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=hebrew COMMENT='users table';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=hebrew COMMENT='users table';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,7 +270,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'shon',NULL,NULL,0,'admin','root',0,1),(2,'ron','bool',NULL,NULL,'daniel2','123',0,0),(3,'lior','abu',NULL,2,'lior','456',1,0),(5,'george',NULL,NULL,NULL,'or','123',0,0),(6,'shimhon',NULL,NULL,1,'employee','employee',1,0),(7,NULL,NULL,NULL,1,'employee1','employee1',0,0),(8,NULL,NULL,NULL,1,'employee2','employee2',0,0),(9,NULL,NULL,NULL,1,'employee3','employee3',0,0),(10,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(11,NULL,NULL,NULL,2,'Sexpert','Sexpert',0,0),(12,NULL,NULL,NULL,2,'Sexpert2','Sexpert2',NULL,0),(13,NULL,NULL,NULL,2,'Sexpert3','Sexpert3',NULL,0),(14,NULL,NULL,NULL,2,'Sexpert4','Sexpert4',NULL,0),(15,NULL,NULL,NULL,3,'service','service',0,0);
+INSERT INTO `users` VALUES (1,'shon',NULL,NULL,0,'admin','root',0,1),(2,'ron','bool',NULL,NULL,'daniel2','123',0,0),(3,'lior','abu',NULL,2,'lior','456',0,0),(5,'george',NULL,NULL,NULL,'or','123',0,0),(6,'shimhon',NULL,NULL,1,'employee','employee',1,0),(7,NULL,NULL,NULL,1,'employee1','employee1',0,0),(8,NULL,NULL,NULL,1,'employee2','employee2',0,0),(9,NULL,NULL,NULL,1,'employee3','employee3',0,0),(10,NULL,NULL,NULL,4,'shop manager','shop manager',0,0),(11,NULL,NULL,NULL,2,'Sexpert','Sexpert',0,0),(12,NULL,NULL,NULL,2,'Sexpert2','Sexpert2',0,0),(13,NULL,NULL,NULL,2,'Sexpert3','Sexpert3',0,0),(14,NULL,NULL,NULL,2,'Sexpert4','Sexpert4',0,0),(15,NULL,NULL,NULL,3,'service','service',0,0),(16,'daniel','bachnov','0502208768',5,'customer','customer',0,1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -250,4 +283,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-28 13:08:05
+-- Dump completed on 2018-01-02 13:02:28
