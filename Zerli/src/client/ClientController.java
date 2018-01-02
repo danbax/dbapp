@@ -11,6 +11,7 @@ import gui.AuthorizeUsersController;
 import gui.CatalogController;
 import gui.GUIcontroller;
 import gui.LoginController;
+import gui.OrderHistoryController;
 import gui.SatisfactionSurvey;
 import gui.SurveyExpertController;
 import gui.SurveyResultsController;
@@ -51,7 +52,7 @@ public class ClientController extends AbstractClient {
 					e.printStackTrace();
 				}
         	}
-        	else if(sr.getAnswer() == Actions.UsernameDoesNotExist)
+        	else if(sr.getAnswer() == Actions.UsernameDoesNotExist) 
         	{
         		// show error
         		System.out.println("error");
@@ -151,7 +152,14 @@ public class ClientController extends AbstractClient {
 		if (sr.getAction() == Actions.GetProductCatalog) {
 			CatalogController.last.setCatalogProducts((ArrayList<Product>) sr.getValue());
 		}
-		
+		if (sr.getAction() == Actions.GetMyOrdersHistory) {
+			@SuppressWarnings("unchecked")
+			ArrayList<Order> orders = (ArrayList<Order>) sr.getValue();
+			System.out.println("xxx");
+			System.out.println(orders.get(0).getGreeting());
+			OrderHistoryController.last.fillTable(orders); 
+			
+		}
 		
 	}
 

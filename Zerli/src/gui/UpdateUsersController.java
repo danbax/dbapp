@@ -93,7 +93,7 @@ public class UpdateUsersController extends Application implements Initializable 
 				
 				});
 			
-		}
+		} 
 		
 		@FXML
 		public void onBtnSearchClick(ActionEvent event) throws Exception {

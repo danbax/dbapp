@@ -10,6 +10,7 @@ import client.Address;
 import client.CreditCard;
 import client.Order;
 import client.Product;
+import client.Refund;
 import client.Request;
 import client.Survey;
 import client.SurveyConclusion;
@@ -212,10 +213,23 @@ public class ServerController extends AbstractServer {
 			} 
 			if(req.getAction() == Actions.buyProductFromCatalog)
 			{
-				// add function here
 				orderCatalogDatabase.order((com.mysql.jdbc.Connection)conn, client, (Order) req.getValue());
 			
 			} 
+			if(req.getAction() == Actions.GetMyOrdersHistory)
+			{
+				orderCatalogDatabase.getMyOrdersHistory((com.mysql.jdbc.Connection)conn, client, (User) req.getValue());
+			} 
+			if(req.getAction() == Actions.CancelOrder)
+			{
+				orderCatalogDatabase.CancelOrder((com.mysql.jdbc.Connection)conn, client, (Order) req.getValue());
+			} 
+			if(req.getAction() == Actions.AddRefund)
+			{
+				RefundDatabase.addRefund((com.mysql.jdbc.Connection)conn, client, (Refund) req.getValue());
+			} 
+			
+			
 			
 			
 			

@@ -72,6 +72,11 @@ public enum Actions {
 	 
 	 /*order*/
 	 buyProductFromCatalog,
+	 GetMyOrdersHistory,
+	 CancelOrder,
+	 
+	 /*refund*/
+	 AddRefund,
 	 
 	 /* update my data */
 	 AddCreditCard,

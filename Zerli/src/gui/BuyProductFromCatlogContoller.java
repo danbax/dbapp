@@ -63,7 +63,7 @@ public class BuyProductFromCatlogContoller extends Application implements Initia
 	Product product = CatalogController.selectedProduct;
 	Address address = LoginController.myAddress;
 	CreditCard creditCard = LoginController.myCreditCard;
-	User user = LoginController.myUser;
+	User user = LoginController.myUser; 
 	
 	@FXML
 	public void onBuy(ActionEvent event) throws Exception {
@@ -106,6 +106,21 @@ public class BuyProductFromCatlogContoller extends Application implements Initia
 		req.setValue(order);
 		Client.clientConn.handleMessageFromClientUI(req);
 		
+		
+		Platform.runLater(new Runnable(){
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				GUIcontroller guic = new GUIcontroller();
+				try {
+					guic.loadFxml("OrdersHistory.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			});
 		
 
 	}

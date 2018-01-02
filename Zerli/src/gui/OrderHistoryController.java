@@ -5,13 +5,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import client.Client;
 import client.ImgFile;
 import client.Order;
 import client.Product;
+import client.Refund;
 import client.Request;
+import client.User;
 import enums.Actions;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -34,6 +37,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -43,6 +47,11 @@ public class OrderHistoryController extends Application implements Initializable
 	private ObservableList<Order> obserOrders;
 	@FXML
 	private TableView<Order> OrdersTable = new TableView<Order>(); // table of products
+	@FXML private Text refundText;
+	@FXML private Button refund;
+	
+	
+	
 	
 	
 	
@@ -50,7 +59,7 @@ public class OrderHistoryController extends Application implements Initializable
 	
 	public static void main( String args[] ) throws Exception
 	   { 
-     launch(args);		
+     launch(args); 		
 	  } // end main
 	
 		public void start(Stage primaryStage) throws Exception {
@@ -72,6 +81,28 @@ public class OrderHistoryController extends Application implements Initializable
 		
 		@FXML
 		public void onGetRefund(ActionEvent event) throws Exception {
+			Order o = OrdersTable.getSelectionModel().getSelectedItem();
+			Request req = new Request();
+			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+			req.setAction(Actions.CancelOrder); 
+			req.setValue(o);
+			Client.clientConn.handleMessageFromClientUI(req);
+			
+			//refund add
+			Refund refund = new Refund();
+			refund.setOrder(o);
+			refund.setRefund(o.calculateRefund());
+			
+			req.setAction(Actions.AddRefund); 
+			req.setValue(refund);
+			Client.clientConn.handleMessageFromClientUI(req);
+			
+			
+			//refresh
+			req.setAction(Actions.GetMyOrdersHistory); 
+			req.setValue(LoginController.myUser);
+			Client.clientConn.handleMessageFromClientUI(req);
+			
 			
 		}
 		
@@ -101,6 +132,28 @@ public class OrderHistoryController extends Application implements Initializable
 		
 		@FXML
 		public void onCancel(MouseEvent event)  throws Exception {
+			Order o = OrdersTable.getSelectionModel().getSelectedItem();
+			if(o.getStatus().equals("canceled"))
+			{
+				refundText.setText("Already canceled");
+				refund.setOpacity(0);
+			}
+				
+			if(o.getStatus().equals("delivered"))
+			{
+				refundText.setText("Already delivered");
+				refund.setOpacity(0);
+			}
+				
+			if(o.getStatus().equals("pending"))
+			{
+			// calculate refund
+				float refundC = o.calculateRefund();
+				refundText.setText("Refund: " + refundC);
+				refund.setOpacity(1);
+			}
+			
+			refundText.setOpacity(1);
 			
 		}
 		
@@ -125,6 +178,8 @@ public class OrderHistoryController extends Application implements Initializable
 			}
 			else
 			{
+				
+				System.out.println(orders.get(0).getPrice());
 				OrdersTable.setEditable(false); // for updating
 				
 				//casting ArrayList to ObservableList
@@ -134,9 +189,24 @@ public class OrderHistoryController extends Application implements Initializable
 				TableColumn<Order, Integer> hoursCol = new TableColumn<Order, Integer>("Hours");
 				hoursCol.setCellValueFactory(new PropertyValueFactory<Order, Integer>("hours")); 
 		        //nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+				
+				TableColumn<Order, Integer> minCol = new TableColumn<Order, Integer>("Minutes");
+				minCol.setCellValueFactory(new PropertyValueFactory<Order, Integer>("minutes"));
+				
+				TableColumn<Order, Float> priceCol = new TableColumn<Order, Float>("Price");
+				priceCol.setCellValueFactory(new PropertyValueFactory<Order, Float>("price")); 
+				
+				TableColumn<Order, LocalDate> arrivingCol = new TableColumn<Order, LocalDate>("Arriving date");
+				arrivingCol.setCellValueFactory(new PropertyValueFactory<Order, LocalDate>("date")); 
+				
+				TableColumn<Order, String> greetingCol = new TableColumn<Order, String>("Greeting text");
+				greetingCol.setCellValueFactory(new PropertyValueFactory<Order, String>("greeting")); 
+				
+				TableColumn<Order, String> statusCol = new TableColumn<Order, String>("status");
+				statusCol.setCellValueFactory(new PropertyValueFactory<Order, String>("status")); 
 		        
 		        OrdersTable.setItems(obserOrders);
-		        OrdersTable.getColumns().add(hoursCol);
+		        OrdersTable.getColumns().addAll(greetingCol,priceCol,arrivingCol,hoursCol,minCol,statusCol); 
 			}
 		}
 		
@@ -144,12 +214,13 @@ public class OrderHistoryController extends Application implements Initializable
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	
 			last = this;
-			/*
+			
 			Request req = new Request();
 			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.GetProducts); 
+			req.setAction(Actions.GetMyOrdersHistory); 
+			req.setValue(LoginController.myUser);
 			Client.clientConn.handleMessageFromClientUI(req);
-			*/
+			
 			
 		}
 	

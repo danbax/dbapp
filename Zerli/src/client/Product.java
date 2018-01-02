@@ -97,6 +97,9 @@ public class Product implements Serializable {
 		this.image = image; 
 	}
 	
-	
+	public String toString()
+	{
+		return "name " + this.productName;
+	}
 	
 }

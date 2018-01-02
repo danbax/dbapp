@@ -51,7 +51,7 @@ public class MainMenuCustomer extends Application implements Initializable  {
 					guic.loadFxml("Catalog.fxml");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					e.printStackTrace(); 
 				}
 			}
 			
@@ -90,7 +90,25 @@ public class MainMenuCustomer extends Application implements Initializable  {
 	
 	@FXML
 	public void orderHistory(MouseEvent event)  throws Exception {
+		Request req = new Request();
+		req.setAction(Actions.Logout);
+		req.setValue(LoginController.myUser);
+		Client.clientConn.handleMessageFromClientUI(req);	
 		
+		Platform.runLater(new Runnable(){
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				GUIcontroller guic = new GUIcontroller();
+				try {
+					guic.loadFxml("OrdersHistory.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			});
 	}
 	
 	public static void main( String args[] ) throws Exception
