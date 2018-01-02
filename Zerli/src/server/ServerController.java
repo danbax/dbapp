@@ -228,7 +228,25 @@ public class ServerController extends AbstractServer {
 			{
 				RefundDatabase.addRefund((com.mysql.jdbc.Connection)conn, client, (Refund) req.getValue());
 			} 
-			
+			if(req.getAction() == Actions.GetMyCart)
+			{
+				CartDatabase.getMyCart((com.mysql.jdbc.Connection)conn, client, (User) req.getValue());
+			} 
+			if(req.getAction() == Actions.AddToCart)
+			{
+				/*
+				 * order -> product,user -> product_id, user_id
+				 */
+				CartDatabase.addToCart((com.mysql.jdbc.Connection)conn, client, (Order) req.getValue());
+			} 
+			if(req.getAction() == Actions.GetMyCartCountItems)
+			{
+				CartDatabase.getCountItemsMyCart((com.mysql.jdbc.Connection)conn, client, (User) req.getValue());
+			} 
+			if(req.getAction() == Actions.DeleteFromCart)
+			{
+				CartDatabase.deleteFromCart((com.mysql.jdbc.Connection)conn, client, (Order) req.getValue());
+			} 
 			
 			
 			

@@ -2,11 +2,13 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import client.Address;
 import client.Client;
 import client.CreditCard;
+import client.Product;
 import client.Request;
 import client.User;
 import enums.Actions;
@@ -28,6 +30,8 @@ public class LoginController implements Initializable  {
 	public static User myUser;
 	public static CreditCard myCreditCard;
 	public static Address myAddress;
+	public static ArrayList<Product> cartProduct;
+	
 	@FXML
 	private TextField loginUsername;
 	@FXML

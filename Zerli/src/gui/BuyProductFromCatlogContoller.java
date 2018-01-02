@@ -45,7 +45,6 @@ import javafx.stage.Stage;
 public class BuyProductFromCatlogContoller extends Application implements Initializable  {
 	
 	public static BuyProductFromCatlogContoller last;
-	@FXML Text pnameTXT; 
 	@FXML Text priceTXT; 
 	@FXML ImageView imgView; 
 	@FXML Text addressTXT; 
@@ -60,7 +59,6 @@ public class BuyProductFromCatlogContoller extends Application implements Initia
 	
 	private Boolean isTgPressed = false;
 	
-	Product product = CatalogController.selectedProduct;
 	Address address = LoginController.myAddress;
 	CreditCard creditCard = LoginController.myCreditCard;
 	User user = LoginController.myUser; 
@@ -91,12 +89,11 @@ public class BuyProductFromCatlogContoller extends Application implements Initia
 		}
 		
 		Order order = new Order();
-		order.setProduct(product);
 		order.setDate(localDate);
 		order.setGreeting(greet);
 		order.setHours(h);
 		order.setMinutes(m);
-		order.setPrice(product.getPrice());
+		order.setPrice(calculateTotalOrderPrice());
 		order.setUser(user);
 		order.setPaymentMethod(paymentMethod);
 		
@@ -163,7 +160,7 @@ public class BuyProductFromCatlogContoller extends Application implements Initia
 			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/Catalog.fxml")); 
 			Scene scene = new Scene(root);
 			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
+			primaryStage.setScene(scene); 
 			
 			primaryStage.show();
 		}
@@ -192,14 +189,21 @@ public class BuyProductFromCatlogContoller extends Application implements Initia
 			
 		}
 		
+		public float calculateTotalOrderPrice()
+		{
+			float sum = 0;
+			ArrayList<Product> products = CartController.last.getProductsCart();
+			for(Product p : products)
+				sum+=p.getPrice();
+			return sum;			
+		}
+		
 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	
 			last = this;
+			priceTXT.setText("Total: " + calculateTotalOrderPrice());
 			
-			pnameTXT.setText(product.getProductName());
-			priceTXT.setText(Float.toString(product.getPrice()));
-			imgView.setImage(new Image("/serverImages/"+product.getImage()));
 			if(address != null)
 				addressTXT.setText(address.getCity() + ", " + address.getStreet() + " " + address.getNumber());
 			if(creditCard != null)

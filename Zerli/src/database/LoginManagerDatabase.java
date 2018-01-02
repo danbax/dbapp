@@ -18,7 +18,7 @@ public class LoginManagerDatabase {
 		 * Checks if username,password exist in database
 		 */
 		PreparedStatement ps;
-		ResultSet rs; 
+		ResultSet rs;  
 		String s1 = "select * from users where username=? and password=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);

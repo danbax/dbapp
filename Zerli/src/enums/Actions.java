@@ -84,6 +84,13 @@ public enum Actions {
 	 AddAddress,
 	 UpdateAddress,
 	 
+	 /*cart*/
+	 GetMyCart,
+	 AddToCart,
+	 GetMyCartCountItems,
+	 DeleteFromCart,
+	 GetTotalCartPrice,
+	 
 	 
 	 /*catalog*/
 	 GetProductCatalog;

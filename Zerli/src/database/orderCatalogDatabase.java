@@ -31,22 +31,47 @@ public static void order(Connection conn,  ConnectionToClient client,Order order
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.buyProductFromCatalog);
 		PreparedStatement ps;
-		String s1 = "INSERT INTO orders (user_id,product_id,order_date,greeting_text,hours,minutes,price,payment_method,status) VALUES (?,?,?,?,?,?,?,?,?);";
+		PreparedStatement ps2;
+		ResultSet rs2; 
+		String s1 = "INSERT INTO orders (user_id,order_date,greeting_text,hours,minutes,price,payment_method,status) VALUES (?,?,?,?,?,?,?,0);";
+		String s2 = "select id from orders where user_id = ? order by id desc limit 1";
+		String s3 = "update cart set order_id=? where user_id=? and order_id=0";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, order.getUser().getId());
-				ps.setInt(2, order.getProduct().getPid());
-				ps.setDate(3,  Date.valueOf(order.getDate()));
-				ps.setString(4, order.getGreeting());
-				ps.setInt(5, order.getHours());
-				ps.setInt(6, order.getMinutes());
-				ps.setFloat(7, order.getPrice());
-				ps.setInt(8,order.getPaymentMethod());
-				ps.setInt(9,0);
-				ps.executeUpdate();
+				ps.setDate(2,  Date.valueOf(order.getDate()));
+				ps.setString(3, order.getGreeting());
+				ps.setInt(4, order.getHours());
+				ps.setInt(5, order.getMinutes());
+				ps.setFloat(6, order.getPrice());
+				ps.setInt(7,order.getPaymentMethod());
+				ps.executeUpdate(); 
 
 				
-				client.sendToClient(sr); // send messeage to client
+
+				try {
+						ps2 = (PreparedStatement) conn.prepareStatement(s2);
+						ps2.setInt(1, order.getUser().getId());
+						rs2 = ps2.executeQuery();
+						
+						if(rs2.next())
+						{
+							System.out.println("soFar"+rs2.getInt("id"));
+							ps2 = (PreparedStatement) conn.prepareStatement(s3);
+							ps2.setInt(1, rs2.getInt("id"));
+							ps2.setInt(2, order.getUser().getId());
+							ps2.executeUpdate();
+						}
+
+						// update products in cart
+						
+						client.sendToClient(sr); // send messeage to client
+						
+					}
+				catch (Exception e)
+				{
+					
+				}
 			}
 		catch (Exception e)
 		{
@@ -173,8 +198,6 @@ public static void CancelOrder(Connection conn,  ConnectionToClient client,Order
 		} // send messeage to client
 	}
 }
-
-
 
 
 }

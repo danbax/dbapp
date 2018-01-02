@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import client.Client;
+import client.Order;
 import client.Product;
 import client.Request;
 import enums.Actions;
@@ -127,21 +128,18 @@ public class CatalogController extends Application implements Initializable  {
 			        		// update selected product id
 			        		Button thisBtn = (Button)e.getSource();
 			        		selectedProduct = (Product)thisBtn.getUserData();
+			        		
+			        		Order o = new Order();
+			        		o.setProduct(selectedProduct);
+			        		o.setUser(LoginController.myUser);
 
-			        		Platform.runLater(new Runnable(){
-			    				@Override
-			    				public void run() {
-			    					// TODO Auto-generated method stub
-			    					GUIcontroller guic = new GUIcontroller();
-			    					try {
-			    						guic.loadFxml("orderProductFromCatalog.fxml");
-			    					} catch (IOException e) {
-			    						// TODO Auto-generated catch block
-			    						e.printStackTrace();
-			    					}
-			    				}
-			    				
-			    				});
+			        		Request req = new Request();
+			    			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+			    			req.setAction(Actions.AddToCart); 
+			    			req.setValue(o);
+			    			Client.clientConn.handleMessageFromClientUI(req);
+			    			
+			    			PurcasheBtn.setText("Added");
 			        				
 			        		
 			        	}

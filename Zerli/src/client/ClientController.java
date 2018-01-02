@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import enums.Actions;
 import gui.AuthorizeUsersController;
+import gui.CartController;
 import gui.CatalogController;
 import gui.GUIcontroller;
 import gui.LoginController;
+import gui.MainMenuCustomer;
 import gui.OrderHistoryController;
 import gui.SatisfactionSurvey;
 import gui.SurveyExpertController;
@@ -55,7 +57,7 @@ public class ClientController extends AbstractClient {
         	else if(sr.getAnswer() == Actions.UsernameDoesNotExist) 
         	{
         		// show error
-        		System.out.println("error");
+        		System.out.println("error"); 
         		try {
 					loginc.ShowLoginMessage(0);
 				} catch (IOException e) {
@@ -159,6 +161,18 @@ public class ClientController extends AbstractClient {
 			System.out.println(orders.get(0).getGreeting());
 			OrderHistoryController.last.fillTable(orders); 
 			
+		}
+	
+		if (sr.getAction() == Actions.GetMyCart) {
+			@SuppressWarnings("unchecked")
+			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
+System.out.println("xxx");
+			System.out.println("ppx"+products.get(0).getProductName());
+			CartController.last.fillProductsInTable(products);
+		}
+		
+		if (sr.getAction() == Actions.GetMyCartCountItems) {
+			MainMenuCustomer.last.updateCountItems((int)sr.getValue());
 		}
 		
 	}

@@ -18,9 +18,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MainMenuCustomer extends Application implements Initializable  {
-	
+	public static MainMenuCustomer last;
 	@FXML Text helloText;
-	
+	@FXML Text numberOfItems;	
 	
 	@FXML
 	public void onLogout(MouseEvent event)  throws Exception {
@@ -62,6 +62,29 @@ public class MainMenuCustomer extends Application implements Initializable  {
 	@FXML
 	public void customMade(MouseEvent event)  throws Exception {
 		
+	}
+	
+	public void updateCountItems(int count)
+	{
+		this.numberOfItems.setText(count + " Items");
+	}
+	
+	@FXML
+	public void onNumberOfItems(MouseEvent event)  throws Exception {
+		Platform.runLater(new Runnable(){
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				GUIcontroller guic = new GUIcontroller();
+				try {
+					guic.loadFxml("Cart.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			});
 	}
 	
 	@FXML
@@ -133,11 +156,27 @@ public class MainMenuCustomer extends Application implements Initializable  {
 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	
+			
+			last = this;
 			if(LoginController.myUser != null)
 			{
 				// add hello text
 				helloText.setText("Hello, "+LoginController.myUser.getUsername());
 			}
+			
+			Request req = new Request();
+			
+			
+			// update count items
+			req.setAction(Actions.GetMyCartCountItems);
+			req.setValue(LoginController.myUser);
+			Client.clientConn.handleMessageFromClientUI(req);
+			
+			
+			
+			req.setAction(Actions.Logout);
+			req.setValue(LoginController.myUser);
+			Client.clientConn.handleMessageFromClientUI(req);	
 			
 		}
 	
