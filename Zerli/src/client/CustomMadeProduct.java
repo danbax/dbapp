@@ -8,6 +8,7 @@ public class CustomMadeProduct implements Serializable {
 	private float minPrice;
 	private float maxPrice;
 	private String color;
+	private User myUser;
 	public String getType() {
 		return type;
 	}
@@ -31,5 +32,11 @@ public class CustomMadeProduct implements Serializable {
 	}
 	public void setMinPrice(float minPrice) {
 		this.minPrice = minPrice;
+	}
+	public User getMyUser() {
+		return myUser;
+	}
+	public void setMyUser(User myUser) {
+		this.myUser = myUser;
 	}
 }

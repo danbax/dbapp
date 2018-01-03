@@ -1,0 +1,155 @@
+package gui;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import com.sun.prism.impl.Disposer.Record;
+
+import client.Client;
+import client.CustomMadeProduct;
+import client.Product;
+import client.Request;
+import client.Survey;
+import client.SurveyResults;
+import client.User;
+import enums.Actions;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+public class CustomMadeController extends Application implements Initializable  {
+	
+	public static CustomMadeController last;
+	@FXML private ComboBox<String> cmbType = new ComboBox<String>();
+	@FXML private ComboBox<String> cmbColor = new ComboBox<String>();
+	@FXML private TextField minTxt;
+	@FXML private TextField maxTxt;
+	@FXML private Text txt;
+	
+	public static void main( String args[] ) throws Exception
+	   { 
+     launch(args);		
+	  } // end main
+	
+		public void start(Stage primaryStage) throws Exception {
+			
+			/*
+			 * start select product frame
+			 */
+			
+			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/CustomOrder.fxml"));
+			Scene scene = new Scene(root);
+			GUIcontroller.setCurrentScene(scene); // save scene
+			primaryStage.setScene(scene);
+			
+			primaryStage.show();
+			
+		}
+		
+		
+		@FXML
+		public void onMenuClick(MouseEvent event) throws Exception {
+
+			/*
+			 *  Move to main menu
+			 */
+			Platform.runLater(new Runnable(){
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					GUIcontroller guic = new GUIcontroller();
+					try {
+						guic.loadFxmlMenu();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				});
+			
+		}
+		
+		@FXML
+		public void onbtnBuy(ActionEvent event) throws Exception {
+			String color = cmbColor.getSelectionModel().getSelectedItem().toString();
+			String type = cmbType.getSelectionModel().getSelectedItem().toString();
+			Float min = Float.parseFloat(minTxt.getText());
+			Float max = Float.parseFloat(maxTxt.getText());
+			
+			CustomMadeProduct cmp = new CustomMadeProduct();
+			cmp.setColor(color);
+			cmp.setMaxPrice(max);
+			cmp.setMinPrice(min);
+			cmp.setType(type);
+			cmp.setMyUser(LoginController.myUser);
+			
+			Request req = new Request();
+			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+			req.setAction(Actions.AddCustomOrder); 
+			req.setValue(cmp);
+			Client.clientConn.handleMessageFromClientUI(req);
+		}
+		
+	
+		
+		
+		public void fillComboTypes(ArrayList<String> types) {
+			ObservableList<String> obser = FXCollections.observableArrayList(types);
+			cmbType.setItems(obser);
+		}
+		
+		public void fillComboColors(ArrayList<String> colors) {
+			ObservableList<String> obser = FXCollections.observableArrayList(colors);
+			cmbColor.setItems(obser);
+		}
+		
+		public void setMinPrice(Float price)
+		{
+			minTxt.setText(Float.toString(price));
+		}
+		
+		public void setMaxPrice(Float price)
+		{
+			maxTxt.setText(Float.toString(price));
+		}
+		
+		public void showAlert(String msg)
+		{
+			txt.setText(msg);
+			txt.setOpacity(1);
+		}
+	
+		
+		@Override
+		public void initialize(URL arg0, ResourceBundle arg1) {	
+			last = this;
+			
+			// get users from database
+			Request req = new Request();
+			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+			req.setAction(Actions.CustomOrderData); 
+			Client.clientConn.handleMessageFromClientUI(req);
+			
+		}
+	
+}

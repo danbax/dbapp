@@ -74,6 +74,7 @@ public enum Actions {
 	 buyProductFromCatalog,
 	 GetMyOrdersHistory,
 	 CancelOrder,
+	 CustomOrderData,
 	 
 	 /*refund*/
 	 AddRefund,
@@ -90,6 +91,9 @@ public enum Actions {
 	 GetMyCartCountItems,
 	 DeleteFromCart,
 	 GetTotalCartPrice,
+	 AddCustomOrder,
+	 	CustomAdded,
+	 	CustomNotAdded,
 	 
 	 
 	 /*catalog*/

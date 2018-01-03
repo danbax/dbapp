@@ -10,6 +10,7 @@ import enums.Actions;
 import gui.AuthorizeUsersController;
 import gui.CartController;
 import gui.CatalogController;
+import gui.CustomMadeController;
 import gui.GUIcontroller;
 import gui.LoginController;
 import gui.MainMenuCustomer;
@@ -166,13 +167,42 @@ public class ClientController extends AbstractClient {
 		if (sr.getAction() == Actions.GetMyCart) {
 			@SuppressWarnings("unchecked")
 			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
-System.out.println("xxx");
 			System.out.println("ppx"+products.get(0).getProductName());
 			CartController.last.fillProductsInTable(products);
 		}
 		
 		if (sr.getAction() == Actions.GetMyCartCountItems) {
 			MainMenuCustomer.last.updateCountItems((int)sr.getValue());
+		}
+		if (sr.getAction() == Actions.CustomOrderData) {
+			ArrayList<Object> obj = (ArrayList<Object>) sr.getValue();
+			ArrayList<String> types = (ArrayList<String>) obj.get(0);
+			ArrayList<String> colors = (ArrayList<String>) obj.get(1);
+			Float max = (Float) obj.get(2);
+			Float min = (Float) obj.get(3);
+			
+			colors.add("all");
+			
+			CustomMadeController.last.fillComboTypes(types);
+			CustomMadeController.last.fillComboColors(colors);
+			CustomMadeController.last.setMaxPrice(max);
+			CustomMadeController.last.setMinPrice(min);
+			
+		}
+		if (sr.getAction() == Actions.AddCustomOrder) {
+			System.out.println("addcustom");
+			if(sr.getAnswer() == Actions.CustomAdded)
+			{
+				System.out.println("added");
+				// added
+				CustomMadeController.last.showAlert("Added to cart");
+			}
+			else if(sr.getAnswer() == Actions.CustomNotAdded)
+			{
+				System.out.println("aaa");
+				// not added
+				CustomMadeController.last.showAlert("No item like this");
+			}
 		}
 		
 	}

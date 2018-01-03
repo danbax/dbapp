@@ -61,7 +61,20 @@ public class MainMenuCustomer extends Application implements Initializable  {
 	
 	@FXML
 	public void customMade(MouseEvent event)  throws Exception {
-		
+		Platform.runLater(new Runnable(){
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				GUIcontroller guic = new GUIcontroller();
+				try {
+					guic.loadFxml("CustomOrder.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			});
 	}
 	
 	public void updateCountItems(int count)

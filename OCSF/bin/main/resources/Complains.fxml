@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UpdateCatalogController">
+   <children>
+      <AnchorPane prefHeight="166.0" prefWidth="900.0" style="-fx-background-color: #0074D9;">
+         <children>
+            <Text fill="WHITE" layoutX="398.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
+               <font>
+                  <Font name="Bell MT" size="52.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="450.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower shop">
+               <font>
+                  <Font name="Vivaldi Italic" size="25.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="14.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Complains" wrappingWidth="123.06597900390625">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" style="-fx-border-color: black;" styleClass="MenuButton" text="&lt;Menu">
+               <font>
+                  <Font name="Verdana Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="428.0" prefWidth="900.0">
+         <children>
+            <AnchorPane prefHeight="442.0" prefWidth="409.0" style="-fx-background-color: #DDDDDD;">
+               <children>
+                  <Text fill="#111111" layoutX="124.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Complain">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="txtFieldPname" layoutX="79.0" layoutY="104.0" prefHeight="33.0" prefWidth="252.0" promptText="User ID" />
+                  <Button fx:id="btnAdd" layoutX="295.0" layoutY="394.0" mnemonicParsing="false" onAction="#onBtnAddClicked" prefHeight="34.0" prefWidth="100.0" text="Add Complain" />
+                  <TextField fx:id="txtPid" layoutX="79.0" layoutY="61.0" prefHeight="33.0" prefWidth="252.0" promptText="Complain ID" />
+                  <TextArea layoutX="30.0" layoutY="149.0" prefHeight="214.0" prefWidth="350.0" promptText="Description" />
+                  <Button layoutX="16.0" layoutY="394.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="84.0" text="Delete" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="409.0" prefHeight="442.0" prefWidth="492.0">
+               <children>
+                  <TableView fx:id="ProductsTable" prefHeight="442.0" prefWidth="492.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

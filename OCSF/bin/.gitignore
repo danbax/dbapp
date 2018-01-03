@@ -1,4 +1,5 @@
 /gui/
-/main/
-/enums/
 /database/
+/enums/
+/server/
+/client/

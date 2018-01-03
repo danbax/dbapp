@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
+import client.CustomMadeProduct;
 import client.Order;
 import client.Product;
 import client.ServerResponse;
@@ -39,6 +40,68 @@ public class CartDatabase {
 		{
 			// TODO: handle exception
 			try {
+				client.sendToClient(sr);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} // send messeage to client
+		}
+	}
+	
+public static void addToCartCustom(Connection conn,  ConnectionToClient client,CustomMadeProduct cmp) throws SQLException {
+		
+		/* insert product to cart */
+		
+		ServerResponse sr = new ServerResponse(); // create server response
+		sr.setAction(Actions.AddCustomOrder);
+		PreparedStatement ps;
+		ResultSet rs;
+		System.out.println("xxx");
+		PreparedStatement ps2;
+		ResultSet rs2; 
+		
+		String s1 = "select id from products where ptype=? and price<? and price>?";
+		String s2 = "INSERT INTO cart (user_id,product_id,order_id) VALUES (?,?,0);";
+		
+		if(!cmp.getColor().equals("all")) {
+			s1=s1+ " and color=?";
+		}
+		try {
+				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setString(1, cmp.getType());
+				ps.setFloat(2, cmp.getMaxPrice());
+				ps.setFloat(3, cmp.getMinPrice());
+				if(!cmp.getColor().equals("all")) {
+					ps.setString(4, cmp.getColor());
+				}
+				rs = ps.executeQuery();
+				
+				if(rs.next())
+				{
+					ps2 = (PreparedStatement) conn.prepareStatement(s2);
+					ps2.setInt(1, cmp.getMyUser().getId());
+					ps2.setInt(2, rs.getInt("id"));
+					ps2.executeUpdate();
+					sr.setAnswer(Actions.CustomAdded);
+					client.sendToClient(sr);
+				}
+				else
+				{
+					sr.setAnswer(Actions.CustomNotAdded);
+					client.sendToClient(sr);
+				}
+				
+				
+
+				// update products in cart
+				
+			}
+		catch (Exception e)
+		{
+			// TODO: handle exception
+			e.printStackTrace();
+			try {
+				sr.setAnswer(Actions.CustomNotAdded);
 				client.sendToClient(sr);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
