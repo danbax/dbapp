@@ -102,4 +102,9 @@ public class User implements Serializable {
 	public void setShop(Shop shop) {
 		this.shop = shop;
 	}
+	
+	public String toString()
+	{
+		return this.getFname() +" "+ this.getLname();
+	}
 }

@@ -46,6 +46,7 @@ public class UpdateCatalogDatabase {
 					product.setPrice(rs.getFloat("price"));
 					product.setProductId(rs.getString("product_id"));
 					product.setImage("/serverImages/"+rs.getString("img"));
+					product.setStock(rs.getInt("stock"));
 					
 					// add to product array
 					products.add(product);
@@ -123,14 +124,15 @@ public class UpdateCatalogDatabase {
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddProduct);
 		PreparedStatement ps;
-		String s1 = "update products set pname=?,ptype=?,price=? where id=? and shop_id=?;";
+		String s1 = "update products set pname=?,ptype=?,price=?,stock=? where id=? and shop_id=?;";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setString(1, product.getProductName());
 				ps.setString(2, product.getProductType());
 				ps.setFloat(3, product.getPrice());
-				ps.setInt(4, product.getPid());
-				ps.setInt(5, shop_id);
+				ps.setInt(4, product.getStock());
+				ps.setInt(5, product.getPid());
+				ps.setInt(6, shop_id);
 				ps.executeUpdate();
 
 				

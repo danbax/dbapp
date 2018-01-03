@@ -35,6 +35,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.converter.FloatStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 
 public class UpdateCatalogController extends Application implements Initializable  {
 	
@@ -201,15 +203,15 @@ public class UpdateCatalogController extends Application implements Initializabl
 				TableColumn<Product, String> typeCol = new TableColumn<Product, String>("Type");
 				
 				
+				
 				//add data to columns
 		        nameCol.setCellValueFactory(
 		        	    new PropertyValueFactory<Product,String>("productName")
 		        	); 
 		        
 		        TableColumn<Product, Float> PriceCol = new TableColumn<Product, Float>("price");
-		        PriceCol.setCellValueFactory(
-		        	    new PropertyValueFactory<Product,Float>("price")
-		        	);
+		        PriceCol.setCellValueFactory(  new PropertyValueFactory<Product,Float>("price") );
+		        PriceCol.setCellFactory(TextFieldTableCell.<Product, Float>forTableColumn(new FloatStringConverter()));
 		        PriceCol.setOnEditCommit(
 			            new EventHandler<CellEditEvent<Product, Float>>() {
 			                @Override
@@ -250,6 +252,33 @@ public class UpdateCatalogController extends Application implements Initializabl
 		                    Product productToUpdate = (Product) t.getTableView().getItems().get(
 			                        t.getTablePosition().getRow());
 		                    productToUpdate.setProductName(newName);
+		                    
+		                    //send request to server
+		                    Request req = new Request();
+		        			req.setAction(Actions.UpdateProduct);
+		        			req.setValue(productToUpdate);
+		        			Client.clientConn.handleMessageFromClientUI(req);
+		                }
+		            }
+		        );
+		        
+		        TableColumn<Product, Integer> stockCol = new TableColumn<Product, Integer>("Stock");
+		        stockCol.setCellValueFactory(  new PropertyValueFactory<Product,Integer>("stock") );
+		        stockCol.setCellFactory(TextFieldTableCell.<Product, Integer>forTableColumn(new IntegerStringConverter()));
+		        stockCol.setOnEditCommit(
+		            new EventHandler<CellEditEvent<Product, Integer>>() {
+		                @Override
+		                public void handle(CellEditEvent<Product, Integer> t) {
+		                	// show new name in column
+		                    ((Product) t.getTableView().getItems().get(
+		                        t.getTablePosition().getRow())
+		                        ).setStock(t.getNewValue());
+		                    
+		                    //update new name to database
+		                    int newStock = t.getNewValue();
+		                    Product productToUpdate = (Product) t.getTableView().getItems().get(
+			                        t.getTablePosition().getRow());
+		                    productToUpdate.setStock(newStock);
 		                    
 		                    //send request to server
 		                    Request req = new Request();
@@ -300,7 +329,7 @@ public class UpdateCatalogController extends Application implements Initializabl
 				
 		        
 		        ProductsTable.setItems(ObserProducts);
-		        ProductsTable.getColumns().addAll(nameCol, typeCol,PriceCol);
+		        ProductsTable.getColumns().addAll(nameCol, typeCol,PriceCol,stockCol);
 			}
 		}
 		

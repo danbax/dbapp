@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import entity.Address;
+import entity.Complain;
 import entity.CreditCard;
 import entity.CustomMadeProduct;
 import entity.Deal;
@@ -281,6 +282,27 @@ public class ServerController extends AbstractServer {
 			{
 				DealsDatabase.getDeals((com.mysql.jdbc.Connection)conn, client);
 			} 
+			if(req.getAction() == Actions.GetComplain)
+			{
+				ComplainsDatabase.getComplains((com.mysql.jdbc.Connection)conn, client);
+			} 
+			if(req.getAction() == Actions.AddComplain)
+			{
+				ComplainsDatabase.addComplain((com.mysql.jdbc.Connection)conn, client, (Complain) req.getValue());
+			} 
+			if(req.getAction() == Actions.DeleteComplain)
+			{
+				ComplainsDatabase.deleteComplain((com.mysql.jdbc.Connection)conn, client, (Complain) req.getValue());
+			} 
+			if(req.getAction() == Actions.GetComplainUsers)
+			{
+				ComplainsDatabase.getUsers((com.mysql.jdbc.Connection)conn, client);
+			} 
+			if(req.getAction() == Actions.Recompense)
+			{
+				ComplainsDatabase.pay((com.mysql.jdbc.Connection)conn, client, (Complain) req.getValue());
+			} 
+			
 			
 			
 			

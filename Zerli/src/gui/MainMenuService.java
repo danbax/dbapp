@@ -43,7 +43,7 @@ public class MainMenuService extends Application implements Initializable  {
 		// Move to 
 		GUIcontroller guic = new GUIcontroller();
 		try {
-			guic.loadFxml("ManageSatisfactionSurvey.fxml");
+			guic.loadFxml("UpdateComplains.fxml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

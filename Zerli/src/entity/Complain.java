@@ -7,38 +7,27 @@ public class Complain implements Serializable {
 	/**
 	 * 
 	 */
-	private int complainId;
+	private int id;
 	private User user; 
-	private int userID;
 	private String desc;
-	private String status;
-	private float compensation;
-	public Complain (int complainId, User user, String desc, String status, float compensation)
+	private int status;
+	private float compensation=0;
+	
+	public Complain()
+	{
+		
+	}
+	
+	public Complain (int complainId, User user, String desc, int status, float compensation)
 	{
 		this.setStatus(status);
 		this.setCompensation(compensation);
-		this.setComplainId(complainId);
+		this.setId(complainId);
 		this.setDesc(desc);
 		this.setUser(user);
-		this.setUserID(this.user.getId());
 	}	
 	
-	public Complain (int complainId, int userID, String desc, String status, float compensation)
-	{
-		this.setStatus(status);
-		this.setCompensation(compensation);
-		this.setComplainId(complainId);
-		this.setDesc(desc);
-		this.setUserID(this.user.getId());
-	}	
-	
-	
-	public int getComplainId() {
-		return complainId;
-	}
-	public void setComplainId(int complainId) {
-		this.complainId = complainId;
-	}
+
 	public User getUser() {
 		return user;
 	}
@@ -58,19 +47,19 @@ public class Complain implements Serializable {
 		this.compensation = compensation;
 	}
 
-	public int getUserID() {
-		return userID;
+	public int getId() {
+		return id;
 	}
 
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	

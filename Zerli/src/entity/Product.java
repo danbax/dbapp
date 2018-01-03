@@ -12,6 +12,7 @@ public class Product implements Serializable {
 	private String productId;
 	private String image; // image path
 	private float dealPrice;
+	private int stock;
 	
 	public Product(	String name, String type) {
 		this.setProductName(name);
@@ -109,6 +110,14 @@ public class Product implements Serializable {
 
 	public void setDealPrice(float dealPrice) {
 		this.dealPrice = dealPrice;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 	
 }

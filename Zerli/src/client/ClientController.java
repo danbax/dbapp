@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 import entity.Address;
+import entity.Complain;
 import entity.CreditCard;
 import entity.Deal;
 import entity.Order;
@@ -25,6 +26,7 @@ import gui.SatisfactionSurvey;
 import gui.SurveyExpertController;
 import gui.SurveyResultsController;
 import gui.UpdateCatalogController;
+import gui.UpdateComplainsController;
 import gui.UpdateDealsController;
 import gui.UpdateUsersController;
 import server.ConIF;
@@ -211,8 +213,19 @@ public class ClientController extends AbstractClient {
 				ArrayList<Deal> deals = (ArrayList<Deal>) sr.getValue();
 				CatalogController.last.setDeals(deals);
 			}
+			if(sr.getAction() == Actions.GetComplain)
+			{
+				ArrayList<Complain> complains = (ArrayList<Complain>) sr.getValue();
+				complains.get(0).getDesc();
+				UpdateComplainsController.last.fillTable(complains);
+			}
+			if(sr.getAction() == Actions.GetComplainUsers)
+			{
+				ArrayList<User> users = (ArrayList<User>) sr.getValue();
+				UpdateComplainsController.last.fillComboUsers(users);
 				
-				
+			}	
+			
 	}
 
 	public void handleMessageFromClientUI(Object req) {

@@ -65,10 +65,6 @@ public enum Actions {
 	addConclusion,
 	checkIfConclusionExist, 
 	
-	/*Complains management*/ 
-	 AddComplain,
-	 GetComplain,
-	 DeleteComplain,
 	 
 	 /*order*/
 	 buyProductFromCatalog,
@@ -100,6 +96,14 @@ public enum Actions {
 	 DeleteDeal,
 	 GetDeals,
 	 GetProductsDeals,
+	 
+	 /*Complains*/
+	 AddComplain,
+	 GetComplain,
+	 DeleteComplain,
+	 UpdateComplain,
+	 Recompense,
+	 GetComplainUsers,
 	 
 	 
 	 /*catalog*/
