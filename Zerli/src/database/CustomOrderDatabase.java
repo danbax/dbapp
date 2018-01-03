@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
-import client.ServerResponse;
+import entity.ServerResponse;
 import enums.Actions;
 import ocsf.server.ConnectionToClient;
 

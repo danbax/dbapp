@@ -13,9 +13,9 @@ import java.util.Date;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
-import client.Deal;
-import client.Product;
-import client.ServerResponse;
+import entity.Deal;
+import entity.Product;
+import entity.ServerResponse;
 import enums.Actions;
 import ocsf.server.ConnectionToClient;
 

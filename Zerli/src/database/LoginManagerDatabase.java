@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
-import client.Address;
-import client.CreditCard;
-import client.ServerResponse;
-import client.User;
+import entity.Address;
+import entity.CreditCard;
+import entity.ServerResponse;
+import entity.User;
 import enums.Actions;
 public class LoginManagerDatabase {
 	

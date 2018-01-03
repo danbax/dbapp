@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import client.Product;
-import client.ServerResponse;
+import entity.Product;
+import entity.ServerResponse;
 import enums.Actions;
 public class UpdateCatalogDatabase {
 	

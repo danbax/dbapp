@@ -5,12 +5,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import client.Address;
+import entity.Address;
 import client.Client;
-import client.CreditCard;
-import client.Product;
-import client.Request;
-import client.User;
+import entity.CreditCard;
+import entity.Product;
+import entity.Request;
+import entity.User;
 import enums.Actions;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;

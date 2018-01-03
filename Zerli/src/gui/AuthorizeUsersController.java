@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import client.Client;
-import client.CreditCard;
-import client.Request;
-import client.User;
+import entity.CreditCard;
+import entity.Request;
+import entity.User;
 import enums.Actions;
 import javafx.application.Application;
 import javafx.application.Platform;

@@ -3,6 +3,16 @@ package client;
 import ocsf.client.*;
 import java.io.*;
 import java.util.ArrayList;
+
+import entity.Address;
+import entity.CreditCard;
+import entity.Deal;
+import entity.Order;
+import entity.Product;
+import entity.ServerResponse;
+import entity.Survey;
+import entity.SurveyResults;
+import entity.User;
 import enums.Actions;
 import gui.AuthorizeUsersController;
 import gui.CartController;
@@ -56,7 +66,6 @@ public class ClientController extends AbstractClient {
         	else if(sr.getAnswer() == Actions.UsernameDoesNotExist) 
         	{
         		// show error
-        		System.out.println("error"); 
         		try {
 					loginc.ShowLoginMessage(0);
 				} catch (IOException e) {
@@ -109,7 +118,6 @@ public class ClientController extends AbstractClient {
 		}
 		if (sr.getAction() == Actions.GetSurveyData) {
 			Survey survey = (Survey) sr.getValue();
-			System.out.println(survey.getQ1());
 			SurveyResultsController.last.showBoxes(survey);
 		}
 		if (sr.getAction() == Actions.GetSurveyResults) {
@@ -148,15 +156,12 @@ public class ClientController extends AbstractClient {
 		}
 		if (sr.getAction() == Actions.GetMyOrdersHistory) {
 			ArrayList<Order> orders = (ArrayList<Order>) sr.getValue();
-			System.out.println("xxx");
-			System.out.println(orders.get(0).getGreeting());
 			OrderHistoryController.last.fillTable(orders); 
 			
 		}
 	
 		if (sr.getAction() == Actions.GetMyCart) {
 			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
-			System.out.println("ppx"+products.get(0).getProductName());
 			CartController.last.fillProductsInTable(products);
 		}
 		
@@ -179,16 +184,13 @@ public class ClientController extends AbstractClient {
 			
 		}
 		if (sr.getAction() == Actions.AddCustomOrder) {
-			System.out.println("addcustom");
 			if(sr.getAnswer() == Actions.CustomAdded)
 			{
-				System.out.println("added");
 				// added
 				CustomMadeController.last.showAlert("Added to cart");
 			}
 			else if(sr.getAnswer() == Actions.CustomNotAdded)
 			{
-				System.out.println("aaa");
 				// not added
 				CustomMadeController.last.showAlert("No item like this");
 			}

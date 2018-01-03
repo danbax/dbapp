@@ -8,10 +8,10 @@ import java.util.ResourceBundle;
 import com.sun.prism.impl.Disposer.Record;
 
 import client.Client;
-import client.Deal;
-import client.Product;
-import client.Request;
-import client.User;
+import entity.Deal;
+import entity.Product;
+import entity.Request;
+import entity.User;
 import enums.Actions;
 import javafx.application.Application;
 import javafx.application.Platform;

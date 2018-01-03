@@ -6,18 +6,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import client.Address;
-import client.CreditCard;
-import client.CustomMadeProduct;
-import client.Deal;
-import client.Order;
-import client.Product;
-import client.Refund;
-import client.Request;
-import client.Survey;
-import client.SurveyConclusion;
-import client.SurveyResults;
-import client.User;
+import entity.Address;
+import entity.CreditCard;
+import entity.CustomMadeProduct;
+import entity.Deal;
+import entity.Order;
+import entity.Product;
+import entity.Refund;
+import entity.Request;
+import entity.Survey;
+import entity.SurveyConclusion;
+import entity.SurveyResults;
+import entity.User;
 import database.*;
 import enums.Actions;
 
@@ -197,7 +197,7 @@ public class ServerController extends AbstractServer {
 				ArrayList<Object> arr = (ArrayList<Object>) req.getValue();
 				CreditCard cc = (CreditCard) arr.get(0);
 				User u = (User) arr.get(1);
-				UpdateMyUser.addCreditCard((com.mysql.jdbc.Connection)conn, client,cc,u);
+				UpdateMyUser.addCreditCard((com.mysql.jdbc.Connection)conn, client,cc,u); 
 			} 
 			if(req.getAction() == Actions.UpdateCreditCard)
 			{

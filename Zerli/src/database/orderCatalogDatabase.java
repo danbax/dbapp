@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
-import client.Order;
-import client.Product;
-import client.ServerResponse;
-import client.User;
+import entity.Order;
+import entity.Product;
+import entity.ServerResponse;
+import entity.User;
 import enums.Actions;
 import ocsf.server.ConnectionToClient;
 

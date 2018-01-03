@@ -1,4 +1,4 @@
-package client;
+package entity;
 
 import java.io.Serializable;
 

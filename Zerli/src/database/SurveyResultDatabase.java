@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import client.ServerResponse;
-import client.Survey;
-import client.SurveyResults;
+import entity.ServerResponse;
+import entity.Survey;
+import entity.SurveyResults;
 import enums.Actions;
 public class SurveyResultDatabase {
 	

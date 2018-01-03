@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import client.Client;
-import client.Request;
+import entity.Request;
 import enums.Actions;
 import javafx.application.Application;
 import javafx.application.Platform;
