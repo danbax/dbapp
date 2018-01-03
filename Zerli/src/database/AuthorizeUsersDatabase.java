@@ -1,6 +1,5 @@
 package database;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import ocsf.server.ConnectionToClient;
 public class AuthorizeUsersDatabase {
 	public static void getUsersNotAuthorized(Connection conn,  ConnectionToClient client) throws SQLException {
 		/*
-		 * get list of users from database
+		 * get list of not authorized users from database
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 

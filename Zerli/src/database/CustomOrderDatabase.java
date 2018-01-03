@@ -8,14 +8,17 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
 import client.ServerResponse;
-import client.Survey;
 import enums.Actions;
 import ocsf.server.ConnectionToClient;
 
 public class CustomOrderDatabase {
 	public static void getCustomOrderData(Connection conn,  ConnectionToClient client) throws SQLException {
 		/*
-		 * get data for custom order
+		 * get data for custom order:
+		 * list of product types from product table
+		 * list of color types from product table
+		 * maximum product price
+		 * minimum product price
 		 */
 		PreparedStatement ps;
 		ResultSet rs;

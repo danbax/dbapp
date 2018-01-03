@@ -15,7 +15,7 @@ public class SurveyManagerDatabase {
 	
 	public static void getSurveys(Connection conn,  ConnectionToClient client) throws SQLException {
 		/*
-		 * get list from database
+		 * get list of surveys from database
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
@@ -52,7 +52,9 @@ public class SurveyManagerDatabase {
 	}
 	
 	public static void addSurvey(Connection conn,  ConnectionToClient client,Survey survey) throws SQLException {
-		
+		/*
+		 * add survey to database
+		 */
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddSurvey);
 		PreparedStatement ps;
@@ -87,7 +89,7 @@ public class SurveyManagerDatabase {
 	
 	public static void updateSurvey(Connection conn,  ConnectionToClient client,Survey survey) throws SQLException {
 		/*
-		 * update
+		 * update survey data in database
 		 */
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.UpdateSurvey);
@@ -115,7 +117,7 @@ public class SurveyManagerDatabase {
 	
 	public static void deleteSurvey(Connection conn,  ConnectionToClient client,Survey survey) throws SQLException {
 		/*
-		 * delete
+		 * delete survey from database
 		 */
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.DeleteSurvey);

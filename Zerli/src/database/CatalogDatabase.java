@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
+import client.Deal;
 import client.Product;
 import client.ServerResponse;
 import enums.Actions;
@@ -19,7 +20,10 @@ public class CatalogDatabase {
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select * from products"; 
+		PreparedStatement ps2;
+		ResultSet rs2; 
+		String s1 = "select * from products";
+		String s2 = "select * from deals where product_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				rs = ps.executeQuery();
@@ -38,6 +42,17 @@ public class CatalogDatabase {
 					product.setPrice(rs.getFloat("price"));
 					product.setProductId(rs.getString("product_id"));
 					product.setImage(rs.getString("img"));
+					product.setDealPrice(0);
+					
+					ps2 = (PreparedStatement) conn.prepareStatement(s2);
+					ps2.setInt(1, product.getPid());
+					rs2 = ps2.executeQuery();
+					if(rs2.next())
+					{
+						int percent = rs2.getInt("percent");
+						product.setDealPrice(product.getPrice()-product.getPrice()*percent/100);
+					}
+					
 					
 					// add to product array
 					products.add(product);
@@ -52,6 +67,42 @@ public class CatalogDatabase {
 		catch (Exception e)
 		{
 			// TODO: handle exception
+		}
+	}
+	
+	public static void getDeals(Connection conn,  ConnectionToClient client) throws SQLException {
+		/*
+		 * get list of deals from database
+		 */
+		PreparedStatement ps;
+		ResultSet rs; 
+		String s1 = "select * from deals";
+		
+		try {
+				ps = (PreparedStatement) conn.prepareStatement(s1);
+				rs = ps.executeQuery();
+				ArrayList<Deal> deals = new ArrayList<Deal>();
+				while ( rs.next() )
+				{
+					// create product
+					Deal deal = new Deal();
+					deal.setId(rs.getInt("id"));
+					deal.setProductId(rs.getInt("product_id"));
+					deal.setPercent(rs.getInt("percent"));
+							
+					deals.add(deal);
+				}
+				
+				ServerResponse sr = new ServerResponse(); // create server response
+				sr.setAction(Actions.GetDealsCatalog);
+				sr.setValue(deals);
+				
+				client.sendToClient(sr); // send messeage to client
+			}
+		catch (Exception e)
+		{
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 }

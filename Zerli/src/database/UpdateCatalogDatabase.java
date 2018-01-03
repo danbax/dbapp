@@ -62,7 +62,7 @@ public class UpdateCatalogDatabase {
 	
 	public static void addProduct(Connection conn,  ConnectionToClient client,Product product) throws SQLException {
 		/*
-		 * Checks if username,password exist in database
+		 * add product to database
 		 */
 		
 		File file = new File("");
@@ -114,7 +114,7 @@ public class UpdateCatalogDatabase {
 	
 	public static void updateProduct(Connection conn,  ConnectionToClient client,Product product) throws SQLException {
 		/*
-		 * updateProductInDatabase
+		 * update product in database
 		 */
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddProduct);

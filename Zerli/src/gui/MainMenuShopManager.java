@@ -49,6 +49,13 @@ public class MainMenuShopManager extends Application implements Initializable  {
 	@FXML
 	public void deals(MouseEvent event)  throws Exception {
 		// move to deals
+		GUIcontroller guic = new GUIcontroller();
+		try {
+			guic.loadFxml("UpdateDeals.fxml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML

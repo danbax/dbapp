@@ -50,15 +50,13 @@ public class CartDatabase {
 	
 public static void addToCartCustom(Connection conn,  ConnectionToClient client,CustomMadeProduct cmp) throws SQLException {
 		
-		/* insert product to cart */
+		/* insert custom product to cart */
 		
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddCustomOrder);
 		PreparedStatement ps;
 		ResultSet rs;
-		System.out.println("xxx");
 		PreparedStatement ps2;
-		ResultSet rs2; 
 		
 		String s1 = "select id from products where ptype=? and price<? and price>?";
 		String s2 = "INSERT INTO cart (user_id,product_id,order_id) VALUES (?,?,0);";
@@ -112,7 +110,7 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 	
 	public static void getMyCart(Connection conn,  ConnectionToClient client,User myUser) throws SQLException {
 		/*
-		 * get list of users from database
+		 * get my list of products from cart 
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
@@ -181,7 +179,7 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 	
 	public static void getCountItemsMyCart(Connection conn,  ConnectionToClient client,User myUser) throws SQLException {
 		/*
-		 * get number of items in cart
+		 * get number of items in my cart
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
@@ -213,7 +211,7 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 	
 	public static void deleteFromCart(Connection conn,  ConnectionToClient client,Order order) throws SQLException {
 		/*
-		 * delete product from database
+		 * delete product from cart
 		 */
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.DeleteFromCart);

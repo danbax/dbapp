@@ -8,7 +8,6 @@ import com.mysql.jdbc.PreparedStatement;
 
 import client.Address;
 import client.CreditCard;
-import client.Product;
 import client.ServerResponse;
 import client.User;
 import enums.Actions;
@@ -16,6 +15,9 @@ import ocsf.server.ConnectionToClient;
 
 public class UpdateMyUser {
 public static void addCreditCard(Connection conn,  ConnectionToClient client,CreditCard cc,User u) throws SQLException {
+	/*
+	 * add user credit card
+	 */
 		
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddCreditCard);
@@ -46,7 +48,9 @@ public static void addCreditCard(Connection conn,  ConnectionToClient client,Cre
 	}
 
 public static void addAddress(Connection conn,  ConnectionToClient client,Address ad,User u) throws SQLException {
-	
+	/*
+	 * add user address
+	 */
 	ServerResponse sr = new ServerResponse(); // create server response
 	sr.setAction(Actions.AddAddress);
 	PreparedStatement ps;
@@ -76,7 +80,7 @@ public static void addAddress(Connection conn,  ConnectionToClient client,Addres
 
 public static void updateCreditCard(Connection conn,  ConnectionToClient client,CreditCard cc,User u) throws SQLException {
 	/*
-	 * updateProductInDatabase
+	 * update user credit card
 	 */
 	ServerResponse sr = new ServerResponse(); // create server response
 	sr.setAction(Actions.UpdateCreditCard);
@@ -101,7 +105,7 @@ public static void updateCreditCard(Connection conn,  ConnectionToClient client,
 
 public static void updateAddress(Connection conn,  ConnectionToClient client,Address ad,User u) throws SQLException {
 	/*
-	 * updateProductInDatabase
+	 * update user address
 	 */
 	ServerResponse sr = new ServerResponse(); // create server response
 	sr.setAction(Actions.UpdateAddress);

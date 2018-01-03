@@ -2,27 +2,19 @@ package gui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.sun.prism.impl.Disposer.Record;
-
 import client.Client;
 import client.CreditCard;
-import client.Product;
 import client.Request;
-import client.Survey;
 import client.User;
 import enums.Actions;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,34 +22,23 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class AuthorizeUsersController extends Application implements Initializable  {
 	
 	public static AuthorizeUsersController last;
 	private ObservableList<User> ObserUsers;
-	@FXML
-	private TableView<User> UsersTable = new TableView<User>(); // table of products
-	@FXML
-	private TextField monthTxt;
-	@FXML
-	private TextField YearTxt;
-	@FXML
-	private TextField txtCardNumber;
-	@FXML
-	private TextField txtCVV;
-	@FXML
-	private Button btnAdd;
+	@FXML private TableView<User> UsersTable = new TableView<User>(); // table of products
+	@FXML private TextField monthTxt;
+	@FXML private TextField YearTxt;
+	@FXML private TextField txtCardNumber;
+	@FXML private TextField txtCVV;
+	@FXML private Button btnAdd;
 	@FXML ComboBox<String> subscribeCmb;
 	
 	public static void main( String args[] ) throws Exception
@@ -68,7 +49,7 @@ public class AuthorizeUsersController extends Application implements Initializab
 		public void start(Stage primaryStage) throws Exception {
 			
 			/*
-			 * start select product frame
+			 * start 
 			 */
 			
 			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/AuthorizeUsers.fxml"));
@@ -122,8 +103,6 @@ public class AuthorizeUsersController extends Application implements Initializab
 		
 		@FXML
 		public void onMenuClick(MouseEvent event) throws Exception {
-			// add product to database, clean form, show message "added succefully"
-
 			/*
 			 *  Move to main menu
 			 */
@@ -187,12 +166,12 @@ public class AuthorizeUsersController extends Application implements Initializab
 		        	    new PropertyValueFactory<User,String>("username")
 		        	);
 				
-				usernameCol.setCellValueFactory(
-		        	    new PropertyValueFactory<User,String>("phoneCol")
+				phoneCol.setCellValueFactory(
+		        	    new PropertyValueFactory<User,String>("phone")
 		        	);
 		        
 		        UsersTable.setItems(ObserUsers);
-		        UsersTable.getColumns().addAll(fnameCol, lnameCol);
+		        UsersTable.getColumns().addAll(fnameCol, lnameCol,usernameCol,phoneCol);
 			}
 		}
 
@@ -206,6 +185,8 @@ public class AuthorizeUsersController extends Application implements Initializab
 			req.setAction(Actions.GetNotAuthorizedUsers); 
 			Client.clientConn.handleMessageFromClientUI(req);
 			
+			
+			// add data to subscribe ComboBox
 			ArrayList<String> autorize = new ArrayList<String>();
 			autorize.add("Regular");
 			autorize.add("Monthly");

@@ -12,7 +12,6 @@ import client.ServerResponse;
 import client.Survey;
 import client.SurveyConclusion;
 import client.SurveyResults;
-import client.User;
 import enums.Actions;
 public class ServiceExpertDatabase { 
 	
@@ -55,7 +54,9 @@ public class ServiceExpertDatabase {
 	}
 	
 	public static void getSurveyNumOfVoters(Connection conn,  ConnectionToClient client,Survey survey) throws SQLException {
-		
+		/*
+		 * get number of voters to specific survey
+		 */
 		PreparedStatement ps;
 		ResultSet rs; 
 		String s1 = "select count(id) as count from survey_results where survey_id=?";
@@ -81,7 +82,9 @@ public class ServiceExpertDatabase {
 	}
 	
 	public static void getConclusion(Connection conn,  ConnectionToClient client,Survey survey) throws SQLException {
-		
+		/*
+		 * get conclusion to specific survey
+		 */
 		PreparedStatement ps;
 		ResultSet rs; 
 		String s1 = "select conclusion from expert_conclusion where survey_id=?";
@@ -116,7 +119,9 @@ public class ServiceExpertDatabase {
 	}
 	
 	public static void getSurveyResultAvg(Connection conn,  ConnectionToClient client,Survey survey) throws SQLException {
-		
+		/*
+		 * get survey result average for specific survey
+		 */
 		PreparedStatement ps;
 		ResultSet rs; 
 		String s1 = "select avg(q1) as q1,avg(q2) as q2,avg(q3) as q3,avg(q4) as q4,avg(q5) as q5,avg(q6) as q6 from survey_results where survey_id=?";
@@ -151,7 +156,9 @@ public class ServiceExpertDatabase {
 	}
 	
 	public static void addConclusion(Connection conn,  ConnectionToClient client,SurveyConclusion sc) throws SQLException {
-		
+		/*
+		 * add conclusion to survey 
+		 */
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddSurveyResults);
 		PreparedStatement ps;
@@ -178,7 +185,9 @@ public class ServiceExpertDatabase {
 	}
 	
 public static void updateConclusion(Connection conn,  ConnectionToClient client,SurveyConclusion sc) throws SQLException {
-		
+		/*
+		 * update conclusion to survey
+		 */
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.updateConclusion);
 		PreparedStatement ps;

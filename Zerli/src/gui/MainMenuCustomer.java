@@ -31,16 +31,12 @@ public class MainMenuCustomer extends Application implements Initializable  {
 		Client.clientConn.handleMessageFromClientUI(req);	
 		
 		// Move to loginForm
-		GUIcontroller guic = new GUIcontroller();
+		GUIcontroller guic = new GUIcontroller(); 
 		guic.loadFxml("loginForm.fxml");
 	}
 	
 	@FXML
 	public void catalog(MouseEvent event)  throws Exception {
-		Request req = new Request();
-		req.setAction(Actions.Logout);
-		req.setValue(LoginController.myUser);
-		Client.clientConn.handleMessageFromClientUI(req);	
 		
 		Platform.runLater(new Runnable(){
 			@Override
@@ -102,10 +98,6 @@ public class MainMenuCustomer extends Application implements Initializable  {
 	
 	@FXML
 	public void updateAccount(MouseEvent event)  throws Exception {
-		Request req = new Request();
-		req.setAction(Actions.Logout);
-		req.setValue(LoginController.myUser);
-		Client.clientConn.handleMessageFromClientUI(req);	
 		
 		Platform.runLater(new Runnable(){
 			@Override
@@ -126,11 +118,7 @@ public class MainMenuCustomer extends Application implements Initializable  {
 	
 	@FXML
 	public void orderHistory(MouseEvent event)  throws Exception {
-		Request req = new Request();
-		req.setAction(Actions.Logout);
-		req.setValue(LoginController.myUser);
-		Client.clientConn.handleMessageFromClientUI(req);	
-		
+	
 		Platform.runLater(new Runnable(){
 			@Override
 			public void run() {
@@ -186,10 +174,6 @@ public class MainMenuCustomer extends Application implements Initializable  {
 			Client.clientConn.handleMessageFromClientUI(req);
 			
 			
-			
-			req.setAction(Actions.Logout);
-			req.setValue(LoginController.myUser);
-			Client.clientConn.handleMessageFromClientUI(req);	
 			
 		}
 	

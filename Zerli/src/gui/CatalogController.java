@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import client.Client;
+import client.Deal;
 import client.Order;
 import client.Product;
 import client.Request;
@@ -27,6 +28,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -35,12 +37,13 @@ public class CatalogController extends Application implements Initializable  {
 	public static CatalogController last;
 	@FXML FlowPane flowPane;
 	@FXML TextField txtSearch;
+	private ArrayList<Deal> deals;
 	
 	public static Product selectedProduct; 
 	
 	public static void main( String args[] ) throws Exception
 	   { 
-     launch(args);		
+     launch(args); 		
 	  } // end main
 	
 		public void start(Stage primaryStage) throws Exception {
@@ -85,6 +88,15 @@ public class CatalogController extends Application implements Initializable  {
 	
 		public void setCatalogProducts(ArrayList<Product> products)
 		{
+			
+			/*
+			for(Deal d: deals)
+    		{
+    			System.out.println(d.getPercent());
+    		}
+*/
+			
+			
 			// flow pane - infinite pane to hold products
 			flowPane.setPadding(new Insets(10, 10, 10, 10));
 		    flowPane.setVgap(4);
@@ -112,8 +124,18 @@ public class CatalogController extends Application implements Initializable  {
 		            // prints stacktace for creating image
 		            e.printStackTrace();
 		         }
+		    	
+		    	Text price = new Text(Float.toString(p.getPrice()));
+		    	
+		    	// if there is a deal
+		    	if(p.getDealPrice()!=0)
+		    	{
+		    		price.setText(Float.toString(p.getPrice()) + "\n Deal: "+p.getDealPrice());
+		    		price.setFill(Color.GREEN);
+		    	}
+
 			    Text productName = new Text(p.getProductName());
-			    Text price = new Text(Float.toString(p.getPrice()));
+			    
 			    Button PurcasheBtn = new Button("buy");
 			    PurcasheBtn.setUserData(p);
 			    
@@ -178,11 +200,21 @@ public class CatalogController extends Application implements Initializable  {
 			
 			Request req = new Request();
 			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+			
 			req.setAction(Actions.GetProductCatalog); 
 			req.setValue(null);
 			Client.clientConn.handleMessageFromClientUI(req);
 			
 			
 		    
-		}	
+		}
+
+		public ArrayList<Deal> getDeals() {
+			return deals;
+		}
+
+		public void setDeals(ArrayList<Deal> deals) {
+			this.deals = deals;
+		}
+
 }

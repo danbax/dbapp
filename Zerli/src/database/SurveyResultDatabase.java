@@ -101,7 +101,6 @@ public class SurveyResultDatabase {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, survey.getId());
 				rs = ps.executeQuery();
-				ArrayList<Survey> surveys = new ArrayList<Survey>();
 				Survey surveyx;
 				if ( rs.next() )
 				{
@@ -129,7 +128,9 @@ public class SurveyResultDatabase {
 	}
 	
 	public static void addSurvey(Connection conn,  ConnectionToClient client,SurveyResults surveyRes) throws SQLException {
-		
+		/*
+		 * add survey result to database
+		 */
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddSurveyResults);
 		PreparedStatement ps;
@@ -187,7 +188,7 @@ public class SurveyResultDatabase {
 	}
 	*/
 	public static void deleteSurvey(Connection conn,  ConnectionToClient client,SurveyResults survey) throws SQLException {
-		// delete
+		// delete survey result from database
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.DeleteSurveyResults);
 		PreparedStatement ps;

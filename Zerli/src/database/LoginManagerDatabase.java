@@ -80,6 +80,9 @@ public class LoginManagerDatabase {
 	}
 	
 	public static void logout(Connection conn,  ConnectionToClient client,User user) throws SQLException {
+		/*
+		 * logout -> set user logged state to 0
+		 */
 		PreparedStatement ps;
 		String s1 = "update users set logged=0 where id=?";
 		try {
@@ -95,7 +98,7 @@ public class LoginManagerDatabase {
 	
 	public static void GetMyCreditCard(Connection conn,  ConnectionToClient client,User u) throws SQLException {
 		/*
-		 * Checks if username,password exist in database
+		 * return user credit card data
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
@@ -132,7 +135,7 @@ public class LoginManagerDatabase {
 	
 	public static void getMyAdress(Connection conn,  ConnectionToClient client,User u) throws SQLException {
 		/*
-		 * Checks if username,password exist in database
+		 * return user address data
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 

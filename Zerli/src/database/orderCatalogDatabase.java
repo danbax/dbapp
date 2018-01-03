@@ -4,11 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
@@ -16,8 +12,6 @@ import com.mysql.jdbc.PreparedStatement;
 import client.Order;
 import client.Product;
 import client.ServerResponse;
-import client.Survey;
-import client.SurveyConclusion;
 import client.User;
 import enums.Actions;
 import ocsf.server.ConnectionToClient;
@@ -25,9 +19,11 @@ import ocsf.server.ConnectionToClient;
 public class orderCatalogDatabase {
 public static void order(Connection conn,  ConnectionToClient client,Order order) throws SQLException {
 		
+	/*
+	 * create order with products in cart
+	 * change cart items to product related 
+	 */
 		
-		Calendar calendar = Calendar.getInstance();
-		java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.buyProductFromCatalog);
 		PreparedStatement ps;
@@ -56,7 +52,6 @@ public static void order(Connection conn,  ConnectionToClient client,Order order
 						
 						if(rs2.next())
 						{
-							System.out.println("soFar"+rs2.getInt("id"));
 							ps2 = (PreparedStatement) conn.prepareStatement(s3);
 							ps2.setInt(1, rs2.getInt("id"));
 							ps2.setInt(2, order.getUser().getId());
@@ -87,7 +82,7 @@ public static void order(Connection conn,  ConnectionToClient client,Order order
 
 public static void getMyOrdersHistory(Connection conn,  ConnectionToClient client,User user) throws SQLException {
 	/*
-	 * get list from database
+	 * get list of orders from database
 	 */
 	PreparedStatement ps;
 	ResultSet rs; 
@@ -174,7 +169,9 @@ public static void getMyOrdersHistory(Connection conn,  ConnectionToClient clien
 }
 
 public static void CancelOrder(Connection conn,  ConnectionToClient client,Order o) throws SQLException {
-	
+	/*
+	 * change order status to canceled
+	 */
 	ServerResponse sr = new ServerResponse(); // create server response
 	sr.setAction(Actions.updateConclusion);
 	PreparedStatement ps;

@@ -11,6 +11,7 @@ public class Product implements Serializable {
 	private ImgFile imgf;
 	private String productId;
 	private String image; // image path
+	private float dealPrice;
 	
 	public Product(	String name, String type) {
 		this.setProductName(name);
@@ -99,7 +100,15 @@ public class Product implements Serializable {
 	
 	public String toString()
 	{
-		return "name " + this.productName;
+		return this.productName;
+	}
+
+	public float getDealPrice() {
+		return dealPrice;
+	}
+
+	public void setDealPrice(float dealPrice) {
+		this.dealPrice = dealPrice;
 	}
 	
 }

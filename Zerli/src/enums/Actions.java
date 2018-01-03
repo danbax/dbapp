@@ -94,8 +94,15 @@ public enum Actions {
 	 AddCustomOrder,
 	 	CustomAdded,
 	 	CustomNotAdded,
+	 	
+	 /*deals*/
+	 AddDeal,
+	 DeleteDeal,
+	 GetDeals,
+	 GetProductsDeals,
 	 
 	 
 	 /*catalog*/
-	 GetProductCatalog;
+	 GetProductCatalog,
+	 GetDealsCatalog;
 }

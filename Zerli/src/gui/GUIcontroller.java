@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class GUIcontroller {
 	private static Scene currentScene;
@@ -21,11 +22,13 @@ public class GUIcontroller {
 	{
 		currentScene.getWindow().hide(); //hiding primary window
 		primaryStage = new Stage();
+		//primaryStage.initStyle(StageStyle.UNDECORATED); // remove close button
+		primaryStage.resizableProperty().setValue(Boolean.FALSE);
 		GUIcontroller.setCurrentStage(primaryStage);
 		loader = new FXMLLoader();
 		root = loader.load(getClass().getResource("/main/resources/"+fxmlFile).openStream());
 		
-		//scene.getStylesheets().add(getClass().getResource("/gui/selectProductFrame.css").toExternalForm());
+		//scene.getStylesheets().add(getClass().getResource("/gui/style.css").toExternalForm());
 		Scene scene = new Scene(root);	
 		GUIcontroller.currentScene = scene;
 		primaryStage.setScene(scene); 		

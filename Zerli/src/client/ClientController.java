@@ -2,16 +2,12 @@ package client;
 
 import ocsf.client.*;
 import java.io.*;
-import java.nio.file.Files;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import enums.Actions;
 import gui.AuthorizeUsersController;
 import gui.CartController;
 import gui.CatalogController;
 import gui.CustomMadeController;
-import gui.GUIcontroller;
 import gui.LoginController;
 import gui.MainMenuCustomer;
 import gui.OrderHistoryController;
@@ -19,6 +15,7 @@ import gui.SatisfactionSurvey;
 import gui.SurveyExpertController;
 import gui.SurveyResultsController;
 import gui.UpdateCatalogController;
+import gui.UpdateDealsController;
 import gui.UpdateUsersController;
 import server.ConIF;
 
@@ -34,6 +31,7 @@ public class ClientController extends AbstractClient {
 		openConnection(); 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void handleMessageFromServer(Object msg) {
 		/*
@@ -79,7 +77,6 @@ public class ClientController extends AbstractClient {
 		}
 		
 		if (sr.getAction() == Actions.GetProducts) {
-			@SuppressWarnings("unchecked")
 			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
 			UpdateCatalogController.last.fillProductsInTable(products);
 		}
@@ -103,36 +100,30 @@ public class ClientController extends AbstractClient {
 		}
 		
 		if (sr.getAction() == Actions.GetSurveys) {
-			@SuppressWarnings("unchecked")
 			ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
 			SatisfactionSurvey.last.fillTable(surveys);
 		}
 		if (sr.getAction() == Actions.GetSurveyNames) {
-			@SuppressWarnings("unchecked")
 			ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
 			SurveyResultsController.last.fillComboSurveys(surveys);
 		}
 		if (sr.getAction() == Actions.GetSurveyData) {
-			@SuppressWarnings("unchecked")
 			Survey survey = (Survey) sr.getValue();
 			System.out.println(survey.getQ1());
 			SurveyResultsController.last.showBoxes(survey);
 		}
 		if (sr.getAction() == Actions.GetSurveyResults) {
-			@SuppressWarnings("unchecked")
 			ArrayList<SurveyResults> surveys = (ArrayList<SurveyResults>) sr.getValue();
 			SurveyResultsController.last.fillTable(surveys);
 			
 		}
 		if (sr.getAction() == Actions.GetNotAuthorizedUsers) {
-			@SuppressWarnings("unchecked")
 			ArrayList<User> users = (ArrayList<User>) sr.getValue();
 			AuthorizeUsersController.last.fillTable(users);
 			
 		}
 		
 		if (sr.getAction() == Actions.GetSurveyNamesExpert) {
-			@SuppressWarnings("unchecked")
 			ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
 			SurveyExpertController.last.fillComboSurveys(surveys);
 		}
@@ -156,7 +147,6 @@ public class ClientController extends AbstractClient {
 			CatalogController.last.setCatalogProducts((ArrayList<Product>) sr.getValue());
 		}
 		if (sr.getAction() == Actions.GetMyOrdersHistory) {
-			@SuppressWarnings("unchecked")
 			ArrayList<Order> orders = (ArrayList<Order>) sr.getValue();
 			System.out.println("xxx");
 			System.out.println(orders.get(0).getGreeting());
@@ -165,7 +155,6 @@ public class ClientController extends AbstractClient {
 		}
 	
 		if (sr.getAction() == Actions.GetMyCart) {
-			@SuppressWarnings("unchecked")
 			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
 			System.out.println("ppx"+products.get(0).getProductName());
 			CartController.last.fillProductsInTable(products);
@@ -204,7 +193,21 @@ public class ClientController extends AbstractClient {
 				CustomMadeController.last.showAlert("No item like this");
 			}
 		}
-		
+		if(sr.getAction() == Actions.GetDeals)
+		{
+			ArrayList<Deal> deals = (ArrayList<Deal>) sr.getValue();
+			UpdateDealsController.last.fillTable(deals);
+		}
+		if(sr.getAction() == Actions.GetProductsDeals)
+		{
+			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
+			UpdateDealsController.last.fillComboProduct(products);
+		}
+		if(sr.getAction() == Actions.GetDealsCatalog)
+		{
+			ArrayList<Deal> deals = (ArrayList<Deal>) sr.getValue();
+			CatalogController.last.setDeals(deals);
+		}
 	}
 
 	public void handleMessageFromClientUI(Object req) {

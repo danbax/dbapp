@@ -9,6 +9,7 @@ import java.util.Objects;
 import client.Address;
 import client.CreditCard;
 import client.CustomMadeProduct;
+import client.Deal;
 import client.Order;
 import client.Product;
 import client.Refund;
@@ -257,7 +258,26 @@ public class ServerController extends AbstractServer {
 			{
 				CartDatabase.addToCartCustom((com.mysql.jdbc.Connection)conn, client, (CustomMadeProduct) req.getValue());
 			} 
-			
+			if(req.getAction() == Actions.GetDeals)
+			{
+				DealsDatabase.getDeals((com.mysql.jdbc.Connection)conn, client);
+			} 
+			if(req.getAction() == Actions.DeleteDeal)
+			{
+				DealsDatabase.deleteDeal((com.mysql.jdbc.Connection)conn, client, (Deal) req.getValue());
+			} 
+			if(req.getAction() == Actions.AddDeal)
+			{
+				DealsDatabase.addDeal((com.mysql.jdbc.Connection)conn, client, (Deal) req.getValue());
+			} 
+			if(req.getAction() == Actions.GetProductsDeals)
+			{
+				DealsDatabase.getProducts((com.mysql.jdbc.Connection)conn, client);
+			} 
+			if(req.getAction() == Actions.GetDealsCatalog)
+			{
+				DealsDatabase.getDeals((com.mysql.jdbc.Connection)conn, client);
+			} 
 			
 			
 			

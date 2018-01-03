@@ -1,14 +1,11 @@
 package database;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
-import client.Order;
 import client.Refund;
 import client.ServerResponse;
 import enums.Actions;
@@ -17,6 +14,9 @@ import ocsf.server.ConnectionToClient;
 public class RefundDatabase {
 public static void addRefund(Connection conn,  ConnectionToClient client,Refund refund) throws SQLException {
 		
+	/*
+	 * add refund on canceled product to database
+	 */
 	
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddRefund);

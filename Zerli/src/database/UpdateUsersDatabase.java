@@ -1,6 +1,6 @@
 package database;
 
-import java.io.IOException;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
-import client.Product;
 import client.ServerResponse;
 import client.User;
 import enums.Actions;
@@ -90,7 +89,7 @@ public class UpdateUsersDatabase {
 	
 	public static void deleteUser(Connection conn,  ConnectionToClient client,User user) throws SQLException {
 		/*
-		 * delete product from database
+		 * delete user from database
 		 */
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.DeleteUser);
