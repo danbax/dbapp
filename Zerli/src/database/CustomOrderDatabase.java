@@ -10,8 +10,11 @@ import com.mysql.jdbc.PreparedStatement;
 import entity.ServerResponse;
 import enums.Actions;
 import ocsf.server.ConnectionToClient;
+import server.ServerController;
 
 public class CustomOrderDatabase {
+	static int shop_id = ServerController.shop.getId();
+	
 	public static void getCustomOrderData(Connection conn,  ConnectionToClient client) throws SQLException {
 		/*
 		 * get data for custom order:
@@ -32,13 +35,14 @@ public class CustomOrderDatabase {
 		float minPrice=0;
 		
 		// sql
-		String s1 = "select distinct(ptype) as pt from products";
-		String s2 = "select distinct(color) as color from products";
-		String s3 = "select price from products order by price desc limit 1"; // min and max sql func dont work
-		String s4 = "select price from products order by price asc limit 1";
+		String s1 = "select distinct(ptype) as pt from products where shop_id=?";
+		String s2 = "select distinct(color) as color from products where shop_id=?";
+		String s3 = "select price from products where shop_id=? order by price desc limit 1"; // min and max sql func dont work
+		String s4 = "select price from products where shop_id=? order by price asc limit 1";
 		try {
 				//types
 				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				
 				while ( rs.next() )
@@ -47,6 +51,7 @@ public class CustomOrderDatabase {
 				}
 				//colors
 				ps2 = (PreparedStatement) conn.prepareStatement(s2);
+				ps2.setInt(1, shop_id);
 				rs2 = ps2.executeQuery();
 				
 				while ( rs2.next() )
@@ -55,6 +60,7 @@ public class CustomOrderDatabase {
 				}
 				// max
 				ps = (PreparedStatement) conn.prepareStatement(s3);
+				ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				if(rs.next())
 				{
@@ -62,6 +68,7 @@ public class CustomOrderDatabase {
 				}
 				// min
 				ps = (PreparedStatement) conn.prepareStatement(s4);
+				ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				if(rs.next())
 				{

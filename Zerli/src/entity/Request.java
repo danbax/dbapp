@@ -1,7 +1,8 @@
 package entity;
 import java.io.Serializable;
 
-import enums.Actions;;
+import enums.Actions;
+import gui.LoginController;;
 
 public class Request implements Serializable {
 	/**
@@ -18,21 +19,24 @@ public class Request implements Serializable {
 	 */
 	private Actions action;
 	private Object value;
+	private Shop shop;
 	
 	public Request()
 	{
-		
+		this.setShop(LoginController.shop);
 	}
 	public Request(Actions act)
 	{
 		this.action = act;
 		value = null;
+		this.setShop(LoginController.shop);
 	}
 	
 	public Request(Actions act,Object val)
 	{
 		action = act;
 		value = val;
+		this.setShop(LoginController.shop);
 	}
 	
 	
@@ -47,6 +51,12 @@ public class Request implements Serializable {
 	}
 	public void setValue(Object values) {
 		this.value = values;
+	}
+	public Shop getShop() {
+		return shop;
+	}
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 	
 	

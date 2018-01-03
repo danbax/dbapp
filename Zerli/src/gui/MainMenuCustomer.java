@@ -173,7 +173,7 @@ public class MainMenuCustomer extends Application implements Initializable  {
 			req.setValue(LoginController.myUser);
 			Client.clientConn.handleMessageFromClientUI(req);
 			
-			
+			System.out.println(req.getShop().getId());
 			
 		}
 	

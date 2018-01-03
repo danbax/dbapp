@@ -11,19 +11,21 @@ import entity.CreditCard;
 import entity.ServerResponse;
 import entity.User;
 import enums.Actions;
-public class LoginManagerDatabase {
+public class LoginManagerDatabase { 
 	
-	public static void isValidData(Connection conn,  ConnectionToClient client,String user,String pass) throws SQLException {
+	public static void isValidData(Connection conn,  ConnectionToClient client,User u) throws SQLException {
 		/*
-		 * Checks if username,password exist in database
+		 * Checks if username,password exist in database (in current shop)
 		 */
 		PreparedStatement ps;
 		ResultSet rs;  
-		String s1 = "select * from users where username=? and password=?";
+		String s1 = "select * from users where username=? and password=? and (shop_id=? or shop_id=0)";
+	
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
-				ps.setString(1, user);
-				ps.setString(2, pass);
+				ps.setString(1, u.getUsername());
+				ps.setString(2, u.getPassword());
+				ps.setInt(3, u.getShop().getId());
 				rs = ps.executeQuery();
 				ServerResponse sr = new ServerResponse(); // create server response
 				if ( rs.next() )

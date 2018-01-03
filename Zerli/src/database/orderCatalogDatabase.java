@@ -15,8 +15,11 @@ import entity.ServerResponse;
 import entity.User;
 import enums.Actions;
 import ocsf.server.ConnectionToClient;
+import server.ServerController;
 
 public class orderCatalogDatabase {
+	static int shop_id = ServerController.shop.getId();
+	
 public static void order(Connection conn,  ConnectionToClient client,Order order) throws SQLException {
 		
 	/*
@@ -29,9 +32,9 @@ public static void order(Connection conn,  ConnectionToClient client,Order order
 		PreparedStatement ps;
 		PreparedStatement ps2;
 		ResultSet rs2; 
-		String s1 = "INSERT INTO orders (user_id,order_date,greeting_text,hours,minutes,price,payment_method,status) VALUES (?,?,?,?,?,?,?,0);";
-		String s2 = "select id from orders where user_id = ? order by id desc limit 1";
-		String s3 = "update cart set order_id=? where user_id=? and order_id=0";
+		String s1 = "INSERT INTO orders (user_id,order_date,greeting_text,hours,minutes,price,payment_method,status,shop_id) VALUES (?,?,?,?,?,?,?,0,?);";
+		String s2 = "select id from orders where user_id = ? and shop_id=? order by id desc limit 1";
+		String s3 = "update cart set order_id=? where user_id=? and order_id=0 and shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, order.getUser().getId());
@@ -41,6 +44,7 @@ public static void order(Connection conn,  ConnectionToClient client,Order order
 				ps.setInt(5, order.getMinutes());
 				ps.setFloat(6, order.getPrice());
 				ps.setInt(7,order.getPaymentMethod());
+				ps.setInt(8, shop_id);
 				ps.executeUpdate(); 
 
 				
@@ -48,6 +52,7 @@ public static void order(Connection conn,  ConnectionToClient client,Order order
 				try {
 						ps2 = (PreparedStatement) conn.prepareStatement(s2);
 						ps2.setInt(1, order.getUser().getId());
+						ps2.setInt(2, shop_id);
 						rs2 = ps2.executeQuery();
 						
 						if(rs2.next())
@@ -55,6 +60,7 @@ public static void order(Connection conn,  ConnectionToClient client,Order order
 							ps2 = (PreparedStatement) conn.prepareStatement(s3);
 							ps2.setInt(1, rs2.getInt("id"));
 							ps2.setInt(2, order.getUser().getId());
+							ps2.setInt(3, shop_id);
 							ps2.executeUpdate();
 						}
 
@@ -92,38 +98,17 @@ public static void getMyOrdersHistory(Connection conn,  ConnectionToClient clien
 			+ ",products.pname,products.ptype,products.price,products.img,products.product_ID,products.id as pid"
 			+ " from orders,products where orders.user_id = ? and orders.product_id=products.id";
 			*/
-	String s1 = "select * from orders where user_id = ?";
+	String s1 = "select * from orders where user_id = ? and shop_id=?";
 	try {
 			ps = (PreparedStatement) conn.prepareStatement(s1);
 			ps.setInt(1, user.getId());
+			ps.setInt(2, shop_id);
 			rs = ps.executeQuery();
 			ArrayList<Order> orders = new ArrayList<Order>();
 			
 			while ( rs.next() )
 			{
-				try {	
-					String s2 = "select * from products where id = ?";
-					PreparedStatement ps2 = (PreparedStatement) conn.prepareStatement(s2);
-					ps2.setInt(1, rs.getInt("product_id"));
-					ResultSet rs2 = ps2.executeQuery();
-					
-					
-					if(rs2.next())
-					{
-						
-						//create product
-						product = new Product(rs2.getString("pname"),rs2.getString("ptype"));
-						product.setImage(rs2.getString("img"));
-						product.setPid(rs2.getInt("id"));
-						product.setPrice(rs2.getFloat("price"));
-						product.setProductId(rs2.getString("product_id"));
-					}
-				}
-				catch (Exception e)
-				{
-					// TODO: handle exception
-					e.printStackTrace();
-				}
+				
 				
 				//create order
 				
@@ -134,7 +119,6 @@ public static void getMyOrdersHistory(Connection conn,  ConnectionToClient clien
 				order.setMinutes(rs.getInt("minutes"));
 				order.setPaymentMethod(rs.getInt("payment_method"));
 				order.setPrice(rs.getFloat("price")); 
-				order.setProduct(product);
 				order.setUser(user);
 				//date
 				Date d = rs.getDate("order_date");

@@ -1,6 +1,7 @@
 package database;
 
 import ocsf.server.ConnectionToClient;
+import server.ServerController;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,6 +18,7 @@ import entity.Product;
 import entity.ServerResponse;
 import enums.Actions;
 public class UpdateCatalogDatabase {
+	static int shop_id = ServerController.shop.getId();
 	
 	public static void getProducts(Connection conn,  ConnectionToClient client) throws SQLException { 
 		/*
@@ -24,9 +26,10 @@ public class UpdateCatalogDatabase {
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select * from products";
+		String s1 = "select * from products where shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				ArrayList<Product> products = new ArrayList<Product>();
 				while ( rs.next() )
@@ -85,7 +88,7 @@ public class UpdateCatalogDatabase {
 		sr.setAction(Actions.AddProduct);
 		System.out.println(product.getProductName());
 		PreparedStatement ps;
-		String s1 = "INSERT INTO products (pname, ptype,price,img,product_ID) VALUES (?,?,?,?,?);";
+		String s1 = "INSERT INTO products (pname, ptype,price,img,product_ID,shop_id) VALUES (?,?,?,?,?,?);";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setString(1, product.getProductName());
@@ -93,6 +96,7 @@ public class UpdateCatalogDatabase {
 				ps.setFloat(3, product.getPrice());
 				ps.setString(4, fileName+"."+product.getImgf().getExe());
 				ps.setString(5, product.getProductId());
+				ps.setInt(6, shop_id);
 				ps.executeUpdate();
 
 				
@@ -119,13 +123,14 @@ public class UpdateCatalogDatabase {
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddProduct);
 		PreparedStatement ps;
-		String s1 = "update products set pname=?,ptype=?,price=? where id=?;";
+		String s1 = "update products set pname=?,ptype=?,price=? where id=? and shop_id=?;";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setString(1, product.getProductName());
 				ps.setString(2, product.getProductType());
 				ps.setFloat(3, product.getPrice());
 				ps.setInt(4, product.getPid());
+				ps.setInt(5, shop_id);
 				ps.executeUpdate();
 
 				
@@ -145,10 +150,11 @@ public class UpdateCatalogDatabase {
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.DeleteProduct);
 		PreparedStatement ps;
-		String s1 = "delete from products where id=?";
+		String s1 = "delete from products where id=? and shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, product.getPid());
+				ps.setInt(2, shop_id);
 				ps.executeUpdate();
 
 				

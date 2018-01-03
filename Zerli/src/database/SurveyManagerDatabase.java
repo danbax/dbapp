@@ -1,6 +1,7 @@
 package database;
 
 import ocsf.server.ConnectionToClient;
+import server.ServerController;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -11,7 +12,9 @@ import com.mysql.jdbc.PreparedStatement;
 import entity.ServerResponse;
 import entity.Survey;
 import enums.Actions;
-public class SurveyManagerDatabase {
+public class SurveyManagerDatabase { 
+	
+	static int shop_id = ServerController.shop.getId();
 	
 	public static void getSurveys(Connection conn,  ConnectionToClient client) throws SQLException {
 		/*
@@ -19,9 +22,10 @@ public class SurveyManagerDatabase {
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select * from Surveys";
+		String s1 = "select * from Surveys where shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				ArrayList<Survey> surveys = new ArrayList<Survey>();
 				while ( rs.next() )
@@ -58,7 +62,7 @@ public class SurveyManagerDatabase {
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddSurvey);
 		PreparedStatement ps;
-		String s1 = "INSERT INTO surveys (q1,q2,q3,q4,q5,q6,survey_name) VALUES (?,?,?,?,?,?,?);";
+		String s1 = "INSERT INTO surveys (q1,q2,q3,q4,q5,q6,survey_name,shop_id) VALUES (?,?,?,?,?,?,?,?);";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setString(1, survey.getQ1());
@@ -68,6 +72,7 @@ public class SurveyManagerDatabase {
 				ps.setString(5, survey.getQ5());
 				ps.setString(6, survey.getQ6());
 				ps.setString(7, survey.getSurveyName());
+				ps.setInt(8, shop_id);
 				ps.executeUpdate();
 
 				

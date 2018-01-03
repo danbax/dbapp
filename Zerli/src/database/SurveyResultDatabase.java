@@ -1,6 +1,7 @@
 package database;
 
 import ocsf.server.ConnectionToClient;
+import server.ServerController;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -14,15 +15,18 @@ import entity.SurveyResults;
 import enums.Actions;
 public class SurveyResultDatabase {
 	
+	static int shop_id = ServerController.shop.getId();
+	
 	public static void getSurveys(Connection conn,  ConnectionToClient client) throws SQLException {
 		/*
 		 * get list of surveys from database
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select * from Surveys"; 
+		String s1 = "select * from Surveys where shop_id=?"; 
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				ArrayList<Survey> surveys = new ArrayList<Survey>();
 				while ( rs.next() )
@@ -58,9 +62,10 @@ public class SurveyResultDatabase {
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select * from Survey_results";
+		String s1 = "select * from Survey_results where shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				ArrayList<SurveyResults> surveys = new ArrayList<SurveyResults>();
 				while ( rs.next() )
@@ -96,10 +101,11 @@ public class SurveyResultDatabase {
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select * from Surveys where id=?";
+		String s1 = "select * from Surveys where id=? and shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, survey.getId());
+				ps.setInt(2, shop_id);
 				rs = ps.executeQuery();
 				Survey surveyx;
 				if ( rs.next() )
@@ -134,7 +140,7 @@ public class SurveyResultDatabase {
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddSurveyResults);
 		PreparedStatement ps;
-		String s1 = "INSERT INTO survey_results (q1,q2,q3,q4,q5,q6,survey_id) VALUES (?,?,?,?,?,?,?);";
+		String s1 = "INSERT INTO survey_results (q1,q2,q3,q4,q5,q6,survey_id,shop_id) VALUES (?,?,?,?,?,?,?,?);";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, surveyRes.getQ1());
@@ -144,6 +150,7 @@ public class SurveyResultDatabase {
 				ps.setInt(5, surveyRes.getQ5());
 				ps.setInt(6, surveyRes.getQ6());
 				ps.setInt(7, surveyRes.getSurveyId());
+				ps.setInt(8, shop_id);
 				ps.executeUpdate();
 
 				
@@ -192,10 +199,11 @@ public class SurveyResultDatabase {
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.DeleteSurveyResults);
 		PreparedStatement ps;
-		String s1 = "delete from survey_results where id=?";
+		String s1 = "delete from survey_results where id=? and shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, survey.getId());
+				ps.setInt(2, shop_id);
 				ps.executeUpdate();
 
 				

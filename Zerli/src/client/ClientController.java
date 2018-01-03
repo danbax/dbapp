@@ -49,167 +49,170 @@ public class ClientController extends AbstractClient {
 		 */
 		ServerResponse sr = (ServerResponse) msg;
 		// decide which action perform
-		if (sr.getAction() == Actions.ValidLoginDataCheck) {
-			// checked id login data correct
-			LoginController loginc = (LoginController)LoginController.last;
-        	if(sr.getAnswer() == Actions.UsernameExist)
-        	{
-        		// login user
-        		LoginController.myUser = (User) sr.getValue();
-        		try {
-					loginc.ShowLoginMessage(1);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if (sr.getAction() == Actions.ValidLoginDataCheck) {
+				// checked id login data correct
+				LoginController loginc = (LoginController)LoginController.last;
+		    	if(sr.getAnswer() == Actions.UsernameExist)
+		    	{
+		    		// login user
+		    		LoginController.myUser = (User) sr.getValue();
+		    		LoginController.myUser.setShop(LoginController.shop); // set my shop
+		    		try {
+						loginc.ShowLoginMessage(1);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		    	}
+		    	else if(sr.getAnswer() == Actions.UsernameDoesNotExist) 
+		    	{
+		    		// show error
+		    		try {
+						loginc.ShowLoginMessage(0);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		    	}
+		    	else if(sr.getAnswer() == Actions.AlreadyLoggedIn)
+		    	{
+		    		// show error
+		    		try {
+						loginc.ShowLoginMessage(2);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		    	}
+			}
+			
+			if (sr.getAction() == Actions.GetProducts) {
+				ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
+				UpdateCatalogController.last.fillProductsInTable(products);
+			}
+			if (sr.getAction() == Actions.AddProduct) {
+				
+			}
+			if (sr.getAction() == Actions.DeleteProduct) {
+				if(sr.getAnswer() == Actions.DeletedProduct)
+				{
+					// deleted
 				}
-        	}
-        	else if(sr.getAnswer() == Actions.UsernameDoesNotExist) 
-        	{
-        		// show error
-        		try {
-					loginc.ShowLoginMessage(0);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				else
+				{
+					// not deleted
 				}
-        	}
-        	else if(sr.getAnswer() == Actions.AlreadyLoggedIn)
-        	{
-        		// show error
-        		try {
-					loginc.ShowLoginMessage(2);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			}
+			if(sr.getAction() == Actions.GetUsers)
+			{
+				ArrayList<User> users = (ArrayList<User>) sr.getValue();
+				UpdateUsersController.last.fillUsersInTable(users);
+			}
+			
+			if (sr.getAction() == Actions.GetSurveys) {
+				ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
+				SatisfactionSurvey.last.fillTable(surveys);
+			}
+			if (sr.getAction() == Actions.GetSurveyNames) {
+				ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
+				SurveyResultsController.last.fillComboSurveys(surveys);
+			}
+			if (sr.getAction() == Actions.GetSurveyData) {
+				Survey survey = (Survey) sr.getValue();
+				SurveyResultsController.last.showBoxes(survey);
+			}
+			if (sr.getAction() == Actions.GetSurveyResults) {
+				ArrayList<SurveyResults> surveys = (ArrayList<SurveyResults>) sr.getValue();
+				SurveyResultsController.last.fillTable(surveys);
+				
+			}
+			if (sr.getAction() == Actions.GetNotAuthorizedUsers) {
+				ArrayList<User> users = (ArrayList<User>) sr.getValue();
+				AuthorizeUsersController.last.fillTable(users);
+				
+			}
+			
+			if (sr.getAction() == Actions.GetSurveyNamesExpert) {
+				ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
+				SurveyExpertController.last.fillComboSurveys(surveys);
+			}
+			if (sr.getAction() == Actions.GetNumberOfVoters) {
+				SurveyExpertController.last.setNumberVoters((Integer)sr.getValue()); 
+			}
+			if (sr.getAction() == Actions.GetAvgRes) {
+				SurveyExpertController.last.setAvgResults((SurveyResults)sr.getValue());
+			}
+			if (sr.getAction() == Actions.GetConclusion) {
+				SurveyExpertController.last.setConclusion((String)sr.getValue());
+			}
+			if (sr.getAction() == Actions.GetMyAdress) {
+				LoginController.myAddress = (Address)sr.getValue();
+			}
+			if (sr.getAction() == Actions.GetMyCreditCard) {
+				LoginController.myCreditCard = (CreditCard)sr.getValue();
+			}
+			
+			if (sr.getAction() == Actions.GetProductCatalog) {
+				CatalogController.last.setCatalogProducts((ArrayList<Product>) sr.getValue());
+			}
+			if (sr.getAction() == Actions.GetMyOrdersHistory) {
+				ArrayList<Order> orders = (ArrayList<Order>) sr.getValue();
+				OrderHistoryController.last.fillTable(orders); 
+				
+			}
+		
+			if (sr.getAction() == Actions.GetMyCart) {
+				ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
+				CartController.last.fillProductsInTable(products);
+			}
+			
+			if (sr.getAction() == Actions.GetMyCartCountItems) {
+				MainMenuCustomer.last.updateCountItems((int)sr.getValue());
+			}
+			if (sr.getAction() == Actions.CustomOrderData) {
+				ArrayList<Object> obj = (ArrayList<Object>) sr.getValue();
+				ArrayList<String> types = (ArrayList<String>) obj.get(0);
+				ArrayList<String> colors = (ArrayList<String>) obj.get(1);
+				Float max = (Float) obj.get(2);
+				Float min = (Float) obj.get(3);
+				
+				colors.add("all");
+				
+				CustomMadeController.last.fillComboTypes(types);
+				CustomMadeController.last.fillComboColors(colors);
+				CustomMadeController.last.setMaxPrice(max);
+				CustomMadeController.last.setMinPrice(min);
+				
+			}
+			if (sr.getAction() == Actions.AddCustomOrder) {
+				if(sr.getAnswer() == Actions.CustomAdded)
+				{
+					// added
+					CustomMadeController.last.showAlert("Added to cart");
 				}
-        	}
-		}
-		
-		if (sr.getAction() == Actions.GetProducts) {
-			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
-			UpdateCatalogController.last.fillProductsInTable(products);
-		}
-		if (sr.getAction() == Actions.AddProduct) {
-			
-		}
-		if (sr.getAction() == Actions.DeleteProduct) {
-			if(sr.getAnswer() == Actions.DeletedProduct)
-			{
-				// deleted
+				else if(sr.getAnswer() == Actions.CustomNotAdded)
+				{
+					// not added
+					CustomMadeController.last.showAlert("No item like this");
+				}
 			}
-			else
+			if(sr.getAction() == Actions.GetDeals)
 			{
-				// not deleted
+				ArrayList<Deal> deals = (ArrayList<Deal>) sr.getValue();
+				UpdateDealsController.last.fillTable(deals);
 			}
-		}
-		if(sr.getAction() == Actions.GetUsers)
-		{
-			ArrayList<User> users = (ArrayList<User>) sr.getValue();
-			UpdateUsersController.last.fillUsersInTable(users);
-		}
-		
-		if (sr.getAction() == Actions.GetSurveys) {
-			ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
-			SatisfactionSurvey.last.fillTable(surveys);
-		}
-		if (sr.getAction() == Actions.GetSurveyNames) {
-			ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
-			SurveyResultsController.last.fillComboSurveys(surveys);
-		}
-		if (sr.getAction() == Actions.GetSurveyData) {
-			Survey survey = (Survey) sr.getValue();
-			SurveyResultsController.last.showBoxes(survey);
-		}
-		if (sr.getAction() == Actions.GetSurveyResults) {
-			ArrayList<SurveyResults> surveys = (ArrayList<SurveyResults>) sr.getValue();
-			SurveyResultsController.last.fillTable(surveys);
-			
-		}
-		if (sr.getAction() == Actions.GetNotAuthorizedUsers) {
-			ArrayList<User> users = (ArrayList<User>) sr.getValue();
-			AuthorizeUsersController.last.fillTable(users);
-			
-		}
-		
-		if (sr.getAction() == Actions.GetSurveyNamesExpert) {
-			ArrayList<Survey> surveys = (ArrayList<Survey>) sr.getValue();
-			SurveyExpertController.last.fillComboSurveys(surveys);
-		}
-		if (sr.getAction() == Actions.GetNumberOfVoters) {
-			SurveyExpertController.last.setNumberVoters((Integer)sr.getValue()); 
-		}
-		if (sr.getAction() == Actions.GetAvgRes) {
-			SurveyExpertController.last.setAvgResults((SurveyResults)sr.getValue());
-		}
-		if (sr.getAction() == Actions.GetConclusion) {
-			SurveyExpertController.last.setConclusion((String)sr.getValue());
-		}
-		if (sr.getAction() == Actions.GetMyAdress) {
-			LoginController.myAddress = (Address)sr.getValue();
-		}
-		if (sr.getAction() == Actions.GetMyCreditCard) {
-			LoginController.myCreditCard = (CreditCard)sr.getValue();
-		}
-		
-		if (sr.getAction() == Actions.GetProductCatalog) {
-			CatalogController.last.setCatalogProducts((ArrayList<Product>) sr.getValue());
-		}
-		if (sr.getAction() == Actions.GetMyOrdersHistory) {
-			ArrayList<Order> orders = (ArrayList<Order>) sr.getValue();
-			OrderHistoryController.last.fillTable(orders); 
-			
-		}
-	
-		if (sr.getAction() == Actions.GetMyCart) {
-			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
-			CartController.last.fillProductsInTable(products);
-		}
-		
-		if (sr.getAction() == Actions.GetMyCartCountItems) {
-			MainMenuCustomer.last.updateCountItems((int)sr.getValue());
-		}
-		if (sr.getAction() == Actions.CustomOrderData) {
-			ArrayList<Object> obj = (ArrayList<Object>) sr.getValue();
-			ArrayList<String> types = (ArrayList<String>) obj.get(0);
-			ArrayList<String> colors = (ArrayList<String>) obj.get(1);
-			Float max = (Float) obj.get(2);
-			Float min = (Float) obj.get(3);
-			
-			colors.add("all");
-			
-			CustomMadeController.last.fillComboTypes(types);
-			CustomMadeController.last.fillComboColors(colors);
-			CustomMadeController.last.setMaxPrice(max);
-			CustomMadeController.last.setMinPrice(min);
-			
-		}
-		if (sr.getAction() == Actions.AddCustomOrder) {
-			if(sr.getAnswer() == Actions.CustomAdded)
+			if(sr.getAction() == Actions.GetProductsDeals)
 			{
-				// added
-				CustomMadeController.last.showAlert("Added to cart");
+				ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
+				UpdateDealsController.last.fillComboProduct(products);
 			}
-			else if(sr.getAnswer() == Actions.CustomNotAdded)
+			if(sr.getAction() == Actions.GetDealsCatalog)
 			{
-				// not added
-				CustomMadeController.last.showAlert("No item like this");
+				ArrayList<Deal> deals = (ArrayList<Deal>) sr.getValue();
+				CatalogController.last.setDeals(deals);
 			}
-		}
-		if(sr.getAction() == Actions.GetDeals)
-		{
-			ArrayList<Deal> deals = (ArrayList<Deal>) sr.getValue();
-			UpdateDealsController.last.fillTable(deals);
-		}
-		if(sr.getAction() == Actions.GetProductsDeals)
-		{
-			ArrayList<Product> products = (ArrayList<Product>) sr.getValue();
-			UpdateDealsController.last.fillComboProduct(products);
-		}
-		if(sr.getAction() == Actions.GetDealsCatalog)
-		{
-			ArrayList<Deal> deals = (ArrayList<Deal>) sr.getValue();
-			CatalogController.last.setDeals(deals);
-		}
+				
+				
 	}
 
 	public void handleMessageFromClientUI(Object req) {
@@ -233,4 +236,7 @@ public class ClientController extends AbstractClient {
 		}
 		System.exit(0);
 	}
+	
+	
+	
 }

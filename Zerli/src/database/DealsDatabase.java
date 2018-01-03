@@ -18,18 +18,22 @@ import entity.Product;
 import entity.ServerResponse;
 import enums.Actions;
 import ocsf.server.ConnectionToClient;
+import server.ServerController;
 
 public class DealsDatabase {
+	static int shop_id = ServerController.shop.getId();
+	
 	public static void getDeals(Connection conn,  ConnectionToClient client) throws SQLException {
 		/*
 		 * get list of deals from database
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select * from deals";
+		String s1 = "select * from deals where shop_id=?";
 		
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				ArrayList<Deal> deals = new ArrayList<Deal>();
 				while ( rs.next() )
@@ -87,11 +91,12 @@ public class DealsDatabase {
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddDeal);
 		PreparedStatement ps;
-		String s1 = "INSERT INTO deals (product_id,percent) VALUES (?,?);";
+		String s1 = "INSERT INTO deals (product_id,percent,shop_id) VALUES (?,?,?);";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, deal.getProductId());
 				ps.setInt(2, deal.getPercent());
+				ps.setInt(3, shop_id);
 				ps.executeUpdate();
 
 				
@@ -109,9 +114,10 @@ public class DealsDatabase {
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select * from products";
+		String s1 = "select * from products where shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				ArrayList<Product> products = new ArrayList<Product>();
 				while ( rs.next() )

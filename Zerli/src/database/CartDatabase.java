@@ -15,8 +15,11 @@ import entity.ServerResponse;
 import entity.User;
 import enums.Actions;
 import ocsf.server.ConnectionToClient;
+import server.ServerController;
 
 public class CartDatabase {
+	static int shop_id = ServerController.shop.getId();
+	
 	public static void addToCart(Connection conn,  ConnectionToClient client,Order order) throws SQLException {
 		
 		/* insert product to cart */
@@ -25,12 +28,13 @@ public class CartDatabase {
 		sr.setAction(Actions.AddToCart);
 		PreparedStatement ps;
 		
-		String s1 = "INSERT INTO cart (user_id,product_id,order_id) VALUES (?,?,0);";
+		String s1 = "INSERT INTO cart (user_id,product_id,order_id,shop_id) VALUES (?,?,0,?);";
 		
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, order.getUser().getId());
 				ps.setInt(2, order.getProduct().getPid());
+				ps.setInt(3, shop_id);
 				ps.executeUpdate();
 
 				// update products in cart
@@ -58,19 +62,20 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 		ResultSet rs;
 		PreparedStatement ps2;
 		
-		String s1 = "select id from products where ptype=? and price<? and price>?";
-		String s2 = "INSERT INTO cart (user_id,product_id,order_id) VALUES (?,?,0);";
+		String s1 = "select id from products where shop_id=? and ptype=? and price<? and price>?";
+		String s2 = "INSERT INTO cart (user_id,product_id,order_id,shop_id) VALUES (?,?,0,?);";
 		
 		if(!cmp.getColor().equals("all")) {
 			s1=s1+ " and color=?";
 		}
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
-				ps.setString(1, cmp.getType());
-				ps.setFloat(2, cmp.getMaxPrice());
-				ps.setFloat(3, cmp.getMinPrice());
+				ps.setInt(1, shop_id);
+				ps.setString(2, cmp.getType());
+				ps.setFloat(3, cmp.getMaxPrice());
+				ps.setFloat(4, cmp.getMinPrice());
 				if(!cmp.getColor().equals("all")) {
-					ps.setString(4, cmp.getColor());
+					ps.setString(5, cmp.getColor());
 				}
 				rs = ps.executeQuery();
 				
@@ -79,6 +84,7 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 					ps2 = (PreparedStatement) conn.prepareStatement(s2);
 					ps2.setInt(1, cmp.getMyUser().getId());
 					ps2.setInt(2, rs.getInt("id"));
+					ps2.setInt(3, shop_id);
 					ps2.executeUpdate();
 					sr.setAnswer(Actions.CustomAdded);
 					client.sendToClient(sr);
@@ -120,10 +126,11 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 		String s1 = "select products.pname,products.ptype,products.price,products.img,products.product_id"
 				+ " from cart,products where cart.product_id=products.id and cart.order_id=0 and cart.user_id=?";
 		*/
-		String s1 = "select * from cart where order_id=0 and user_id =?"; // not ordered
+		String s1 = "select * from cart where order_id=0 and user_id =? and shop_id=?"; // not ordered
 		try {
 			ps = (PreparedStatement) conn.prepareStatement(s1);
 			ps.setInt(1, myUser.getId());
+			ps.setInt(2, shop_id);
 			rs = ps.executeQuery();
 			
 			ArrayList<Product> products = new ArrayList<Product>();
@@ -131,9 +138,10 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 			{
 				System.out.println("ooo" + rs.getInt("product_id"));
 				try {
-				String s2 = "select * from products where id=?";
+				String s2 = "select * from products where id=? and shop_id=?";
 				ps2 = (PreparedStatement) conn.prepareStatement(s2);
 				ps2.setInt(1, rs.getInt("product_id"));
+				ps2.setInt(2, shop_id);
 				rs2 = ps2.executeQuery();
 				
 				
@@ -183,10 +191,11 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select count(id) as c from cart where order_id=0 and user_id =?"; // not ordered
+		String s1 = "select count(id) as c from cart where order_id=0 and user_id =? and shop_id=?"; // not ordered
 		try {
 			ps = (PreparedStatement) conn.prepareStatement(s1);
 			ps.setInt(1, myUser.getId());
+			ps.setInt(2, shop_id);
 			rs = ps.executeQuery();
 			int count =0;
 			if(rs.next())
@@ -216,11 +225,12 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.DeleteFromCart);
 		PreparedStatement ps;
-		String s1 = "delete from cart where user_id=? and product_id=?";
+		String s1 = "delete from cart where user_id=? and product_id=? and shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, order.getUser().getId());
 				ps.setInt(2, order.getProduct().getPid());
+				ps.setInt(3, shop_id);
 				ps.executeUpdate();
 
 				

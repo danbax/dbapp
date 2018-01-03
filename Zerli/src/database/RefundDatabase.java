@@ -10,8 +10,12 @@ import entity.Refund;
 import entity.ServerResponse;
 import enums.Actions;
 import ocsf.server.ConnectionToClient;
+import server.ServerController;
 
 public class RefundDatabase {
+	
+	static int shop_id = ServerController.shop.getId();
+	
 public static void addRefund(Connection conn,  ConnectionToClient client,Refund refund) throws SQLException {
 		
 	/*
@@ -21,11 +25,12 @@ public static void addRefund(Connection conn,  ConnectionToClient client,Refund 
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddRefund);
 		PreparedStatement ps;
-		String s1 = "INSERT INTO refunds (order_id,refund) VALUES (?,?);";
+		String s1 = "INSERT INTO refunds (order_id,refund,shop_id) VALUES (?,?,?);";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, refund.getOrder().getId());
 				ps.setFloat(2, refund.getRefund());
+				ps.setInt(3, shop_id);
 				ps.executeUpdate();
 
 				

@@ -12,18 +12,22 @@ import entity.ServerResponse;
 import entity.User;
 import enums.Actions;
 import ocsf.server.ConnectionToClient;
+import server.ServerController;
 
 public class AuthorizeUsersDatabase {
+	static int shop_id = ServerController.shop.getId();
+	
 	public static void getUsersNotAuthorized(Connection conn,  ConnectionToClient client) throws SQLException {
 		/*
 		 * get list of not authorized users from database
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select * from users where authorized=0";
+		String s1 = "select * from users where authorized=0 and shop_id=?";
 		
 		try {
-				ps = (PreparedStatement) conn.prepareStatement(s1);				
+				ps = (PreparedStatement) conn.prepareStatement(s1);	
+				ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				ArrayList<User> users = new ArrayList<User>();
 				while ( rs.next() )

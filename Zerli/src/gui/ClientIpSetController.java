@@ -1,10 +1,15 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import client.Client;
+import entity.Product;
 import entity.Request;
+import entity.Shop;
 import enums.Actions;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,15 +17,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ClientIpSetController implements Initializable  {
-	@FXML
-	private TextField txtIP;
+	@FXML private TextField txtIP;
 	
-	@FXML
-	private Button saveIP;
+	@FXML private Button saveIP;
+	@FXML private ComboBox<Shop> selectShop;
 	
 		public void saveIPaction(ActionEvent event) throws Exception {
 			/*
@@ -29,7 +34,7 @@ public class ClientIpSetController implements Initializable  {
 			 */
 			String ip = txtIP.getText(); 
 			Client.host = ip;
-			
+			LoginController.shop = this.selectShop.getSelectionModel().getSelectedItem();
 			/*
 			 * HERE COME CODES THAT TAKES YOU TO THE CLASS PRODUCT MANAGER
 			 * 
@@ -76,7 +81,25 @@ public class ClientIpSetController implements Initializable  {
 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	
+			Shop shop0 = new Shop();
+			shop0.setId(0);
+			shop0.setShopName("Internet");
 			
+			Shop shop1 = new Shop();
+			shop1.setId(1);
+			shop1.setShopName("Mister flower");
+			
+			Shop shop2 = new Shop();
+			shop2.setId(2);
+			shop2.setShopName("Super flower");
+			
+			ArrayList<Shop> shops = new ArrayList<Shop>();
+			shops.add(shop0);
+			shops.add(shop1);
+			shops.add(shop2);
+			
+			ObservableList<Shop> observableList = FXCollections.observableList(shops);
+		    this.selectShop.setItems(observableList);
 		}
 	
 }

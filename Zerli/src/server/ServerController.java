@@ -14,6 +14,7 @@ import entity.Order;
 import entity.Product;
 import entity.Refund;
 import entity.Request;
+import entity.Shop;
 import entity.Survey;
 import entity.SurveyConclusion;
 import entity.SurveyResults;
@@ -31,7 +32,9 @@ public class ServerController extends AbstractServer {
 	private static String DBName = "zerli";
 	private static String DBUserName = "root";
 	private static String DBPassward = "dbapp1605";
-
+	
+	public static Shop shop;
+	
 	public ServerController(int port) {
 		super(port);
 	}
@@ -62,14 +65,14 @@ public class ServerController extends AbstractServer {
 			*/
 			
 			Request req = (Request) msg;
-			
+			shop = req.getShop();
 			
 			// switch - which action to do
 			if(req.getAction() == Actions.ValidLoginDataCheck)
 			{
 				// get products data from database
 				User u = (User) req.getValue();
-				LoginManagerDatabase.isValidData((com.mysql.jdbc.Connection) conn,client,u.getUsername(),u.getPassword());
+				LoginManagerDatabase.isValidData((com.mysql.jdbc.Connection) conn,client,u);
 				
 			}
 			if(req.getAction() == Actions.GetProducts)
@@ -306,5 +309,7 @@ public class ServerController extends AbstractServer {
 		ServerController.DBUserName = user;
 		ServerController.DBPassward = pass;
 	}
+
+	
 
 }

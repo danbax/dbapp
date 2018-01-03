@@ -12,8 +12,11 @@ import entity.Product;
 import entity.ServerResponse;
 import enums.Actions;
 import ocsf.server.ConnectionToClient;
+import server.ServerController;
 
 public class CatalogDatabase {
+	static int shop_id = ServerController.shop.getId();
+	
 	public static void getProducts(Connection conn,  ConnectionToClient client,String searchQuery) throws SQLException {
 		/*
 		 * get list of products from database
@@ -22,10 +25,11 @@ public class CatalogDatabase {
 		ResultSet rs; 
 		PreparedStatement ps2;
 		ResultSet rs2; 
-		String s1 = "select * from products";
-		String s2 = "select * from deals where product_id=?";
+		String s1 = "select * from products where shop_id=?";
+		String s2 = "select * from deals where product_id=? and shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				ArrayList<Product> products = new ArrayList<Product>();
 				while ( rs.next() )
@@ -46,6 +50,7 @@ public class CatalogDatabase {
 					
 					ps2 = (PreparedStatement) conn.prepareStatement(s2);
 					ps2.setInt(1, product.getPid());
+					ps2.setInt(2, shop_id);
 					rs2 = ps2.executeQuery();
 					if(rs2.next())
 					{
@@ -76,10 +81,11 @@ public class CatalogDatabase {
 		 */
 		PreparedStatement ps;
 		ResultSet rs; 
-		String s1 = "select * from deals";
+		String s1 = "select * from deals where shop_id=?";
 		
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				ArrayList<Deal> deals = new ArrayList<Deal>();
 				while ( rs.next() )

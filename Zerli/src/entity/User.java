@@ -16,11 +16,13 @@ public class User implements Serializable {
 	private String phone;
 	private int permissions;
 	private int authorized;
+	private Shop shop;
 	
 	
 	public User(String user,String pass) {
 		this.setUsername(user);
 		this.setPassword(pass);
+		
 	}
 	
 	public User(int uid,String user,String pass) {
@@ -91,5 +93,13 @@ public class User implements Serializable {
 
 	public void setAuthorized(int authorized) {
 		this.authorized = authorized;
+	}
+
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 }

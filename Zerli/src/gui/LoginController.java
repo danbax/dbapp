@@ -10,6 +10,7 @@ import client.Client;
 import entity.CreditCard;
 import entity.Product;
 import entity.Request;
+import entity.Shop;
 import entity.User;
 import enums.Actions;
 import javafx.application.Platform;
@@ -31,15 +32,12 @@ public class LoginController implements Initializable  {
 	public static CreditCard myCreditCard;
 	public static Address myAddress;
 	public static ArrayList<Product> cartProduct;
+	public static Shop shop;
 	
-	@FXML
-	private TextField loginUsername;
-	@FXML
-	private PasswordField loginPassword;
-	@FXML
-	private Button loginButton;
-	@FXML
-	private Text loginMessage;
+	@FXML private TextField loginUsername;
+	@FXML private PasswordField loginPassword;
+	@FXML private Button loginButton;
+	@FXML private Text loginMessage;
 	
 	@FXML
 	public void onLoginButtonClick(ActionEvent event) throws Exception {
@@ -49,7 +47,9 @@ public class LoginController implements Initializable  {
 		String password = loginPassword.getText(); 
 		
 		// create request to validate data
-		Request req = new Request(Actions.ValidLoginDataCheck,new User(username,password));
+		User user = new User(username,password);
+		user.setShop(shop);
+		Request req = new Request(Actions.ValidLoginDataCheck,user);
 	
 		// send request to server
 		@SuppressWarnings("unused")
@@ -67,7 +67,7 @@ public class LoginController implements Initializable  {
 		 */
 		
 		if(isValid==1) 
-		{
+		{ 
 			// get my address and credit card
 			Request req = new Request();
 			req.setValue(myUser);
