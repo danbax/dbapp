@@ -39,7 +39,8 @@ public class CartProudctDatabase {
 					// create 
 					CartProduct cartProduct = new CartProduct();
 					Date d = rs.getDate("order_date");
-					cartProduct.setOrderDate(d.toLocalDate());
+					if(d != null)
+						cartProduct.setOrderDate(d.toLocalDate());
 					cartProduct.setOrder_id(rs.getInt("id"));
 					
 					// get Product

@@ -38,7 +38,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ReportOrdersController extends Application implements Initializable {
+public class ReportOrdersController extends GUIcontroller {
 	public static ReportOrdersController last;
 	private ObservableList<CartProduct> Obser;
 	@FXML
@@ -57,26 +57,7 @@ public class ReportOrdersController extends Application implements Initializable
 	
 	public ReportOrders report; // this report
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
-	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/ReportOrders.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
-		
+
 		
 		@FXML
 		public void onMenuClick(MouseEvent event) throws Exception {
@@ -84,20 +65,7 @@ public class ReportOrdersController extends Application implements Initializable
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		} 
 		
@@ -200,7 +168,7 @@ public class ReportOrdersController extends Application implements Initializable
 		}
 		
 		public void fillComboYears(ArrayList<Integer> years) {
-			ObservableList obser = FXCollections.observableArrayList(years);
+			ObservableList<Integer> obser = FXCollections.observableArrayList(years);
 			this.cmbYear.setItems(obser);
 		}
 
@@ -213,6 +181,11 @@ public class ReportOrdersController extends Application implements Initializable
 	     
 		Request req = new Request();
 		Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+		if(LoginController.myUser.getPermissions()==6)
+		{
+			// network manager
+			req.setShop(MainMenuNetworkManager.shop1);
+		}
 		req.setAction(Actions.GetCartOrders); 
 		Client.clientConn.handleMessageFromClientUI(req);
 		

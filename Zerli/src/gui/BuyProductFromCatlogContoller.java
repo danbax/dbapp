@@ -34,7 +34,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class BuyProductFromCatlogContoller extends Application implements Initializable  {
+public class BuyProductFromCatlogContoller extends GUIcontroller  {
 	
 	public static BuyProductFromCatlogContoller last;
 	@FXML Text priceTXT; 
@@ -96,20 +96,7 @@ public class BuyProductFromCatlogContoller extends Application implements Initia
 		Client.clientConn.handleMessageFromClientUI(req);
 		
 		
-		Platform.runLater(new Runnable(){
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				GUIcontroller guic = new GUIcontroller();
-				try {
-					guic.loadFxml("OrdersHistory.fxml");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-			});
+		loadFxml("OrdersHistory.fxml");
 		
 
 	}
@@ -138,24 +125,7 @@ public class BuyProductFromCatlogContoller extends Application implements Initia
 	}
 	
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
 	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/Catalog.fxml")); 
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene); 
-			
-			primaryStage.show();
-		}
 		
 		
 		@FXML
@@ -164,20 +134,7 @@ public class BuyProductFromCatlogContoller extends Application implements Initia
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		}
 		

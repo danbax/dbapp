@@ -34,7 +34,7 @@ public static void order(Connection conn,  ConnectionToClient client,Order order
 		ResultSet rs2; 
 		String s1 = "INSERT INTO orders (user_id,order_date,greeting_text,hours,minutes,price,payment_method,status,shop_id) VALUES (?,?,?,?,?,?,?,0,?);";
 		String s2 = "select id from orders where user_id = ? and shop_id=? order by id desc limit 1";
-		String s3 = "update cart set order_id=? where user_id=? and order_id=0 and shop_id=?";
+		String s3 = "update cart set order_id=?,order_date=now() where user_id=? and order_id=0 and shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, order.getUser().getId());

@@ -41,7 +41,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class OrderHistoryController extends Application implements Initializable  {
+public class OrderHistoryController extends GUIcontroller  {
 	
 	public static OrderHistoryController last;
 	private ObservableList<Order> obserOrders;
@@ -57,25 +57,7 @@ public class OrderHistoryController extends Application implements Initializable
 	
 	File file; // Image file to upload
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args); 		
-	  } // end main
 	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/OrdersHistory.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
 		
 		
 		
@@ -113,20 +95,7 @@ public class OrderHistoryController extends Application implements Initializable
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		}
 		

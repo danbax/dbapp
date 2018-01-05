@@ -29,7 +29,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class UpdateUsersController extends Application implements Initializable  {
+public class UpdateUsersController extends GUIcontroller  {
 	
 	public static UpdateUsersController last;
 	private ObservableList<User> ObserUsers;
@@ -39,26 +39,7 @@ public class UpdateUsersController extends Application implements Initializable 
 	@FXML
 	private TextField txtSearch;
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
-	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/updateUsers.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
-		
+
 		
 		@FXML
 		public void onMenuClick(MouseEvent event) throws Exception {
@@ -66,20 +47,7 @@ public class UpdateUsersController extends Application implements Initializable 
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		} 
 		

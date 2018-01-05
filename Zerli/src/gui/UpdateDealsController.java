@@ -43,7 +43,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class UpdateDealsController extends Application implements Initializable  {
+public class UpdateDealsController extends GUIcontroller  {
 	
 	public static UpdateDealsController last;
 	private ObservableList<Deal> ObserDeal;
@@ -53,47 +53,13 @@ public class UpdateDealsController extends Application implements Initializable 
 	@FXML private ComboBox<Integer> cmbDiscount;
 	
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
-	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/UpdateDeals.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
-		
-		
 		@FXML
 		public void onMenuClick(MouseEvent event) throws Exception {
 
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		} 
 		

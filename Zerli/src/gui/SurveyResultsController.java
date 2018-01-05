@@ -42,7 +42,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class SurveyResultsController extends Application implements Initializable  {
+public class SurveyResultsController extends GUIcontroller  {
 	
 	public static SurveyResultsController last;
 	private ObservableList<Survey> ObserSurveys;
@@ -66,25 +66,7 @@ public class SurveyResultsController extends Application implements Initializabl
 	@FXML private Text txtq6 = new Text();
 	ObservableList<Integer> observableList;
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
 	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/SurveyResults.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
 		
 		
 		@FXML
@@ -93,20 +75,7 @@ public class SurveyResultsController extends Application implements Initializabl
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		}
 		

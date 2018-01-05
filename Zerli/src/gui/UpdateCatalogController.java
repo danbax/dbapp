@@ -38,7 +38,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 
-public class UpdateCatalogController extends Application implements Initializable  {
+public class UpdateCatalogController extends GUIcontroller  {
 	
 	public static UpdateCatalogController last;
 	private ObservableList<Product> ObserProducts;
@@ -63,30 +63,12 @@ public class UpdateCatalogController extends Application implements Initializabl
 	
 	File file; // Image file to upload
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
 	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/UpdateCatalogProducts.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
 		
 		@FXML
 		public void onSelectImg(ActionEvent event) throws Exception {
 			FileChooser fileChooser = new FileChooser();
-			file = fileChooser.showOpenDialog(GUIcontroller.getCurrentStage());
+			file = fileChooser.showOpenDialog(getCurrentStage());
 			selectImg.setText("Image selected");
 		}
 		
@@ -127,20 +109,7 @@ public class UpdateCatalogController extends Application implements Initializabl
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		}
 		

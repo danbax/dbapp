@@ -26,7 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class LoginController implements Initializable  {
+public class LoginController extends GUIcontroller  {
 	public static LoginController last;
 	public static User myUser;
 	public static CreditCard myCreditCard;
@@ -79,20 +79,7 @@ public class LoginController implements Initializable  {
 			// GO to main menu
 			
 			
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		}
 		else if(isValid==0)

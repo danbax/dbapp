@@ -20,7 +20,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class MainMenuService extends Application implements Initializable  {
+public class MainMenuService extends GUIcontroller  {
 	
 	@FXML Text helloText;
 	
@@ -28,61 +28,22 @@ public class MainMenuService extends Application implements Initializable  {
 	@FXML
 	public void onLogout(MouseEvent event)  throws Exception {
 		// Logout
-		Request req = new Request();
-		req.setAction(Actions.Logout);
-		req.setValue(LoginController.myUser);
-		Client.clientConn.handleMessageFromClientUI(req);	
-		
-		// Move to loginForm
-		GUIcontroller guic = new GUIcontroller();
-		guic.loadFxml("loginForm.fxml");
+		logout();
 	}
 	
 	@FXML
 	public void complains(MouseEvent event)  throws Exception {
 		// Move to 
-		GUIcontroller guic = new GUIcontroller();
-		try {
-			guic.loadFxml("UpdateComplains.fxml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		loadFxml("UpdateComplains.fxml");
 	}
 	
 	@FXML
 	public void survey(MouseEvent event)  throws Exception {
 		// Move to 
-		GUIcontroller guic = new GUIcontroller();
-				try {
-					guic.loadFxml("SatisfactionSurvey.fxml");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		loadFxml("SatisfactionSurvey.fxml");
 	}
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
-	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/MenuService.fxml"));
-			
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene);
-			GUIcontroller.setCurrentScene(scene);
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
+
 	
 
 		@Override

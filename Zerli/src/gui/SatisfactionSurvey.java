@@ -29,7 +29,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class SatisfactionSurvey extends Application implements Initializable  {
+public class SatisfactionSurvey extends GUIcontroller  {
 	
 	public static SatisfactionSurvey last;
 	private ObservableList<Survey> ObserSurveys;
@@ -44,26 +44,6 @@ public class SatisfactionSurvey extends Application implements Initializable  {
 	@FXML private TextArea q6;
 	@FXML private TextField surveyName;
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
-	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/SatisfactionSurvey.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
-		
 		
 		@FXML
 		public void onMenuClick(MouseEvent event) throws Exception {
@@ -71,20 +51,7 @@ public class SatisfactionSurvey extends Application implements Initializable  {
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){  
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		}
 		

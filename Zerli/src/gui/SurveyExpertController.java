@@ -43,7 +43,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class SurveyExpertController extends Application implements Initializable  {
+public class SurveyExpertController extends GUIcontroller  {
 	
 	public static SurveyExpertController last;
 	private ObservableList<Survey> ObserSurveys;
@@ -66,28 +66,7 @@ public class SurveyExpertController extends Application implements Initializable
 	@FXML private Text txtNumberVoters;
 	Boolean isSet; // is conclusion exist in database
 	
-	
-	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
-	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/ServiceExpert.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
-		
+
 		
 		@FXML
 		public void onMenuClick(MouseEvent event) throws Exception {
@@ -95,20 +74,7 @@ public class SurveyExpertController extends Application implements Initializable
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		}
 		

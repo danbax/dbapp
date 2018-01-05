@@ -29,7 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class AuthorizeUsersController extends Application implements Initializable  {
+public class AuthorizeUsersController extends GUIcontroller  {
 	
 	public static AuthorizeUsersController last;
 	private ObservableList<User> ObserUsers;
@@ -41,26 +41,6 @@ public class AuthorizeUsersController extends Application implements Initializab
 	@FXML private Button btnAdd;
 	@FXML ComboBox<String> subscribeCmb;
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
-	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start 
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/AuthorizeUsers.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-		}
-		
-		
 		
 		@FXML
 		public void onBtnClicked(ActionEvent event) throws Exception {
@@ -106,20 +86,7 @@ public class AuthorizeUsersController extends Application implements Initializab
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		}
 		

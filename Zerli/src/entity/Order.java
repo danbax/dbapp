@@ -11,7 +11,7 @@ public class Order implements Serializable {
 	private int id;
 	private Product product;
 	private User user;
-	private LocalDate date;
+	private LocalDate date = LocalDate.now(); // for not handling with null
 	private String greeting;
 	private int hours;
 	private int minutes;

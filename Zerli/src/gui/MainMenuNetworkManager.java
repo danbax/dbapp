@@ -20,7 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class MainMenuNetworkManager extends Application implements Initializable  {
+public class MainMenuNetworkManager extends GUIcontroller  {
 	
 	@FXML Text helloText;
 	@FXML ComboBox<Shop> shop1cmb;
@@ -33,26 +33,13 @@ public class MainMenuNetworkManager extends Application implements Initializable
 	@FXML
 	public void onLogout(MouseEvent event)  throws Exception {
 		// Logout
-		Request req = new Request();
-		req.setAction(Actions.Logout);
-		req.setValue(LoginController.myUser);
-		Client.clientConn.handleMessageFromClientUI(req);	
-		
-		// Move to loginForm
-		GUIcontroller guic = new GUIcontroller();
-		guic.loadFxml("loginForm.fxml");
+		logout();
 	}
 	
 	@FXML
 	public void complains(MouseEvent event)  throws Exception {
 		if(howMuchComboBox == 1) {
-			GUIcontroller guic = new GUIcontroller();
-			try {
-				guic.loadFxml("ReportComplains.fxml");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			loadFxml("ReportComplains.fxml");
 		}
 		if(howMuchComboBox == 2) {
 			// 2 shop view
@@ -63,13 +50,7 @@ public class MainMenuNetworkManager extends Application implements Initializable
 	@FXML
 	public void orders(MouseEvent event)  throws Exception {
 		if(howMuchComboBox == 1) {
-			GUIcontroller guic = new GUIcontroller();
-			try {
-				guic.loadFxml("ReportOrders.fxml");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			loadFxml("ReportOrders.fxml");
 		}
 		if(howMuchComboBox == 2) {
 			// 2 shop view
@@ -93,13 +74,7 @@ public class MainMenuNetworkManager extends Application implements Initializable
 		if(howMuchComboBox == 1)
 		{
 		// Move to 
-		GUIcontroller guic = new GUIcontroller();
-				try {
-					guic.loadFxml("ReportRevenues.fxml");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			loadFxml("ReportRevenues.fxml");
 		}
 		if(howMuchComboBox == 2) {
 			// 2 shop view
@@ -118,8 +93,8 @@ public class MainMenuNetworkManager extends Application implements Initializable
 			if(is1)
 				shop1 = this.shop1cmb.getSelectionModel().getSelectedItem(); 
 			if(is2)
-				shop1 = this.shop2cmb.getSelectionModel().getSelectedItem(); 
-			LoginController.shop = shop1;
+				shop1 = this.shop2cmb.getSelectionModel().getSelectedItem();
+			
 		}
 		if(howMuchComboBox == 2)
 		{
@@ -145,27 +120,7 @@ public class MainMenuNetworkManager extends Application implements Initializable
 		return 0;
 	}
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
-	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/MenuNetworkManager.fxml"));
-			
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene);
-			GUIcontroller.setCurrentScene(scene);
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
+
 	
 
 		@Override

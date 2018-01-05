@@ -43,7 +43,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class UpdateMyDataController extends Application implements Initializable  {
+public class UpdateMyDataController extends GUIcontroller  {
 	
 	public static UpdateMyDataController last;
 	
@@ -72,25 +72,7 @@ public class UpdateMyDataController extends Application implements Initializable
 	@FXML private Button updateAdress;
 	
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
 	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/UpdateMyUserData.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
 		
 		
 		@FXML
@@ -99,20 +81,7 @@ public class UpdateMyDataController extends Application implements Initializable
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		}
 		

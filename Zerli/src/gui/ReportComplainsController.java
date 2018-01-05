@@ -40,7 +40,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ReportComplainsController extends Application implements Initializable {
+public class ReportComplainsController extends GUIcontroller {
 	public static ReportComplainsController last;
 	private ObservableList<Complain> Obser;
 	@FXML
@@ -59,25 +59,7 @@ public class ReportComplainsController extends Application implements Initializa
 	
 	public ReportComplains report; // this report
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
 	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/ReportComplains.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
 		
 		
 		@FXML
@@ -86,20 +68,7 @@ public class ReportComplainsController extends Application implements Initializa
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		} 
 		
@@ -214,11 +183,10 @@ public class ReportComplainsController extends Application implements Initializa
 		}
 		
 		public void fillComboYears(ArrayList<Integer> years) {
-			ObservableList obser = FXCollections.observableArrayList(years);
+			ObservableList<Integer> obser = FXCollections.observableArrayList(years);
 			this.cmbYear.setItems(obser);
 		}
 
-		@SuppressWarnings({ "rawtypes", "unchecked" })
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	
 			last = this;
@@ -227,6 +195,11 @@ public class ReportComplainsController extends Application implements Initializa
 	     
 		Request req = new Request();
 		Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
+		if(LoginController.myUser.getPermissions()==6)
+		{
+			// network manager
+			req.setShop(MainMenuNetworkManager.shop1);
+		}
 		req.setAction(Actions.getComplainsReport); 
 		Client.clientConn.handleMessageFromClientUI(req);
 		
@@ -236,7 +209,7 @@ public class ReportComplainsController extends Application implements Initializa
 		quarters.add(2);
 		quarters.add(3);
 		quarters.add(4);
-		ObservableList obser = FXCollections.observableArrayList(quarters);
+		ObservableList<Integer> obser = FXCollections.observableArrayList(quarters);
 		this.cmbq.setItems(obser);
 		
 		}

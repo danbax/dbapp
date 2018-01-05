@@ -32,7 +32,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CatalogController extends Application implements Initializable  {
+public class CatalogController extends GUIcontroller  {
 	
 	public static CatalogController last;
 	@FXML FlowPane flowPane;
@@ -41,25 +41,6 @@ public class CatalogController extends Application implements Initializable  {
 	
 	public static Product selectedProduct; 
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args); 		
-	  } // end main
-	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/Catalog.fxml")); 
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-		}
-		
 		
 		@FXML
 		public void onMenuClick(MouseEvent event) throws Exception {
@@ -67,20 +48,7 @@ public class CatalogController extends Application implements Initializable  {
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		}
 		

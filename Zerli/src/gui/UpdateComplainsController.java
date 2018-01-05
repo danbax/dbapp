@@ -29,7 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class UpdateComplainsController extends Application implements Initializable  {
+public class UpdateComplainsController extends GUIcontroller  {
 	
 	public static UpdateComplainsController last;
 	private ObservableList<Complain> ObserComplains;
@@ -41,26 +41,7 @@ public class UpdateComplainsController extends Application implements Initializa
 	@FXML private ComboBox<User> userCmb;
 	
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
 	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/UpdateComplains.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
-		
 		
 		@FXML
 		public void onMenuClick(MouseEvent event) throws Exception {
@@ -68,20 +49,7 @@ public class UpdateComplainsController extends Application implements Initializa
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		} 
 		

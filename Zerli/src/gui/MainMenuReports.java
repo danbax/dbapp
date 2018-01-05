@@ -20,7 +20,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class MainMenuReports extends Application implements Initializable  {
+public class MainMenuReports extends GUIcontroller  {
 	
 	@FXML Text helloText;
 	
@@ -28,36 +28,17 @@ public class MainMenuReports extends Application implements Initializable  {
 	@FXML
 	public void onLogout(MouseEvent event)  throws Exception {
 		// Logout
-		Request req = new Request();
-		req.setAction(Actions.Logout);
-		req.setValue(LoginController.myUser);
-		Client.clientConn.handleMessageFromClientUI(req);	
-		
-		// Move to loginForm
-		GUIcontroller guic = new GUIcontroller();
-		guic.loadFxml("MenuShopManager.fxml");
+		logout();
 	}
 	
 	@FXML
 	public void complains(MouseEvent event)  throws Exception {
-		GUIcontroller guic = new GUIcontroller();
-		try {
-			guic.loadFxml("ReportComplains.fxml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		loadFxml("ReportComplains.fxml");
 	}
 	
 	@FXML
 	public void orders(MouseEvent event)  throws Exception {
-		GUIcontroller guic = new GUIcontroller();
-		try {
-			guic.loadFxml("ReportOrders.fxml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		loadFxml("ReportOrders.fxml");
 	}
 	
 	@FXML
@@ -68,36 +49,9 @@ public class MainMenuReports extends Application implements Initializable  {
 	@FXML
 	public void revenue(MouseEvent event)  throws Exception {
 		// Move to 
-		GUIcontroller guic = new GUIcontroller();
-				try {
-					guic.loadFxml("ReportRevenues.fxml");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		loadFxml("ReportRevenues.fxml");
 	}
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
-	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/MenuReport.fxml"));
-			
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene);
-			GUIcontroller.setCurrentScene(scene);
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
 	
 
 		@Override

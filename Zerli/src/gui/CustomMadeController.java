@@ -36,7 +36,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CustomMadeController extends Application implements Initializable  {
+public class CustomMadeController extends GUIcontroller  {
 	
 	public static CustomMadeController last;
 	@FXML private ComboBox<String> cmbType = new ComboBox<String>();
@@ -45,25 +45,7 @@ public class CustomMadeController extends Application implements Initializable  
 	@FXML private TextField maxTxt;
 	@FXML private Text txt;
 	
-	public static void main( String args[] ) throws Exception
-	   { 
-     launch(args);		
-	  } // end main
 	
-		public void start(Stage primaryStage) throws Exception {
-			
-			/*
-			 * start select product frame
-			 */
-			
-			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/CustomOrder.fxml"));
-			Scene scene = new Scene(root);
-			GUIcontroller.setCurrentScene(scene); // save scene
-			primaryStage.setScene(scene);
-			
-			primaryStage.show();
-			
-		}
 		
 		
 		@FXML
@@ -72,20 +54,7 @@ public class CustomMadeController extends Application implements Initializable  
 			/*
 			 *  Move to main menu
 			 */
-			Platform.runLater(new Runnable(){
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					GUIcontroller guic = new GUIcontroller();
-					try {
-						guic.loadFxmlMenu();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-				});
+			loadFxmlMenu();
 			
 		}
 		

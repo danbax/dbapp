@@ -1,13 +1,22 @@
 package gui;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import client.Client;
+import entity.Request;
+import enums.Actions;
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class GUIcontroller {
+public class GUIcontroller extends Application implements Initializable {
 	private static Scene currentScene;
 	private  Stage primaryStage;
 	private  static Stage currentStage;
@@ -20,18 +29,33 @@ public class GUIcontroller {
 	
 	public void loadFxml(String fxmlFile) throws IOException
 	{
-		currentScene.getWindow().hide(); //hiding primary window
-		primaryStage = new Stage();
-		//primaryStage.initStyle(StageStyle.UNDECORATED); // remove close button
-		//primaryStage.resizableProperty().setValue(Boolean.FALSE);
-		GUIcontroller.setCurrentStage(primaryStage);
-		loader = new FXMLLoader();
-		root = loader.load(getClass().getResource("/main/resources/"+fxmlFile).openStream());
-		Scene scene = new Scene(root);	
-		scene.getStylesheets().add(getClass().getResource("/main/resources/AppStyle.css").toExternalForm());
-		GUIcontroller.currentScene = scene;
-		primaryStage.setScene(scene); 		
-		primaryStage.show(); 
+		// For avoiding bugs
+		Platform.runLater(new Runnable(){
+			@Override
+			public void run() {
+				try {
+					
+					currentScene.getWindow().hide(); //hiding primary window
+					primaryStage = new Stage();
+					//primaryStage.initStyle(StageStyle.UNDECORATED); // remove close button
+					//primaryStage.resizableProperty().setValue(Boolean.FALSE);
+					GUIcontroller.setCurrentStage(primaryStage);
+					loader = new FXMLLoader();
+					root = loader.load(getClass().getResource("/main/resources/"+fxmlFile).openStream());
+					Scene scene = new Scene(root);	
+					scene.getStylesheets().add(getClass().getResource("/main/resources/AppStyle.css").toExternalForm());
+					GUIcontroller.currentScene = scene;
+					primaryStage.setScene(scene); 		
+					primaryStage.show(); 
+					
+				} catch (IOException e) {
+					// show problems
+					e.printStackTrace();
+				}
+			}
+			
+			});
+		
 	}
 	
 	public void loadFxmlMenu() throws IOException
@@ -66,6 +90,18 @@ public class GUIcontroller {
 		
 		loadFxml(fxmlFile);
 	}
+	
+	public void logout() throws IOException
+	{
+		/* logout */
+		Request req = new Request();
+		req.setAction(Actions.Logout);
+		req.setValue(LoginController.myUser);
+		Client.clientConn.handleMessageFromClientUI(req);	
+		
+		// Move to loginForm
+		loadFxml("loginForm.fxml");
+	}
 
 	public static Scene getCurrentScene() {
 		return currentScene;
@@ -81,6 +117,18 @@ public class GUIcontroller {
 
 	public static void setCurrentStage(Stage currentStage) {
 		GUIcontroller.currentStage = currentStage;
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
