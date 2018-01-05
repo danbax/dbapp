@@ -5,11 +5,16 @@ import java.io.*;
 import java.util.ArrayList;
 
 import entity.Address;
+import entity.CartProduct;
 import entity.Complain;
 import entity.CreditCard;
 import entity.Deal;
 import entity.Order;
 import entity.Product;
+import entity.ReportComplains;
+import entity.ReportOrders;
+import entity.ReportRevenue;
+import entity.Revenue;
 import entity.ServerResponse;
 import entity.Survey;
 import entity.SurveyResults;
@@ -22,6 +27,9 @@ import gui.CustomMadeController;
 import gui.LoginController;
 import gui.MainMenuCustomer;
 import gui.OrderHistoryController;
+import gui.ReportComplainsController;
+import gui.ReportOrdersController;
+import gui.ReportRevenueController;
 import gui.SatisfactionSurvey;
 import gui.SurveyExpertController;
 import gui.SurveyResultsController;
@@ -224,7 +232,37 @@ public class ClientController extends AbstractClient {
 				ArrayList<User> users = (ArrayList<User>) sr.getValue();
 				UpdateComplainsController.last.fillComboUsers(users);
 				
-			}	
+			}
+			if(sr.getAction() == Actions.GetRevenue)
+			{
+				ReportRevenue report = (ReportRevenue) sr.getValue();
+				ReportRevenueController.last.report = report;
+				
+				ArrayList<Revenue> reven = report.getMoney();
+				ReportRevenueController.last.fillTable(reven);
+				ReportRevenueController.last.TextNames(report,0,0);
+				ReportRevenueController.last.fillComboYears(report.GetYears());
+			}
+			if(sr.getAction() == Actions.GetCartOrders)
+			{
+				ReportOrders report = (ReportOrders) sr.getValue();
+				ReportOrdersController.last.report = report;
+				ArrayList<CartProduct> cart = report.getCart();
+				
+				
+				ReportOrdersController.last.fillTable(cart);
+				ReportOrdersController.last.fillComboYears(report.GetYears());
+			}
+			if(sr.getAction() == Actions.getComplainsReport)
+			{
+				ReportComplains report = (ReportComplains) sr.getValue();
+				ReportComplainsController.last.report = report;
+				ArrayList<Complain> complains = report.getComplains();
+				
+				
+				ReportComplainsController.last.fillTable(complains);
+				ReportComplainsController.last.fillComboYears(report.GetYears());
+			}
 			
 	}
 

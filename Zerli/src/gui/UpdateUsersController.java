@@ -88,7 +88,6 @@ public class UpdateUsersController extends Application implements Initializable 
 			// search user
 			
 			String searchQuery = txtSearch.getText();
-			System.out.println(searchQuery);
 			
 			Request req = new Request(Actions.GetUsers,searchQuery);
 			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);

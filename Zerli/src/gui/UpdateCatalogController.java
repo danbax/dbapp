@@ -157,7 +157,6 @@ public class UpdateCatalogController extends Application implements Initializabl
 			if(product!= null)
 			{
 				
-				System.out.println(product.getPid());
 				// delete
 				Request req = new Request();
     			req.setAction(Actions.DeleteProduct);

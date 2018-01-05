@@ -87,7 +87,6 @@ public class UpdateCatalogDatabase {
 		
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddProduct);
-		System.out.println(product.getProductName());
 		PreparedStatement ps;
 		String s1 = "INSERT INTO products (pname, ptype,price,img,product_ID,shop_id) VALUES (?,?,?,?,?,?);";
 		try {

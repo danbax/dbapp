@@ -126,7 +126,6 @@ public class SurveyExpertController extends Application implements Initializable
 			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
 			
 			// if survey exist - > update ; else -> add
-			System.out.println(isSet);
 			if(isSet)
 			{
 				// update
@@ -194,7 +193,6 @@ public class SurveyExpertController extends Application implements Initializable
 			else 
 				isSet = true;
 			
-			System.out.println(isSet);
 			
 			textAreaConclusion.setText(conclusion);
 			textAreaConclusion.setOpacity(1);

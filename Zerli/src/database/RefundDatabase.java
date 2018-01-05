@@ -25,7 +25,7 @@ public static void addRefund(Connection conn,  ConnectionToClient client,Refund 
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddRefund);
 		PreparedStatement ps;
-		String s1 = "INSERT INTO refunds (order_id,refund,shop_id) VALUES (?,?,?);";
+		String s1 = "INSERT INTO refunds (order_id,refund,shop_id,refund_date) VALUES (?,?,?,now());";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, refund.getOrder().getId());

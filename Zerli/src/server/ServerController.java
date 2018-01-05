@@ -4,7 +4,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import entity.Address;
 import entity.Complain;
@@ -43,6 +42,7 @@ public class ServerController extends AbstractServer {
 	/*
 	 * handleMessageFromClient connect to database and decides what to do with request
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		/*
@@ -302,7 +302,20 @@ public class ServerController extends AbstractServer {
 			{
 				ComplainsDatabase.pay((com.mysql.jdbc.Connection)conn, client, (Complain) req.getValue());
 			} 
-			
+			if(req.getAction() == Actions.GetRevenue)
+			{
+				LocalDate start = null;
+				LocalDate end = null;
+				RevenueDatabase.getRevenue((com.mysql.jdbc.Connection)conn, client,start,end);
+			} 
+			if(req.getAction() == Actions.GetCartOrders)
+			{
+				CartProudctDatabase.getCart((com.mysql.jdbc.Connection)conn, client);
+			} 
+			if(req.getAction() == Actions.getComplainsReport)
+			{
+				ComplainsDatabase.getComplainsReport((com.mysql.jdbc.Connection)conn, client);
+			} 
 			
 			
 			

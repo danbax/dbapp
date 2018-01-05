@@ -78,114 +78,14 @@ public class LoginController implements Initializable  {
 			
 			// GO to main menu
 			
-			loginMessage.setText("valid data!");
-			// permissions - show right menu
-			if(LoginController.myUser.getPermissions() == 1)
-			{
-				// employee
-				Platform.runLater(new Runnable(){
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						GUIcontroller guic = new GUIcontroller();
-						try {
-							guic.loadFxml("MenuEmployee.fxml");
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-			else if(LoginController.myUser.getPermissions() == 2)
-			{
-				// Expert Manager
-				{
-					Platform.runLater(new Runnable(){
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							GUIcontroller guic = new GUIcontroller();
-							try {
-								guic.loadFxml("ServiceExpert.fxml");
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-					});
-				}
-			}
-			else if(LoginController.myUser.getPermissions() == 3)
-			{
-				// Customer Service
-				{
-					Platform.runLater(new Runnable(){
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							GUIcontroller guic = new GUIcontroller();
-							try {
-								guic.loadFxml("MenuService.fxml");
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-					});
-				}
-			}
-			else if(LoginController.myUser.getPermissions() == 4)
-			{
-				// Customer Service
-				{
-					Platform.runLater(new Runnable(){
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							GUIcontroller guic = new GUIcontroller();
-							try {
-								guic.loadFxml("MenuShopManager.fxml");
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace(); 
-							}
-						}
-					});
-				}
-			}
-			else if(LoginController.myUser.getPermissions() == 5)
-			{
-				// Customer Service
-				{
-					Platform.runLater(new Runnable(){
-						@Override
-						public void run() {
-							// TODO Auto-generated method stub
-							GUIcontroller guic = new GUIcontroller();
-							try {
-								guic.loadFxml("MenuCustomers.fxml");
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace(); 
-							}
-						}
-					});
-				}
-			}
-			else
-			{
 			
-			/*
-			 *  Move to main menu
-			 */
 			Platform.runLater(new Runnable(){
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
 					GUIcontroller guic = new GUIcontroller();
 					try {
-						guic.loadFxml("MainMenu.fxml");
+						guic.loadFxmlMenu();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -193,7 +93,6 @@ public class LoginController implements Initializable  {
 				}
 				
 				});
-			}
 			
 		}
 		else if(isValid==0)

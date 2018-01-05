@@ -1,20 +1,18 @@
 package database;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
+import entity.CartProduct;
 import entity.Complain;
-import entity.Product;
+import entity.ReportComplains;
+import entity.ReportOrders;
 import entity.ServerResponse;
 import entity.User;
 import enums.Actions;
@@ -38,7 +36,7 @@ static int shop_id = ServerController.shop.getId();
 				ArrayList<Complain> complains = new ArrayList<Complain>();
 				while ( rs.next() )
 				{
-					// create product
+					// create complain
 					Complain complain = new Complain();
 					
 					complain.setId(rs.getInt("id"));
@@ -46,7 +44,7 @@ static int shop_id = ServerController.shop.getId();
 					complain.setCompensation(rs.getFloat("compensation"));
 					complain.setStatus(rs.getInt("status"));
 					
-					// add to product array
+					// add to complains array
 					complains.add(complain);
 				}
 				
@@ -73,7 +71,7 @@ static int shop_id = ServerController.shop.getId();
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddComplain);
 		PreparedStatement ps;
-		String s1 = "INSERT INTO complains (complains.desc,userID,status,shop_id) VALUES (?,?,0,?);";
+		String s1 = "INSERT INTO complains (complains.desc,userID,status,shop_id,complain_date) VALUES (?,?,0,?,now());";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setString(1, complain.getDesc());
@@ -122,7 +120,7 @@ static int shop_id = ServerController.shop.getId();
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.Recompense);
 		PreparedStatement ps;
-		String s1 = "update complains set compensation=? where id=? and shop_id=?";
+		String s1 = "update complains set compesation_date=now(),compensation=? where id=? and shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setFloat(1, complain.getCompensation());
@@ -173,6 +171,54 @@ static int shop_id = ServerController.shop.getId();
 		catch (Exception e)
 		{
 			// TODO: handle exception
+		}
+	}
+	
+	/* complains report database */
+	public static void getComplainsReport(Connection conn,  ConnectionToClient client) throws SQLException { 
+		/*
+		 * get list of cart items from database
+		 */
+		PreparedStatement ps;
+		ResultSet rs;
+		String s1 = "select * from complains where shop_id=?";
+		try {
+				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, shop_id);
+				rs = ps.executeQuery();
+				ArrayList<Complain> complains = new ArrayList<Complain>();
+				
+				while ( rs.next() )
+				{
+					// create 
+					Complain complain = new Complain();
+					
+					complain.setId(rs.getInt("id"));
+					complain.setDesc(rs.getString("desc"));
+					complain.setCompensation(rs.getFloat("compensation"));
+					complain.setStatus(rs.getInt("status"));
+					
+					Date d = rs.getDate("complain_date");
+					complain.setComplainDate(d.toLocalDate());
+					
+					complains.add(complain);
+				}
+			/* create report */	
+				
+				ReportComplains report = new ReportComplains();
+				report.setComplains(complains);
+				
+				
+				ServerResponse sr = new ServerResponse(); // create server response
+				sr.setAction(Actions.getComplainsReport);
+				sr.setValue(report);
+				
+				client.sendToClient(sr); // send messeage to client
+			}
+		catch (Exception e)
+		{
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 }

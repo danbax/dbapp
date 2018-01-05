@@ -63,14 +63,12 @@ public class LoginManagerDatabase {
 					}
 					
 					sr.setValue(myuser);
-					System.out.println("login");
 				}
 				else
 				{
 					// username does not exist
 					sr.setAction(Actions.ValidLoginDataCheck);
 					sr.setAnswer(Actions.UsernameDoesNotExist);
-					System.out.println("wrong data");
 					
 				}
 				client.sendToClient(sr); // send messeage to client

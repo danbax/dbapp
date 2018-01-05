@@ -108,5 +108,10 @@ public enum Actions {
 	 
 	 /*catalog*/
 	 GetProductCatalog,
-	 GetDealsCatalog;
+	 GetDealsCatalog,
+	
+	/* reports */
+	 	GetCartOrders,
+		GetRevenue,
+		getComplainsReport;
 }

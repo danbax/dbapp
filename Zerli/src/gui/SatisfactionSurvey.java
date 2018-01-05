@@ -146,7 +146,6 @@ public class SatisfactionSurvey extends Application implements Initializable  {
 			/*
 			 * This function fill the table with data in ArrayList 
 			*/ 
-			System.out.println(surveys.get(0).getQ1());
 			
 			if(ObserSurveys != null) {
 				// if table alredy populate

@@ -136,7 +136,6 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 			ArrayList<Product> products = new ArrayList<Product>();
 			while ( rs.next() )
 			{
-				System.out.println("ooo" + rs.getInt("product_id"));
 				try {
 				String s2 = "select * from products where id=? and shop_id=?";
 				ps2 = (PreparedStatement) conn.prepareStatement(s2);
@@ -147,8 +146,6 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 				
 				
 					if(rs2.next()) {
-					System.out.println(rs2.getString("pname"));
-					System.out.println(rs2.getString("products.pname"));
 					// create product
 					Product product = new Product(
 							rs2.getInt("id"),
@@ -161,7 +158,6 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 					product.setProductId(rs2.getString("product_id"));
 					product.setImage("/serverImages/"+rs2.getString("img"));
 					
-					System.out.println(product);
 					
 					// add to product array
 					products.add(product);
@@ -203,7 +199,6 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 				count=rs.getInt("c");
 				
 			}
-			System.out.println(count);
 			ServerResponse sr = new ServerResponse(); // create server response
 			sr.setAction(Actions.GetMyCartCountItems);
 			sr.setValue(count);

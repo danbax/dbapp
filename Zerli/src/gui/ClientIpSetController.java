@@ -26,6 +26,7 @@ public class ClientIpSetController implements Initializable  {
 	
 	@FXML private Button saveIP;
 	@FXML private ComboBox<Shop> selectShop;
+	public static ObservableList<Shop> observableList; // list of shops
 	
 		public void saveIPaction(ActionEvent event) throws Exception {
 			/*
@@ -67,7 +68,7 @@ public class ClientIpSetController implements Initializable  {
 			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/ClientIpSetForm.fxml"));
 					
 			Scene scene = new Scene(root);
-			
+			scene.getStylesheets().add(getClass().getResource("/main/resources/AppStyle.css").toExternalForm());
 			//gui controller
 			
 			GUIcontroller.setCurrentScene(scene);
@@ -98,7 +99,7 @@ public class ClientIpSetController implements Initializable  {
 			shops.add(shop1);
 			shops.add(shop2);
 			
-			ObservableList<Shop> observableList = FXCollections.observableList(shops);
+			observableList = FXCollections.observableList(shops);
 		    this.selectShop.setItems(observableList);
 		}
 	

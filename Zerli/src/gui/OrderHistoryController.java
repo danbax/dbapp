@@ -179,7 +179,6 @@ public class OrderHistoryController extends Application implements Initializable
 			else
 			{
 				
-				System.out.println(orders.get(0).getPrice());
 				OrdersTable.setEditable(false); // for updating
 				
 				//casting ArrayList to ObservableList

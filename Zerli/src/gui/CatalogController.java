@@ -105,12 +105,6 @@ public class CatalogController extends Application implements Initializable  {
 		    flowPane.setPrefHeight(600);
 		   
 		    
-		    for (Product p: products) {
-		    	System.out.println(p.getPrice());
-			    System.out.println(p.getImage());
-			    System.out.println(p.getProductName());
-		    }
-		    System.out.println();System.out.println();
 
 		    for (Product p: products) {
 		    	GridPane gridpane = new GridPane(); // to show product data

@@ -33,7 +33,6 @@ public class UpdateUsersDatabase {
 					ps.setString(3,searchText);
 					ps.setString(4,searchText);
 					ps.setString(5,searchText);
-					System.out.println(searchText);
 				}
 				
 				

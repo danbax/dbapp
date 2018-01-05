@@ -122,7 +122,6 @@ public static void getMyOrdersHistory(Connection conn,  ConnectionToClient clien
 				order.setUser(user);
 				//date
 				Date d = rs.getDate("order_date");
-				System.out.println(d);
 				if(d!= null) 
 					order.setDate(d.toLocalDate());
 				//status

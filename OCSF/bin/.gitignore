@@ -1,7 +1,7 @@
 /gui/
 /database/
+/client/
+/entity/
+/main/
 /enums/
 /server/
-/client/
-/main/
-/entity/

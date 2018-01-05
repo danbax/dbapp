@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @SuppressWarnings("serial")
 public class Complain implements Serializable {
@@ -12,6 +13,7 @@ public class Complain implements Serializable {
 	private String desc;
 	private int status;
 	private float compensation=0;
+	private LocalDate complainDate;
 	
 	public Complain()
 	{
@@ -61,6 +63,20 @@ public class Complain implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public LocalDate getComplainDate() {
+		return complainDate;
+	}
+
+	public void setComplainDate(LocalDate complainDate) {
+		this.complainDate = complainDate;
+	}
+	
+	public int getQuarter()
+	{
+		// get quarter
+		return (complainDate.getMonthValue() / 3) + 1;
 	}
 	
 }

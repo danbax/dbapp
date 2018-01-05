@@ -78,6 +78,7 @@ public class MainMenuEmployeeController extends Application implements Initializ
 			primaryStage.show();
 			
 		}
+		
 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	

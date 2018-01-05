@@ -23,13 +23,12 @@ public class GUIcontroller {
 		currentScene.getWindow().hide(); //hiding primary window
 		primaryStage = new Stage();
 		//primaryStage.initStyle(StageStyle.UNDECORATED); // remove close button
-		primaryStage.resizableProperty().setValue(Boolean.FALSE);
+		//primaryStage.resizableProperty().setValue(Boolean.FALSE);
 		GUIcontroller.setCurrentStage(primaryStage);
 		loader = new FXMLLoader();
 		root = loader.load(getClass().getResource("/main/resources/"+fxmlFile).openStream());
-		
-		//scene.getStylesheets().add(getClass().getResource("/gui/style.css").toExternalForm());
 		Scene scene = new Scene(root);	
+		scene.getStylesheets().add(getClass().getResource("/main/resources/AppStyle.css").toExternalForm());
 		GUIcontroller.currentScene = scene;
 		primaryStage.setScene(scene); 		
 		primaryStage.show(); 
@@ -59,6 +58,9 @@ public class GUIcontroller {
 		case 5:
 			fxmlFile = "MenuCustomers.fxml";
 			break;	
+		case 6:
+			fxmlFile = "MenuNetworkManager.fxml";
+			break;		
 		}
 			
 		

@@ -63,7 +63,7 @@ public class DatabaseLoginController implements Initializable  {
 			Parent root = FXMLLoader.load(getClass().getResource("/main/resources/databaseLoginForm.fxml"));
 			
 			Scene scene = new Scene(root);
-			//scene.getStylesheets().add(getClass().getResource("/gui/databaseLoginForm.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/main/resources/AppStyle.css").toExternalForm());
 			primaryStage.setTitle("Product update tool");
 			primaryStage.setScene(scene);
 			

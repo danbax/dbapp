@@ -61,6 +61,13 @@ public class MainMenuShopManager extends Application implements Initializable  {
 	@FXML
 	public void reports(MouseEvent event)  throws Exception {
 		// move to reports
+				GUIcontroller guic = new GUIcontroller();
+				try {
+					guic.loadFxml("MenuReport.fxml");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}
 	
 	public static void main( String args[] ) throws Exception
@@ -93,6 +100,10 @@ public class MainMenuShopManager extends Application implements Initializable  {
 				helloText.setText("Hello, "+LoginController.myUser.getUsername());
 			}
 			
+			Request req = new Request();
+			req.setAction(Actions.Logout);
+			req.setValue(LoginController.myUser);
+			Client.clientConn.handleMessageFromClientUI(req);	
 		}
 	
 }
