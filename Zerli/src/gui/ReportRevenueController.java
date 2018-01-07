@@ -230,6 +230,7 @@ public class ReportRevenueController extends GUIcontroller  {
 		req.setAction(Actions.GetRevenue); 
 		Client.clientConn.handleMessageFromClientUI(req);
 		
+		
 		// add quarters to combo
 		ArrayList<Integer> quarters = new ArrayList<Integer>();
 		quarters.add(1);

@@ -113,5 +113,13 @@ public enum Actions {
 	/* reports */
 	 	GetCartOrders,
 		GetRevenue,
-		getComplainsReport;
+		getComplainsReport,
+	
+		// 2 screens
+		GetCartOrdersShop1,
+		GetRevenueShop1,
+		getComplainsReportShop1,
+		GetCartOrdersShop2,
+		GetRevenueShop2,
+		getComplainsReportShop2;
 }

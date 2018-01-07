@@ -68,6 +68,8 @@ public class ServerController extends AbstractServer {
 			Request req = (Request) msg;
 			shop = req.getShop();
 			
+			System.out.println(shop);
+			
 			// switch - which action to do
 			if(req.getAction() == Actions.ValidLoginDataCheck)
 			{
@@ -306,15 +308,43 @@ public class ServerController extends AbstractServer {
 			{
 				LocalDate start = null;
 				LocalDate end = null;
-				RevenueDatabase.getRevenue((com.mysql.jdbc.Connection)conn, client,start,end);
+				RevenueDatabase.getRevenue((com.mysql.jdbc.Connection)conn, client,start,end,null);
 			} 
 			if(req.getAction() == Actions.GetCartOrders)
 			{
-				CartProudctDatabase.getCart((com.mysql.jdbc.Connection)conn, client);
+				CartProudctDatabase.getCart((com.mysql.jdbc.Connection)conn, client,null);
 			} 
 			if(req.getAction() == Actions.getComplainsReport)
 			{
-				ComplainsDatabase.getComplainsReport((com.mysql.jdbc.Connection)conn, client);
+				ComplainsDatabase.getComplainsReport((com.mysql.jdbc.Connection)conn, client,null);
+			} 
+			if(req.getAction() == Actions.GetRevenueShop1)
+			{
+				LocalDate start = null;
+				LocalDate end = null;
+				RevenueDatabase.getRevenue((com.mysql.jdbc.Connection)conn, client,start,end,Actions.GetRevenueShop1);
+			} 
+			if(req.getAction() == Actions.GetCartOrdersShop1)
+			{
+				CartProudctDatabase.getCart((com.mysql.jdbc.Connection)conn, client,Actions.GetCartOrdersShop1);
+			} 
+			if(req.getAction() == Actions.getComplainsReportShop1)
+			{
+				ComplainsDatabase.getComplainsReport((com.mysql.jdbc.Connection)conn, client,Actions.getComplainsReportShop1);
+			} 
+			if(req.getAction() == Actions.GetRevenueShop2)
+			{
+				LocalDate start = null;
+				LocalDate end = null;
+				RevenueDatabase.getRevenue((com.mysql.jdbc.Connection)conn, client,start,end,Actions.GetRevenueShop2);
+			} 
+			if(req.getAction() == Actions.GetCartOrdersShop2)
+			{
+				CartProudctDatabase.getCart((com.mysql.jdbc.Connection)conn, client,Actions.GetCartOrdersShop2);
+			} 
+			if(req.getAction() == Actions.getComplainsReportShop2)
+			{
+				CartProudctDatabase.getCart((com.mysql.jdbc.Connection)conn, client,Actions.getComplainsReportShop2);
 			} 
 			
 			

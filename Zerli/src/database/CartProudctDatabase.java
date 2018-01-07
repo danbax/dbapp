@@ -17,11 +17,13 @@ import server.ServerController;
 
 public class CartProudctDatabase {
 	/* orderReport database */
-	static int shop_id = ServerController.shop.getId();
-	public static void getCart(Connection conn,  ConnectionToClient client) throws SQLException { 
+	public static void getCart(Connection conn,  ConnectionToClient client,Actions action) throws SQLException { 
 		/*
 		 * get list of cart items from database
 		 */
+		int shop_id = ServerController.shop.getId(); // set shop
+		
+		
 		PreparedStatement ps;
 		ResultSet rs;
 		PreparedStatement ps2;
@@ -65,6 +67,9 @@ public class CartProudctDatabase {
 				
 				ServerResponse sr = new ServerResponse(); // create server response
 				sr.setAction(Actions.GetCartOrders);
+				//for 2 screen report
+				if(action!=null)
+					sr.setAction(action);
 				sr.setValue(report);
 				
 				client.sendToClient(sr); // send messeage to client

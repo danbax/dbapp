@@ -16,7 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class GUIcontroller extends Application implements Initializable {
+public class GUIcontroller  implements Initializable {
 	private static Scene currentScene;
 	private  Stage primaryStage;
 	private  static Stage currentStage;
@@ -125,10 +125,6 @@ public class GUIcontroller extends Application implements Initializable {
 		
 	}
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 }

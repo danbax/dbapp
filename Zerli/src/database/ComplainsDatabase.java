@@ -20,7 +20,8 @@ import ocsf.server.ConnectionToClient;
 import server.ServerController;
 
 public class ComplainsDatabase {
-static int shop_id = ServerController.shop.getId();
+	static int shop_id = ServerController.shop.getId();
+
 	
 	public static void getComplains(Connection conn,  ConnectionToClient client) throws SQLException { 
 		/*
@@ -175,16 +176,19 @@ static int shop_id = ServerController.shop.getId();
 	}
 	
 	/* complains report database */
-	public static void getComplainsReport(Connection conn,  ConnectionToClient client) throws SQLException { 
+	public static void getComplainsReport(Connection conn,  ConnectionToClient client,Actions action) throws SQLException { 
 		/*
 		 * get list of cart items from database
 		 */
+		
+		int shop_id = ServerController.shop.getId(); // set shop
+		
 		PreparedStatement ps;
 		ResultSet rs;
 		String s1 = "select * from complains where shop_id=?";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
-				ps.setInt(1, shop_id);
+					ps.setInt(1, shop_id);
 				rs = ps.executeQuery();
 				ArrayList<Complain> complains = new ArrayList<Complain>();
 				
@@ -211,6 +215,9 @@ static int shop_id = ServerController.shop.getId();
 				
 				ServerResponse sr = new ServerResponse(); // create server response
 				sr.setAction(Actions.getComplainsReport);
+				//for 2 screen report
+				if(action!=null)
+					sr.setAction(action);
 				sr.setValue(report);
 				
 				client.sendToClient(sr); // send messeage to client

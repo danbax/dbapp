@@ -74,7 +74,7 @@ public class SurveyExpertController extends GUIcontroller  {
 			/*
 			 *  Move to main menu
 			 */
-			loadFxmlMenu();
+			logout();
 			
 		}
 		

@@ -27,8 +27,11 @@ import gui.CustomMadeController;
 import gui.LoginController;
 import gui.MainMenuCustomer;
 import gui.OrderHistoryController;
+import gui.ReportComplains2Controller;
 import gui.ReportComplainsController;
+import gui.ReportOrders2Controller;
 import gui.ReportOrdersController;
+import gui.ReportRevenue2Controller;
 import gui.ReportRevenueController;
 import gui.SatisfactionSurvey;
 import gui.SurveyExpertController;
@@ -262,8 +265,62 @@ public class ClientController extends AbstractClient {
 				
 				ReportComplainsController.last.fillTable(complains);
 				ReportComplainsController.last.fillComboYears(report.GetYears());
+				System.out.println("xx");
 			}
 			
+			if(sr.getAction() == Actions.getComplainsReportShop1)
+			{
+				ReportComplains report = (ReportComplains) sr.getValue();
+				ReportComplains2Controller.last.report1 = report;
+				ArrayList<Complain> complains = report.getComplains();
+				
+				
+				ReportComplains2Controller.last.fillComboYears1(report.GetYears());
+				System.out.println("xx");
+			}
+			if(sr.getAction() == Actions.getComplainsReportShop2)
+			{
+				ReportComplains report = (ReportComplains) sr.getValue();
+				ReportComplains2Controller.last.report2 = report;
+				ArrayList<Complain> complains = report.getComplains();
+				
+				
+				ReportComplains2Controller.last.fillComboYears2(report.GetYears());
+			}
+			if(sr.getAction() == Actions.GetCartOrdersShop1)
+			{
+				ReportOrders report = (ReportOrders) sr.getValue();
+				ReportOrders2Controller.last.report1 = report;
+				ArrayList<CartProduct> cart = report.getCart();
+				
+				
+				ReportOrders2Controller.last.fillComboYears1(report.GetYears());
+			}
+			if(sr.getAction() == Actions.GetCartOrdersShop2)
+			{
+				ReportOrders report = (ReportOrders) sr.getValue();
+				ReportOrders2Controller.last.report2 = report;
+				ArrayList<CartProduct> cart = report.getCart();
+				
+				
+				ReportOrders2Controller.last.fillComboYears2(report.GetYears());
+			}
+			if(sr.getAction() == Actions.GetRevenueShop1)
+			{
+				ReportRevenue report = (ReportRevenue) sr.getValue();
+				ReportRevenue2Controller.last.report1 = report;
+				
+				ArrayList<Revenue> reven = report.getMoney();
+				ReportRevenue2Controller.last.fillComboYears1(report.GetYears());
+			}
+			if(sr.getAction() == Actions.GetRevenueShop2)
+			{
+				ReportRevenue report = (ReportRevenue) sr.getValue();
+				ReportRevenue2Controller.last.report2 = report;
+				
+				ArrayList<Revenue> reven = report.getMoney();
+				ReportRevenue2Controller.last.fillComboYears2(report.GetYears());
+			}
 	}
 
 	public void handleMessageFromClientUI(Object req) {

@@ -18,11 +18,13 @@ import ocsf.server.ConnectionToClient;
 import server.ServerController;
 
 public class RevenueDatabase {
-	static int shop_id = ServerController.shop.getId();
-	public static void getRevenue(Connection conn,  ConnectionToClient client,LocalDate start,LocalDate end) throws SQLException { 
+	
+	public static void getRevenue(Connection conn,  ConnectionToClient client,LocalDate start,LocalDate end,Actions action) throws SQLException { 
 		/*
 		 * get list of products from database
 		 */
+		int shop_id = ServerController.shop.getId(); // set shop
+		
 		PreparedStatement ps;
 		ResultSet rs;
 		PreparedStatement ps2;
@@ -95,6 +97,9 @@ public class RevenueDatabase {
 				
 				ServerResponse sr = new ServerResponse(); // create server response
 				sr.setAction(Actions.GetRevenue);
+				//for 2 screen report
+				if(action!=null)
+					sr.setAction(action);
 				sr.setValue(report);
 				
 				client.sendToClient(sr); // send messeage to client

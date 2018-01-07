@@ -43,7 +43,7 @@ public class MainMenuNetworkManager extends GUIcontroller  {
 		}
 		if(howMuchComboBox == 2) {
 			// 2 shop view
-			
+			loadFxml("ReportComplains2.fxml");
 		}
 	}
 	
@@ -54,7 +54,7 @@ public class MainMenuNetworkManager extends GUIcontroller  {
 		}
 		if(howMuchComboBox == 2) {
 			// 2 shop view
-			
+			loadFxml("ReportOrders2.fxml");
 		}
 	}
 	
@@ -78,7 +78,7 @@ public class MainMenuNetworkManager extends GUIcontroller  {
 		}
 		if(howMuchComboBox == 2) {
 			// 2 shop view
-			
+			loadFxml("ReportRevenues2.fxml");
 		}
 	}
 	
@@ -90,10 +90,12 @@ public class MainMenuNetworkManager extends GUIcontroller  {
 		howMuchComboBox = howMuchComboSelected();
 		if(howMuchComboBox == 1)
 		{
-			if(is1)
-				shop1 = this.shop1cmb.getSelectionModel().getSelectedItem(); 
-			if(is2)
+			if(!is1) {
+				shop1 = this.shop1cmb.getSelectionModel().getSelectedItem();
+			}
+			if(!is2) {
 				shop1 = this.shop2cmb.getSelectionModel().getSelectedItem();
+			}
 			
 		}
 		if(howMuchComboBox == 2)
@@ -101,6 +103,8 @@ public class MainMenuNetworkManager extends GUIcontroller  {
 			shop1 = this.shop1cmb.getSelectionModel().getSelectedItem(); 
 			shop2 = this.shop2cmb.getSelectionModel().getSelectedItem(); 
 		}
+		
+		
 		
 	}
 	
