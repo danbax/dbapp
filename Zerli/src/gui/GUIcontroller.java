@@ -80,7 +80,7 @@ public class GUIcontroller  implements Initializable {
 		switch(permission)
 		{
 		case 1:
-			fxmlFile = "MenuEmployees.fxml";
+			fxmlFile = "MenuEmployee.fxml";
 			break;
 		case 2:
 			fxmlFile = "ServiceExpert.fxml";
