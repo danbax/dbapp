@@ -72,13 +72,8 @@ public class MainMenuCustomer extends GUIcontroller  {
 				helloText.setText("Hello, "+LoginController.myUser.getUsername());
 			}
 			
-			Request req = new Request();
-			
-			
 			// update count items
-			req.setAction(Actions.GetMyCartCountItems);
-			req.setValue(LoginController.myUser);
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.GetMyCartCountItems,LoginController.myUser);
 			
 			
 		}

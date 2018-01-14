@@ -6,22 +6,32 @@ import java.util.ResourceBundle;
 
 import client.Client;
 import entity.Request;
+import entity.Shop;
 import enums.Actions;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class GUIcontroller  implements Initializable {
+	/********************************************
+	 * This class used for manage the GUI windows
+	 *********************************************/
 	private static Scene currentScene;
 	private  Stage primaryStage;
 	private  static Stage currentStage;
 	private  FXMLLoader loader;
 	private  Pane root;
+	
+	// sending request to database
+	private Request req = new Request();
+	Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
 	
 	public GUIcontroller(){
 		
@@ -43,7 +53,9 @@ public class GUIcontroller  implements Initializable {
 					loader = new FXMLLoader();
 					root = loader.load(getClass().getResource("/main/resources/"+fxmlFile).openStream());
 					Scene scene = new Scene(root);	
-					scene.getStylesheets().add(getClass().getResource("/main/resources/AppStyle.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/main/resources/AppStyle.css").toExternalForm()); // load css
+					// on pressing "x" 
+					
 					GUIcontroller.currentScene = scene;
 					primaryStage.setScene(scene); 		
 					primaryStage.show(); 
@@ -68,7 +80,7 @@ public class GUIcontroller  implements Initializable {
 		switch(permission)
 		{
 		case 1:
-			fxmlFile = "MenuEmployee.fxml";
+			fxmlFile = "MenuEmployees.fxml";
 			break;
 		case 2:
 			fxmlFile = "ServiceExpert.fxml";
@@ -102,6 +114,39 @@ public class GUIcontroller  implements Initializable {
 		// Move to loginForm
 		loadFxml("loginForm.fxml");
 	}
+	
+	public void alertValidationWarning(String title,String header,String content) {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(content);
+
+		alert.showAndWait();
+
+	}
+
+	public void sendRequestToServer(Actions action)
+	{
+		req.setAction(action); 
+		Client.clientConn.handleMessageFromClientUI(req);
+	}
+	
+	public void sendRequestToServer(Actions action,Object value)
+	{
+		req.setAction(action); 
+		req.setValue(value);
+		Client.clientConn.handleMessageFromClientUI(req);
+	}
+	
+	public void sendRequestToServer(Actions action,Object value,Shop shop)
+	{
+		req.setAction(action); 
+		req.setValue(value);
+		req.setShop(shop);
+		Client.clientConn.handleMessageFromClientUI(req);
+	}
+	
+	
 
 	public static Scene getCurrentScene() {
 		return currentScene;
@@ -125,6 +170,11 @@ public class GUIcontroller  implements Initializable {
 		
 	}
 
-	
-	
+	public Request getReq() {
+		return req;
+	}
+
+	public void setReq(Request req) {
+		this.req = req;
+	}
 }

@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import client.Client;
+import entity.Deal;
 import entity.Order;
 import entity.Product;
 import entity.Request;
@@ -32,6 +33,7 @@ public class CartController extends GUIcontroller  {
 	@FXML
 	private TableView<Product> ProductsTable = new TableView<Product>(); // table of products
 	private ArrayList<Product> productsCart;
+	private ArrayList<Deal> dealsCart;
 	
 	
 		
@@ -66,17 +68,9 @@ public class CartController extends GUIcontroller  {
 				Order o = new Order();
 				o.setUser(LoginController.myUser);
 				o.setProduct(product);
-				// delete
-				Request req = new Request();
-    			req.setAction(Actions.DeleteFromCart);
-    			req.setValue(o);
-    			Client.clientConn.handleMessageFromClientUI(req);	
     			
-    			// refresh table
-    			Request req2 = new Request();
-    			req2.setAction(Actions.GetMyCart);
-    			req2.setValue(LoginController.myUser);
-    			Client.clientConn.handleMessageFromClientUI(req2);
+    			sendRequestToServer(Actions.DeleteFromCart,o); // delete
+    			sendRequestToServer(Actions.GetMyCart,LoginController.myUser);// refresh table
 				
 			}
 		}
@@ -131,11 +125,8 @@ public class CartController extends GUIcontroller  {
 			last = this;
 			
 			// getProducts from database
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.GetMyCart); 
-			req.setValue(LoginController.myUser);
-			Client.clientConn.handleMessageFromClientUI(req);
+			
+			sendRequestToServer(Actions.GetMyCart,LoginController.myUser);
 			
 		}
 
@@ -146,6 +137,18 @@ public class CartController extends GUIcontroller  {
 
 		public void setProductsCart(ArrayList<Product> productsCart) {
 			this.productsCart = productsCart;
+		}
+
+
+
+		public ArrayList<Deal> getDealsCart() {
+			return dealsCart;
+		}
+
+
+
+		public void setDealsCart(ArrayList<Deal> dealsCart) {
+			this.dealsCart = dealsCart;
 		}
 	
 }

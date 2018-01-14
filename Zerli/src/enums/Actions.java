@@ -114,8 +114,11 @@ public enum Actions {
 	 	GetCartOrders,
 		GetRevenue,
 		getComplainsReport,
+		GetSatisfactionReport,
 	
 		// 2 screens
+		GetSatisfactionReportShop1,
+		GetSatisfactionReportShop2,
 		GetCartOrdersShop1,
 		GetRevenueShop1,
 		getComplainsReportShop1,

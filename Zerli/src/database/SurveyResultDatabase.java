@@ -4,11 +4,15 @@ import ocsf.server.ConnectionToClient;
 import server.ServerController;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
+
+import entity.ReportSatisfaction;
 import entity.ServerResponse;
 import entity.Survey;
 import entity.SurveyResults;
@@ -80,6 +84,9 @@ public class SurveyResultDatabase {
 							rs.getInt("q5"),
 							rs.getInt("q6"),
 							rs.getInt("survey_id"));
+					
+					Date d = rs.getDate("date");
+					surveyRes.setDate(d.toLocalDate());
 					surveys.add(surveyRes);
 				}
 				
@@ -140,7 +147,7 @@ public class SurveyResultDatabase {
 		ServerResponse sr = new ServerResponse(); // create server response
 		sr.setAction(Actions.AddSurveyResults);
 		PreparedStatement ps;
-		String s1 = "INSERT INTO survey_results (q1,q2,q3,q4,q5,q6,survey_id,shop_id) VALUES (?,?,?,?,?,?,?,?);";
+		String s1 = "INSERT INTO survey_results (q1,q2,q3,q4,q5,q6,survey_id,shop_id,date) VALUES (?,?,?,?,?,?,?,?,now());";
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
 				ps.setInt(1, surveyRes.getQ1());
@@ -219,6 +226,98 @@ public class SurveyResultDatabase {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} // send messeage to client
+		}
+	}
+	
+	/**********************************************
+	 * 				Satisfaction report
+	 ***********************************************/
+	
+	public static void getSatisfaction(Connection conn,  ConnectionToClient client,LocalDate start,LocalDate end,Actions action) throws SQLException { 
+		/*
+		 * get list of products from database
+		 */
+		int shop_id = ServerController.shop.getId(); // set shop
+		
+		PreparedStatement ps;
+		ResultSet rs;
+		PreparedStatement ps2;
+		ResultSet rs2;
+		String s1 = "select * from Survey_results where shop_id=?";
+		String s2 = "select * from Surveys where shop_id=? and id=?";
+		try {
+				ps = (PreparedStatement) conn.prepareStatement(s1);
+				ps.setInt(1, shop_id);
+				rs = ps.executeQuery();
+				ArrayList<SurveyResults> surveys = new ArrayList<SurveyResults>();
+				while ( rs.next() )
+				{
+					// create survey
+					SurveyResults surveyRes = new SurveyResults(
+							rs.getInt("id"),
+							rs.getInt("q1"),
+							rs.getInt("q2"),
+							rs.getInt("q3"),
+							rs.getInt("q4"),
+							rs.getInt("q5"),
+							rs.getInt("q6"),
+							rs.getInt("survey_id"));
+					
+					Date d = rs.getDate("date");
+					surveyRes.setDate(d.toLocalDate());
+					
+					/**** get survey *****/
+					 
+					try {
+							ps2 = (PreparedStatement) conn.prepareStatement(s2);
+							ps2.setInt(1, shop_id);
+							ps2.setInt(2, surveyRes.getSurveyId());
+							rs2 = ps2.executeQuery();
+							if ( rs2.next() )
+							{
+								System.out.println(surveyRes.getSurveyId());
+								// create survey
+								Survey survey = new Survey(
+										rs2.getInt("id"),
+										rs2.getString("q1"),
+										rs2.getString("q2"),
+										rs2.getString("q3"),
+										rs2.getString("q4"),
+										rs2.getString("q5"),
+										rs2.getString("q6"),
+										rs2.getString("survey_name"));
+										surveyRes.setSurvey(survey);
+							}
+							
+					}
+					catch (Exception e)
+					{
+						// TODO: handle exception
+						e.printStackTrace();
+					}
+					
+					surveys.add(surveyRes);
+				}
+				
+				ReportSatisfaction report = new ReportSatisfaction();
+				report.setSurveyResults(surveys);
+				report.setStartDate(start);
+				report.setEndDate(end);
+				
+				
+				ServerResponse sr = new ServerResponse(); // create server response
+				sr.setAction(Actions.GetSatisfactionReport);
+				//for 2 screen report
+				if(action!=null)
+					sr.setAction(action);
+				sr.setValue(report);
+				
+				client.sendToClient(sr); // send messeage to client
+			}
+		catch (Exception e)
+		{
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	

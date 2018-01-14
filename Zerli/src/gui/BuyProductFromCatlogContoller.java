@@ -24,6 +24,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
@@ -48,6 +49,7 @@ public class BuyProductFromCatlogContoller extends GUIcontroller  {
 	@FXML ComboBox<Integer> minutes;
 	@FXML AnchorPane greeting;
 	@FXML TextArea greetingText;
+	@FXML CheckBox pickCheck;
 	
 	private Boolean isTgPressed = false;
 	
@@ -89,16 +91,19 @@ public class BuyProductFromCatlogContoller extends GUIcontroller  {
 		order.setUser(user);
 		order.setPaymentMethod(paymentMethod);
 		
-		
-		Request req = new Request();
-		req.setAction(Actions.buyProductFromCatalog);
-		req.setValue(order);
-		Client.clientConn.handleMessageFromClientUI(req);
+		sendRequestToServer(Actions.buyProductFromCatalog,order);
 		
 		
 		loadFxml("OrdersHistory.fxml");
 		
 
+	}
+	
+	
+	@FXML
+	public void onPicSelection(ActionEvent event) throws Exception {
+		// change price
+		priceTXT.setText("Total: " + calculateTotalOrderPrice());
 	}
 	
 	@FXML
@@ -140,12 +145,33 @@ public class BuyProductFromCatlogContoller extends GUIcontroller  {
 		
 		public float calculateTotalOrderPrice()
 		{
+			/* calculate total price of shipping
+			 * isShipping = false : no shipping
+			 * isShipping = true : shipping
+			 */
 			float sum = 0;
+			
+			// products prices
 			ArrayList<Product> products = CartController.last.getProductsCart();
 			for(Product p : products)
-				sum+=p.getPrice();
+			{
+				if(p.getDealPrice() == 0) // if there is a deal
+					sum+=p.getPrice();
+				else
+					sum+=p.getDealPrice();
+			}
+			
+			sum+=LoginController.shop.getPriceOfShipping();
+			
+			// shipping
+			if(pickCheck.isSelected())	
+					sum-=LoginController.shop.getPriceOfShipping();
+			
 			return sum;			
 		}
+		// on change pick check
+		
+		
 		
 
 		@Override

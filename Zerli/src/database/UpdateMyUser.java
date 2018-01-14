@@ -94,6 +94,7 @@ public static void updateCreditCard(Connection conn,  ConnectionToClient client,
 			ps.setString(4, cc.getCvv());
 			ps.setInt(5,u.getId());
 			ps.executeUpdate();
+			System.out.println(cc.getCardNumber()+" "+cc.getCvv());
 
 			client.sendToClient(sr); // send messeage to client
 		}

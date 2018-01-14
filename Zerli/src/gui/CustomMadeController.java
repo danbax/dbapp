@@ -72,11 +72,7 @@ public class CustomMadeController extends GUIcontroller  {
 			cmp.setType(type);
 			cmp.setMyUser(LoginController.myUser);
 			
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.AddCustomOrder); 
-			req.setValue(cmp);
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.AddCustomOrder,cmp);
 		}
 		
 	
@@ -114,11 +110,7 @@ public class CustomMadeController extends GUIcontroller  {
 			last = this;
 			
 			// get users from database
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.CustomOrderData); 
-			Client.clientConn.handleMessageFromClientUI(req);
-			
+			sendRequestToServer(Actions.CustomOrderData);
 		}
 	
 }

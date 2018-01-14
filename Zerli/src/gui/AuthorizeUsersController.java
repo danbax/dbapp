@@ -73,11 +73,8 @@ public class AuthorizeUsersController extends GUIcontroller  {
 			cc.setUser(userToUpdate);
 			
 			
-			Request req = new Request(Actions.AuthorizeUser,cc);
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			Client.clientConn.handleMessageFromClientUI(req);
-			req.setAction(Actions.GetNotAuthorizedUsers); 
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.AuthorizeUser,cc);
+			sendRequestToServer(Actions.GetNotAuthorizedUsers);
 			
 		}
 		
@@ -147,10 +144,8 @@ public class AuthorizeUsersController extends GUIcontroller  {
 			last = this;
 			
 			// get users from database
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.GetNotAuthorizedUsers); 
-			Client.clientConn.handleMessageFromClientUI(req);
+			
+			sendRequestToServer(Actions.GetNotAuthorizedUsers);
 			
 			
 			// add data to subscribe ComboBox

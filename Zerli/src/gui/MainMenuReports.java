@@ -43,7 +43,7 @@ public class MainMenuReports extends GUIcontroller  {
 	
 	@FXML
 	public void satisfaction(MouseEvent event)  throws Exception {
-		
+		loadFxml("ReportSatisfaction.fxml");
 	}
 	
 	@FXML

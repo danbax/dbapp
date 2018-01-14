@@ -28,7 +28,7 @@ public class CartDatabase {
 		sr.setAction(Actions.AddToCart);
 		PreparedStatement ps;
 		
-		String s1 = "INSERT INTO cart (user_id,product_id,order_id,shop_id) VALUES (?,?,0,?);";
+		String s1 = "INSERT INTO cart (user_id,product_id,order_id,shop_id,order_date) VALUES (?,?,0,?,now());";
 		
 		try {
 				ps = (PreparedStatement) conn.prepareStatement(s1);
@@ -127,6 +127,7 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 				+ " from cart,products where cart.product_id=products.id and cart.order_id=0 and cart.user_id=?";
 		*/
 		String s1 = "select * from cart where order_id=0 and user_id =? and shop_id=?"; // not ordered
+		String s3 = "select * from deals where product_id=? and shop_id=?";
 		try {
 			ps = (PreparedStatement) conn.prepareStatement(s1);
 			ps.setInt(1, myUser.getId());
@@ -157,6 +158,19 @@ public static void addToCartCustom(Connection conn,  ConnectionToClient client,C
 					product.setPrice(rs2.getFloat("price"));
 					product.setProductId(rs2.getString("product_id"));
 					product.setImage("/serverImages/"+rs2.getString("img"));
+					
+					product.setDealPrice(0); // Default
+					
+					//deals
+					ps2 = (PreparedStatement) conn.prepareStatement(s3);
+					ps2.setInt(1, product.getPid());
+					ps2.setInt(2, shop_id);
+					rs2 = ps2.executeQuery();
+					if(rs2.next())
+					{
+						int percent = rs2.getInt("percent");
+						product.setDealPrice(product.getPrice()-product.getPrice()*percent/100);
+					}
 					
 					
 					// add to product array

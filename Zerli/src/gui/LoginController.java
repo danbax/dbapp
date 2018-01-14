@@ -49,12 +49,9 @@ public class LoginController extends GUIcontroller  {
 		// create request to validate data
 		User user = new User(username,password);
 		user.setShop(shop);
-		Request req = new Request(Actions.ValidLoginDataCheck,user);
-	
-		// send request to server
-		@SuppressWarnings("unused")
-		Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);	 
-		Client.clientConn.handleMessageFromClientUI(req);	
+		
+
+		sendRequestToServer(Actions.ValidLoginDataCheck,user);
 		
 	}
 	
@@ -69,12 +66,9 @@ public class LoginController extends GUIcontroller  {
 		if(isValid==1) 
 		{ 
 			// get my address and credit card
-			Request req = new Request();
-			req.setValue(myUser);
-			req.setAction(Actions.GetMyAdress);
-			Client.clientConn.handleMessageFromClientUI(req);
-			req.setAction(Actions.GetMyCreditCard);
-			Client.clientConn.handleMessageFromClientUI(req);
+
+			sendRequestToServer(Actions.GetMyAdress,myUser);
+			sendRequestToServer(Actions.GetMyCreditCard,myUser);
 			
 			// GO to main menu
 			

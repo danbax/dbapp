@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 
 public class SurveyResults implements Serializable {
@@ -17,6 +18,8 @@ public class SurveyResults implements Serializable {
 	private int q5;
 	private int q6;
 	private int surveyId;
+	private Survey survey;
+	private LocalDate date;
 	
 	public SurveyResults(int id,int q1,int q2,int q3,int q4,int q5,int q6,int surveyId) {
 		this.setId(id);
@@ -125,6 +128,28 @@ public class SurveyResults implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+	
+	public int getQuarter()
+	{
+		// get quarter
+		return (date.getMonthValue() / 3) + 1;
+	}
+
+	public Survey getSurvey() {
+		return survey;
+	}
+
+	public void setSurvey(Survey survey) {
+		this.survey = survey;
 	}
 
 

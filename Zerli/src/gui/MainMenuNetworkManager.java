@@ -62,10 +62,10 @@ public class MainMenuNetworkManager extends GUIcontroller  {
 	public void satisfaction(MouseEvent event)  throws Exception {
 		if(howMuchComboBox == 1)
 		{
-			
+			loadFxml("ReportSatisfaction.fxml");
 		}
 		if(howMuchComboBox == 2) {
-			
+			loadFxml("ReportSatisfaction2.fxml");
 		}
 	}
 	

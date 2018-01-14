@@ -6,6 +6,8 @@ import java.io.Serializable;
 public class Shop implements Serializable {
 	private int id;
 	private String shopName;
+	private float priceOfShipping=30;
+	
 	public int getId() {
 		return id;
 	}
@@ -22,5 +24,11 @@ public class Shop implements Serializable {
 	public String toString()
 	{
 		return this.getShopName();
+	}
+	public float getPriceOfShipping() {
+		return priceOfShipping;
+	}
+	public void setPriceOfShipping(float priceOfShipping) {
+		this.priceOfShipping = priceOfShipping;
 	}
 }

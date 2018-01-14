@@ -1,6 +1,5 @@
 package gui;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -10,31 +9,24 @@ import entity.Order;
 import entity.Product;
 import entity.Request;
 import enums.Actions;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class CatalogController extends GUIcontroller  {
 	
@@ -129,12 +121,8 @@ public class CatalogController extends GUIcontroller  {
 			        		Order o = new Order();
 			        		o.setProduct(selectedProduct);
 			        		o.setUser(LoginController.myUser);
-
-			        		Request req = new Request();
-			    			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			    			req.setAction(Actions.AddToCart); 
-			    			req.setValue(o);
-			    			Client.clientConn.handleMessageFromClientUI(req);
+			        		
+			    			sendRequestToServer(Actions.AddToCart,o);
 			    			
 			    			PurcasheBtn.setText("Added");
 			        				
@@ -175,12 +163,7 @@ public class CatalogController extends GUIcontroller  {
 		public void initialize(URL arg0, ResourceBundle arg1) {	
 			last = this;
 			
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			
-			req.setAction(Actions.GetProductCatalog); 
-			req.setValue(null);
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.GetProductCatalog,null);
 			
 			
 		    
