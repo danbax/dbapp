@@ -159,18 +159,9 @@ public class ReportOrders2Controller extends GUIcontroller {
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {	
 			last = this;
-			
-	        
-	     
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setShop(MainMenuNetworkManager.shop1);
-			req.setAction(Actions.GetCartOrdersShop1); 
-			
-			Client.clientConn.handleMessageFromClientUI(req);
-			req.setShop(MainMenuNetworkManager.shop2);
-			req.setAction(Actions.GetCartOrdersShop2); 
-			Client.clientConn.handleMessageFromClientUI(req);
+		
+		sendRequestToServer(Actions.GetCartOrdersShop1,null,MainMenuNetworkManager.shop1);	
+		sendRequestToServer(Actions.GetCartOrdersShop2,null,MainMenuNetworkManager.shop2);	
 		
 		// add quarters to combo
 		ArrayList<Integer> quarters = new ArrayList<Integer>();

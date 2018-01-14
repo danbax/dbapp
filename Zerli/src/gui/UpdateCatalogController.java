@@ -90,11 +90,8 @@ public class UpdateCatalogController extends GUIcontroller  {
 			p.setProductId(productID);
 			
 			// send request to server
-			Request req = new Request(Actions.AddProduct,p);
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			Client.clientConn.handleMessageFromClientUI(req);
-			req.setAction(Actions.GetProducts); 
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.AddProduct,p);
+			sendRequestToServer(Actions.GetProducts);
 			}
 			else
 			{
@@ -125,17 +122,8 @@ public class UpdateCatalogController extends GUIcontroller  {
 			Product product = ProductsTable.getSelectionModel().getSelectedItem();
 			if(product!= null)
 			{
-				
-				// delete
-				Request req = new Request();
-    			req.setAction(Actions.DeleteProduct);
-    			req.setValue(product);
-    			Client.clientConn.handleMessageFromClientUI(req);	
-    			
-    			// refresh table
-    			Request req2 = new Request();
-    			req2.setAction(Actions.GetProducts);
-    			Client.clientConn.handleMessageFromClientUI(req2);
+    			sendRequestToServer(Actions.DeleteProduct,product);
+    			sendRequestToServer(Actions.GetProducts); // refresh table
 				
 			}
 		}
@@ -196,10 +184,7 @@ public class UpdateCatalogController extends GUIcontroller  {
 			                    productToUpdate.setPrice(newPrice);
 			                    
 			                    //send request to server
-			                    Request req = new Request();
-			        			req.setAction(Actions.UpdateProduct);
-			        			req.setValue(productToUpdate);
-			        			Client.clientConn.handleMessageFromClientUI(req);
+			        			sendRequestToServer(Actions.UpdateProduct,productToUpdate);
 			                }
 			            }
 			        );
@@ -222,10 +207,7 @@ public class UpdateCatalogController extends GUIcontroller  {
 		                    productToUpdate.setProductName(newName);
 		                    
 		                    //send request to server
-		                    Request req = new Request();
-		        			req.setAction(Actions.UpdateProduct);
-		        			req.setValue(productToUpdate);
-		        			Client.clientConn.handleMessageFromClientUI(req);
+		        			sendRequestToServer(Actions.UpdateProduct,productToUpdate);
 		                }
 		            }
 		        );
@@ -249,10 +231,7 @@ public class UpdateCatalogController extends GUIcontroller  {
 		                    productToUpdate.setStock(newStock);
 		                    
 		                    //send request to server
-		                    Request req = new Request();
-		        			req.setAction(Actions.UpdateProduct);
-		        			req.setValue(productToUpdate);
-		        			Client.clientConn.handleMessageFromClientUI(req);
+		        			sendRequestToServer(Actions.UpdateProduct,productToUpdate);
 		                }
 		            }
 		        );
@@ -280,10 +259,7 @@ public class UpdateCatalogController extends GUIcontroller  {
 		                    productToUpdate.setProductType(newType);
 		                    
 		                    //send request to server
-		                    Request req = new Request();
-		        			req.setAction(Actions.UpdateProduct);
-		        			req.setValue(productToUpdate);
-		        			Client.clientConn.handleMessageFromClientUI(req);
+		                    sendRequestToServer(Actions.UpdateProduct,productToUpdate);
 		                }
 		            }
 		        );
@@ -341,10 +317,7 @@ public class UpdateCatalogController extends GUIcontroller  {
 			last = this;
 			
 			// getProducts from database
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.GetProducts); 
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.GetProducts);
 			
 		}
 	

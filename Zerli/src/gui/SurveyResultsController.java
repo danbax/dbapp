@@ -65,8 +65,6 @@ public class SurveyResultsController extends GUIcontroller  {
 	@FXML private Text txtq5 = new Text();
 	@FXML private Text txtq6 = new Text();
 	ObservableList<Integer> observableList;
-	
-	
 		
 		
 		@FXML
@@ -91,15 +89,9 @@ public class SurveyResultsController extends GUIcontroller  {
 			int q6 = this.cmbq6.getSelectionModel().getSelectedItem();
 			
 			SurveyResults surveyRes = new SurveyResults(q1,q2,q3,q4,q5,q6,s.getId());
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.AddSurveyResults); 
-			req.setValue(surveyRes);
-			Client.clientConn.handleMessageFromClientUI(req);
 			
-			req.setAction(Actions.GetSurveyResults); 
-			Client.clientConn.handleMessageFromClientUI(req);
-			
+			sendRequestToServer(Actions.AddSurveyResults,surveyRes);
+			sendRequestToServer(Actions.GetSurveyResults);
 		}
 		
 		

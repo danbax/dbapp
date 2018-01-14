@@ -64,26 +64,20 @@ public class OrderHistoryController extends GUIcontroller  {
 		@FXML
 		public void onGetRefund(ActionEvent event) throws Exception {
 			Order o = OrdersTable.getSelectionModel().getSelectedItem();
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.CancelOrder); 
-			req.setValue(o);
-			Client.clientConn.handleMessageFromClientUI(req);
+			
+			sendRequestToServer(Actions.CancelOrder,o);
 			
 			//refund add
 			Refund refund = new Refund();
 			refund.setOrder(o);
 			refund.setRefund(o.calculateRefund());
 			
-			req.setAction(Actions.AddRefund); 
-			req.setValue(refund);
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.AddRefund,refund);
 			
 			
 			//refresh
-			req.setAction(Actions.GetMyOrdersHistory); 
-			req.setValue(LoginController.myUser);
-			Client.clientConn.handleMessageFromClientUI(req);
+			
+			sendRequestToServer(Actions.GetMyOrdersHistory,LoginController.myUser);
 			
 			
 		}
@@ -183,11 +177,7 @@ public class OrderHistoryController extends GUIcontroller  {
 		public void initialize(URL arg0, ResourceBundle arg1) {	
 			last = this;
 			
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.GetMyOrdersHistory); 
-			req.setValue(LoginController.myUser);
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.GetMyOrdersHistory,LoginController.myUser);
 			
 			
 		}

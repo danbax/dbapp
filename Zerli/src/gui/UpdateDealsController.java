@@ -72,13 +72,9 @@ public class UpdateDealsController extends GUIcontroller  {
 			Deal deal = new Deal();
 			deal.setPercent(d);
 			deal.setProductId(p.getPid());
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.AddDeal); 
-			req.setValue(deal);
-			Client.clientConn.handleMessageFromClientUI(req);
-			req.setAction(Actions.GetDeals); 
-			Client.clientConn.handleMessageFromClientUI(req);
+			
+			sendRequestToServer(Actions.AddDeal,deal);
+			sendRequestToServer(Actions.GetDeals);
 		}
 		
 		@FXML
@@ -92,14 +88,8 @@ public class UpdateDealsController extends GUIcontroller  {
 			Deal deal = DealsTable.getSelectionModel().getSelectedItem();
 			if(deal!= null)
 			{
-				Request req = new Request();
-				Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-				req.setAction(Actions.DeleteDeal); 
-				req.setValue(deal);
-				Client.clientConn.handleMessageFromClientUI(req);
-				req.setAction(Actions.GetDeals); 
-				Client.clientConn.handleMessageFromClientUI(req);
-				
+				sendRequestToServer(Actions.DeleteDeal,deal);
+				sendRequestToServer(Actions.GetDeals);
 			}
 		}
 		
@@ -171,13 +161,10 @@ public class UpdateDealsController extends GUIcontroller  {
 			last = this;
 			
 			// get deals from database
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.GetDeals); 
-			Client.clientConn.handleMessageFromClientUI(req);
-			req.setAction(Actions.GetProductsDeals); 
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.GetDeals);
+			sendRequestToServer(Actions.GetProductsDeals);
 			fillComboPercent();
+			
 		}
 	
 }

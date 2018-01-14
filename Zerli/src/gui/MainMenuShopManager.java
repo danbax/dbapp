@@ -54,11 +54,6 @@ public class MainMenuShopManager extends GUIcontroller  {
 				// add hello text
 				helloText.setText("Hello, "+LoginController.myUser.getUsername());
 			}
-			
-			Request req = new Request();
-			req.setAction(Actions.Logout);
-			req.setValue(LoginController.myUser);
-			Client.clientConn.handleMessageFromClientUI(req);	
 		}
 	
 }

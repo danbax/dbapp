@@ -135,19 +135,9 @@ public class SurveyExpertController extends GUIcontroller  {
 			q5Txt.setOpacity(1);
 			q6Txt.setOpacity(1);
 			
-			
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.GetNumberOfVoters); 
-			req.setValue(s);
-			Client.clientConn.handleMessageFromClientUI(req);
-			
-			req.setAction(Actions.GetAvgRes); 
-			Client.clientConn.handleMessageFromClientUI(req);
-			
-			req.setAction(Actions.GetConclusion); 
-			Client.clientConn.handleMessageFromClientUI(req);
-			
+			sendRequestToServer(Actions.GetNumberOfVoters,s);
+			sendRequestToServer(Actions.GetAvgRes,s);
+			sendRequestToServer(Actions.GetConclusion,s);
 			
 		}
 		
@@ -199,10 +189,7 @@ public class SurveyExpertController extends GUIcontroller  {
 			last = this;
 			
 			// get data from database
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.GetSurveyNamesExpert); 
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.GetSurveyNamesExpert);
 		}
 	
 }

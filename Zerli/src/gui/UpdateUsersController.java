@@ -57,9 +57,7 @@ public class UpdateUsersController extends GUIcontroller  {
 			
 			String searchQuery = txtSearch.getText();
 			
-			Request req = new Request(Actions.GetUsers,searchQuery);
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.GetUsers,searchQuery);
 			
 		}
 		
@@ -76,15 +74,8 @@ public class UpdateUsersController extends GUIcontroller  {
 			{
 				
 				// delete
-				Request req = new Request();
-    			req.setAction(Actions.DeleteUser);
-    			req.setValue(user);
-    			Client.clientConn.handleMessageFromClientUI(req);	
-    			
-    			// refresh table
-    			Request req2 = new Request();
-    			req2.setAction(Actions.GetUsers);
-    			Client.clientConn.handleMessageFromClientUI(req2);
+    			sendRequestToServer(Actions.DeleteUser,user);
+    			sendRequestToServer(Actions.GetUsers); // refresh table
 				
 			}
 		}
@@ -148,10 +139,7 @@ public class UpdateUsersController extends GUIcontroller  {
 				                    user.setUsername(newUsername);
 				                    
 				                    //send request to server
-				                    Request req = new Request();
-				        			req.setAction(Actions.updateUser);
-				        			req.setValue(user);
-				        			Client.clientConn.handleMessageFromClientUI(req);
+				        			sendRequestToServer(Actions.updateUser,user);
 				                }
 				            }
 				        );
@@ -178,10 +166,7 @@ public class UpdateUsersController extends GUIcontroller  {
 				                    user.setPassword(newPassword);
 				                    
 				                    //send request to server
-				                    Request req = new Request();
-				        			req.setAction(Actions.updateUser);
-				        			req.setValue(user);
-				        			Client.clientConn.handleMessageFromClientUI(req);
+				        			sendRequestToServer(Actions.updateUser,user);
 				                }
 				            }
 				        );
@@ -201,10 +186,8 @@ public class UpdateUsersController extends GUIcontroller  {
 			last = this;
 			
 			// get users from database
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.GetUsers); 
-			Client.clientConn.handleMessageFromClientUI(req);
+			
+			sendRequestToServer(Actions.GetUsers);
 			
 		}
 	

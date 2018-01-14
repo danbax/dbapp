@@ -69,12 +69,9 @@ public class SatisfactionSurvey extends GUIcontroller  {
 			
 			
 			Survey survey = new Survey(q1String,q2String,q3String,q4String,q5String,q6String,surveyNameString);
-			Request req = new Request(Actions.AddSurvey,survey);
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			Client.clientConn.handleMessageFromClientUI(req);
 			
-			req.setAction(Actions.GetSurveys);
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.AddSurvey,survey);
+			sendRequestToServer(Actions.GetSurveys);
 			
 		}
 		
@@ -89,17 +86,8 @@ public class SatisfactionSurvey extends GUIcontroller  {
 			Survey survey = surveyTable.getSelectionModel().getSelectedItem();
 			if(survey!= null)
 			{
-				
-				// delete
-				Request req = new Request();
-    			req.setAction(Actions.DeleteSurvey);
-    			req.setValue(survey);
-    			Client.clientConn.handleMessageFromClientUI(req);	
-    			
-    			// refresh table
-    			Request req2 = new Request();
-    			req2.setAction(Actions.GetSurveys);
-    			Client.clientConn.handleMessageFromClientUI(req2);
+    			sendRequestToServer(Actions.DeleteSurvey,survey);// delete	
+    			sendRequestToServer(Actions.GetSurveys); // refresh table
 				
 			}
 			
@@ -192,11 +180,8 @@ public class SatisfactionSurvey extends GUIcontroller  {
 					                        t.getTablePosition().getRow());
 				                    survey.setQ1(newSurvey);
 				                    
-				                    //send request to server
-				                    Request req = new Request();
-				        			req.setAction(Actions.UpdateSurvey);
-				        			req.setValue(survey);
-				        			Client.clientConn.handleMessageFromClientUI(req);
+				        			
+				        			sendRequestToServer(Actions.UpdateSurvey,survey);
 				                }
 				            }
 				        );
@@ -219,10 +204,7 @@ public class SatisfactionSurvey extends GUIcontroller  {
 				                    survey.setQ2(newSurvey);
 				                    
 				                    //send request to server
-				                    Request req = new Request();
-				        			req.setAction(Actions.UpdateSurvey);
-				        			req.setValue(survey);
-				        			Client.clientConn.handleMessageFromClientUI(req);
+				        			sendRequestToServer(Actions.UpdateSurvey,survey);
 				                }
 				            }
 				        );
@@ -244,11 +226,7 @@ public class SatisfactionSurvey extends GUIcontroller  {
 					                        t.getTablePosition().getRow());
 				                    survey.setQ3(newSurvey);
 				                    
-				                    //send request to server
-				                    Request req = new Request();
-				        			req.setAction(Actions.UpdateSurvey);
-				        			req.setValue(survey);
-				        			Client.clientConn.handleMessageFromClientUI(req);
+				                    sendRequestToServer(Actions.UpdateSurvey,survey);
 				                }
 				            }
 				        );
@@ -269,11 +247,7 @@ public class SatisfactionSurvey extends GUIcontroller  {
 					                        t.getTablePosition().getRow());
 				                    survey.setQ4(newSurvey);
 				                    
-				                    //send request to server
-				                    Request req = new Request();
-				        			req.setAction(Actions.UpdateSurvey);
-				        			req.setValue(survey);
-				        			Client.clientConn.handleMessageFromClientUI(req);
+				                    sendRequestToServer(Actions.UpdateSurvey,survey);
 				                }
 				            }
 				        );
@@ -295,11 +269,7 @@ public class SatisfactionSurvey extends GUIcontroller  {
 					                        t.getTablePosition().getRow());
 				                    survey.setQ5(newSurvey);
 				                    
-				                    //send request to server
-				                    Request req = new Request();
-				        			req.setAction(Actions.UpdateSurvey);
-				        			req.setValue(survey);
-				        			Client.clientConn.handleMessageFromClientUI(req);
+				                    sendRequestToServer(Actions.UpdateSurvey,survey);
 				                }
 				            }
 				        );
@@ -321,11 +291,7 @@ public class SatisfactionSurvey extends GUIcontroller  {
 					                        t.getTablePosition().getRow());
 				                    survey.setQ6(newSurvey);
 				                    
-				                    //send request to server
-				                    Request req = new Request();
-				        			req.setAction(Actions.UpdateSurvey);
-				        			req.setValue(survey);
-				        			Client.clientConn.handleMessageFromClientUI(req);
+				                    sendRequestToServer(Actions.UpdateSurvey,survey);
 				                }
 				            }
 				        );
@@ -341,11 +307,8 @@ public class SatisfactionSurvey extends GUIcontroller  {
 		public void initialize(URL arg0, ResourceBundle arg1) {	
 			last = this;
 			
-			// get users from database
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.GetSurveys); 
-			Client.clientConn.handleMessageFromClientUI(req);
+			// get surveys from database
+			sendRequestToServer(Actions.GetSurveys);
 			
 		}
 	

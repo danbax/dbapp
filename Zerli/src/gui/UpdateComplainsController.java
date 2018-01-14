@@ -68,13 +68,8 @@ public class UpdateComplainsController extends GUIcontroller  {
 			complain.setUser(u);
 			complain.setDesc(desc);
 			
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.AddComplain); 
-			req.setValue(complain);
-			Client.clientConn.handleMessageFromClientUI(req);
-			req.setAction(Actions.GetComplain); 
-			Client.clientConn.handleMessageFromClientUI(req);
+			sendRequestToServer(Actions.AddComplain,complain);
+			sendRequestToServer(Actions.GetComplain);
 		}
 		
 		@FXML
@@ -84,13 +79,9 @@ public class UpdateComplainsController extends GUIcontroller  {
 			Float compensation = Float.parseFloat(compensationText.getText());
 			complain.setCompensation(compensation);
 			
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.Recompense); 
-			req.setValue(complain);
-			Client.clientConn.handleMessageFromClientUI(req);
-			req.setAction(Actions.GetComplain); 
-			Client.clientConn.handleMessageFromClientUI(req);
+			
+			sendRequestToServer(Actions.Recompense,complain);
+			sendRequestToServer(Actions.GetComplain);
 			
 		}
 		
@@ -107,15 +98,9 @@ public class UpdateComplainsController extends GUIcontroller  {
 			{
 				
 				// delete
-				Request req = new Request();
-    			req.setAction(Actions.DeleteComplain);
-    			req.setValue(complain);
-    			Client.clientConn.handleMessageFromClientUI(req);	
     			
-    			// refresh table
-    			Request req2 = new Request();
-    			req2.setAction(Actions.GetComplain);
-    			Client.clientConn.handleMessageFromClientUI(req2);
+    			sendRequestToServer(Actions.DeleteComplain,complain);
+    			sendRequestToServer(Actions.GetComplain); // refresh table
 				
 			}
 			
@@ -198,13 +183,9 @@ public class UpdateComplainsController extends GUIcontroller  {
 		public void initialize(URL arg0, ResourceBundle arg1) {	
 			last = this;
 			
-			// get users from database
-			Request req = new Request();
-			Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-			req.setAction(Actions.GetComplain); 
-			Client.clientConn.handleMessageFromClientUI(req);
-			req.setAction(Actions.GetComplainUsers); 
-			Client.clientConn.handleMessageFromClientUI(req);
+			
+			sendRequestToServer(Actions.GetComplain);
+			sendRequestToServer(Actions.GetComplainUsers);
 			
 		}
 	

@@ -101,14 +101,11 @@ public class UpdateMyDataController extends GUIcontroller  {
 				LoginController.myCreditCard.setExpYear(expYear);
 				LoginController.myCreditCard.setCvv(cvv);
 				
-				Request req = new Request();
-				Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-				req.setAction(Actions.UpdateCreditCard); 
 				ArrayList<Object> arr = new ArrayList<Object>();
 				arr.add(LoginController.myCreditCard);
 				arr.add(LoginController.myUser);
-				req.setValue(arr);
-				Client.clientConn.handleMessageFromClientUI(req);
+				
+				sendRequestToServer(Actions.UpdateCreditCard,arr);
 			}
 			else
 			{
@@ -119,21 +116,16 @@ public class UpdateMyDataController extends GUIcontroller  {
 				cc.setExpYear(expYear);
 				cc.setCvv(cvv);
 				
-				Request req = new Request();
-				Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-				req.setAction(Actions.AddCreditCard); 
 				ArrayList<Object> arr = new ArrayList<Object>();
 				arr.add(cc);
 				arr.add(LoginController.myUser);
-				req.setValue(arr);
-				Client.clientConn.handleMessageFromClientUI(req);
+				
+				sendRequestToServer(Actions.AddCreditCard,arr);
 				
 				
 			}
-			Request req = new Request();
-			req.setValue(LoginController.myUser);
-			req.setAction(Actions.GetMyCreditCard);
-			Client.clientConn.handleMessageFromClientUI(req);
+			
+			sendRequestToServer(Actions.GetMyCreditCard,LoginController.myUser);
 		}
 		
 		@FXML
@@ -153,12 +145,9 @@ public class UpdateMyDataController extends GUIcontroller  {
 				LoginController.myUser.setPassword(password);
 				LoginController.myUser.setLname(lname);
 				LoginController.myUser.setPhone(phone);
+			
 				
-				Request req = new Request();
-				Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-				req.setAction(Actions.updateUser); 
-				req.setValue(LoginController.myUser);
-				Client.clientConn.handleMessageFromClientUI(req);
+				sendRequestToServer(Actions.updateUser,LoginController.myUser);
 			}
 		}
 		
@@ -175,14 +164,11 @@ public class UpdateMyDataController extends GUIcontroller  {
 				LoginController.myAddress.setStreet(street);
 				LoginController.myAddress.setNumber(number);
 				
-				Request req = new Request();
-				Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-				req.setAction(Actions.UpdateAddress); 
 				ArrayList<Object> arr = new ArrayList<Object>();
 				arr.add(LoginController.myAddress);
 				arr.add(LoginController.myUser);
-				req.setValue(arr);
-				Client.clientConn.handleMessageFromClientUI(req);
+				
+				sendRequestToServer(Actions.UpdateAddress,arr);
 			}
 			else
 			{
@@ -192,19 +178,14 @@ public class UpdateMyDataController extends GUIcontroller  {
 				address.setStreet(street);
 				address.setNumber(number);
 				
-				Request req = new Request();
-				Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-				req.setAction(Actions.AddAddress); 
 				ArrayList<Object> arr = new ArrayList<Object>();
 				arr.add(address);
 				arr.add(LoginController.myUser);
-				req.setValue(arr);
-				Client.clientConn.handleMessageFromClientUI(req);
+				
+				sendRequestToServer(Actions.AddAddress,arr);
 			}
-			Request req = new Request();
-			req.setValue(LoginController.myUser);
-			req.setAction(Actions.GetMyAdress);
-			Client.clientConn.handleMessageFromClientUI(req);
+			
+			sendRequestToServer(Actions.GetMyAdress,LoginController.myUser);
 		}
 		
 		public void fillPayment()

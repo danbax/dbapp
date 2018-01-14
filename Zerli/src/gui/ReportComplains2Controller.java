@@ -190,16 +190,10 @@ public class ReportComplains2Controller extends GUIcontroller {
 			last = this;
 			
 	        
-	     
-		Request req = new Request();
-		Client mainClient = new Client(Client.host, Client.DEFAULT_PORT);
-		req.setShop(MainMenuNetworkManager.shop1);
-		req.setAction(Actions.getComplainsReportShop1); 
 		
-		Client.clientConn.handleMessageFromClientUI(req);
-		req.setShop(MainMenuNetworkManager.shop2);
-		req.setAction(Actions.getComplainsReportShop2); 
-		Client.clientConn.handleMessageFromClientUI(req);
+		sendRequestToServer(Actions.getComplainsReportShop1,null,MainMenuNetworkManager.shop1);
+		sendRequestToServer(Actions.getComplainsReportShop2,null,MainMenuNetworkManager.shop2);
+		
 		
 		// add quarters to combo
 		ArrayList<Integer> quarters = new ArrayList<Integer>();
