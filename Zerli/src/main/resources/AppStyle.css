@@ -1,3 +1,35 @@
+.AnchBtn {
+	-fx-border-color: black;
+	-fx-background-color: #ffffff;
+}
+
+.AnchBtn:hover {
+	-fx-cursor: hand;
+	-fx-background-color: #edf6ff;
+}
+
+.AnchBtn:pressed {
+	-fx-cursor: hand;
+	-fx-background-color: #b2d8ff;
+}
+
+.imgBtn {
+	-fx-cursor: hand;
+	
+}
+
+.imgBtn:pressed {
+	-fx-background-color: yellow;
+}
+
+.labelBtn:hover {
+	-fx-cursor: hand;
+}
+
+.text {
+	-fx-font-family: "Microsoft JhengHei Light", Arial, SansSerif;
+	
+}
 
 
 /*******************************************************************************
@@ -6,13 +38,40 @@
  *                                                                             *
  ******************************************************************************/
  .button{
- -fx-background-color: #0074D9;
- -fx-text-fill: white;
+ -fx-background-color: none;
+ -fx-text-fill: #515151;
+ -fx-border-color: gray;
+ -fx-border-radius: 20;
+ -fx-background-radius: 20;
+ -fx-font-size:20px;
  }
  
  .button:hover{
- -fx-background-color: #7FDBFF;
+ -fx-background-color: #edd8df;
  -fx-text-fill: black;
+ -fx-cursor: hand;
+ }
+ 
+  .button:pressed{
+ -fx-background-color: #B72B4B;
+ -fx-text-fill: white;
+ -fx-cursor: hand;
+ }
+ 
+ .connectBtn {
+ -fx-background-color: #0074D9;
+ -fx-text-fill: white;
+
+ -fx-border-radius: 10;
+ -fx-background-radius: 10;
+ -fx-font-size:15px;
+ }
+ .connectBtn:hover {
+ 	 -fx-background-color: #1994FF;
+ }
+ 
+ .connectBtn:pressed {
+ 	 -fx-background-color: #59b0ff;
  }
  
  /*******************************************************************************

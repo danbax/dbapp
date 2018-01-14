@@ -15,19 +15,14 @@
    <children>
       <AnchorPane prefHeight="166.0" prefWidth="900.0" style="-fx-background-color: #0074D9;">
          <children>
-            <ImageView layoutX="21.0" layoutY="19.0">
+            <ImageView layoutX="365.0" layoutY="3.0">
                <image>
-                  <Image url="images/logo.png" />
+                  <Image url="images/zerliLogo.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="140.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
+            <Text fill="WHITE" layoutX="415.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli" wrappingWidth="75.00000894069672">
                <font>
-                  <Font size="52.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="140.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower shop">
-               <font>
-                  <Font size="25.0" />
+                  <Font name="Century Gothic" size="36.0" />
                </font>
             </Text>
             <Text fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Authorize User" wrappingWidth="350.06597900390625">

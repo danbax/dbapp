@@ -19,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,9 +27,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -66,12 +70,13 @@ public class CatalogController extends GUIcontroller  {
 			
 			
 			// flow pane - infinite pane to hold products
-			flowPane.setPadding(new Insets(10, 10, 10, 10));
-		    flowPane.setVgap(4);
-		    flowPane.setHgap(4);
-		    flowPane.setPrefWrapLength(300);
-		    flowPane.setPrefHeight(600);
-		   
+			flowPane.setPadding(new Insets(20, 0, 20, 20));
+		    flowPane.setVgap(5);
+		    flowPane.setHgap(5);
+		    
+		    flowPane.setPrefWrapLength(400);
+		    flowPane.setPrefHeight(500);
+		    flowPane.setOrientation(Orientation.VERTICAL);
 		    
 
 		    for (Product p: products) {
@@ -80,27 +85,35 @@ public class CatalogController extends GUIcontroller  {
 		        // set Product data
 		    	try {
 		    		productImg.setImage(new Image("/serverImages/"+p.getImage()));
-		    		productImg.setFitWidth(100);
-		    		productImg.setFitHeight(100);
+		    		productImg.setFitWidth(170);
+		    		productImg.setFitHeight(170);
 		    	}  catch(Throwable e) {
 		            // prints stacktace for creating image
 		            e.printStackTrace();
 		         }
 		    	
 		    	Text price = new Text(Float.toString(p.getPrice()));
-		    	
+		    	Text dealTxt = new Text();
 		    	// if there is a deal
 		    	if(p.getDealPrice()!=0)
 		    	{
-		    		price.setText(Float.toString(p.getPrice()) + "\n Deal: "+p.getDealPrice());
-		    		price.setFill(Color.GREEN);
+		    		
+		    		price.setStrikethrough(true);
+		    		price.setText(Float.toString(p.getPrice()) + "$");
+		    		dealTxt.setText(Float.toString(p.getDealPrice())+"$");
+		    		dealTxt.setFill(Color.LIGHTSEAGREEN);
+		    		
+		    	}
+		    	else {
+		    		price.setText(Float.toString(p.getPrice()));
 		    	}
 
 			    Text productName = new Text(p.getProductName());
+			    productName.setFont(Font.font("Microsoft JhengHei", FontWeight.BOLD, 16));
+			    Button PurcasheBtn = new Button("BUY");
 			    
-			    Button PurcasheBtn = new Button("buy");
 			    PurcasheBtn.setUserData(p);
-			    
+			    PurcasheBtn.setPrefSize(170, 35);
 			    PurcasheBtn.setOnAction(new EventHandler<ActionEvent>() {
 			        @Override public void handle(ActionEvent e) {
 			        	if(LoginController.myUser.getAuthorized() == 0)
@@ -134,13 +147,15 @@ public class CatalogController extends GUIcontroller  {
 		        GridPane.setRowIndex(productName, 0);
 		        GridPane.setRowIndex(productImg, 1);
 		        GridPane.setRowIndex(price, 2);
-		        GridPane.setRowIndex(PurcasheBtn, 3);
-		        gridpane.getChildren().addAll(PurcasheBtn,productImg, productName,price);
+		        GridPane.setRowIndex(dealTxt, 3);
+		        GridPane.setRowIndex(PurcasheBtn, 4);
+		        gridpane.getChildren().addAll(PurcasheBtn,productImg, productName,price,dealTxt);
 		        
 		        GridPane.setHalignment(productName, HPos.CENTER);
 		        GridPane.setHalignment(productImg, HPos.CENTER);
 		        GridPane.setHalignment(PurcasheBtn, HPos.CENTER);
 		        GridPane.setHalignment(price, HPos.CENTER);
+		        GridPane.setHalignment(dealTxt, HPos.CENTER);
 		        
 		        try {
 		        	Platform.runLater(new Runnable() {

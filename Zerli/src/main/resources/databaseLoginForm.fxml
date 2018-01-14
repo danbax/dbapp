@@ -27,7 +27,7 @@
                      </image>
                   </ImageView>
                   <TextField fx:id="dbName" layoutX="73.0" layoutY="167.0" prefHeight="26.0" prefWidth="268.0" promptText="Database name" text="zerli" />
-                  <Button fx:id="start" layoutX="143.0" layoutY="294.0" mnemonicParsing="false" onAction="#onServerStart" prefHeight="46.0" prefWidth="128.0" text="Start server" />
+                  <Button styleClass="connectBtn" fx:id="start" layoutX="143.0" layoutY="294.0" mnemonicParsing="false" onAction="#onServerStart" prefHeight="46.0" prefWidth="128.0" text="Start server" />
                   <Text id="loginMessage" fx:id="loginMessage" layoutX="73.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" wrappingWidth="268.00000071525574" />
                   <PasswordField fx:id="dbPassword" layoutX="73.0" layoutY="255.0" prefHeight="26.0" prefWidth="268.0" promptText="DB password" text="dbapp1605" />
                   <TextField fx:id="dbUserName" layoutX="73.0" layoutY="209.0" prefHeight="26.0" prefWidth="268.0" promptText="DB username" text="root" />

@@ -12,36 +12,31 @@
    <children>
       <AnchorPane prefHeight="166.0" prefWidth="900.0" style="-fx-background-color: #0074D9;">
          <children>
-         	<ImageView layoutX="860.0" layoutY="19.0" onMouseClicked="#onLogout">
+         	<ImageView styleClass="imgBtn" layoutX="860.0" layoutY="19.0" onMouseClicked="#onLogout">
                <image>
                   <Image url="images/logout.png" />
                </image>
             </ImageView>
-            <ImageView layoutX="21.0" layoutY="19.0">
+            <ImageView layoutX="365.0" layoutY="3.0">
                <image>
-                  <Image url="images/logo.png" />
+                  <Image url="images/zerliLogo.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="140.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
+            <Text fill="WHITE" layoutX="415.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli"  wrappingWidth="75.00000894069672">
                <font>
-                  <Font size="52.0" />
+                  <Font name="Century Gothic" size="36.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="140.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower shop">
+            <Text fx:id="helloText" fill="WHITE" layoutX="14.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, {user name}" wrappingWidth="350.06597900390625">
                <font>
-                  <Font size="25.0" />
-               </font>
-            </Text>
-            <Text fx:id="helloText" fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, {user name}" wrappingWidth="350.06597900390625">
-               <font>
-                  <Font size="38.0" />
+                  <Font name="Microsoft JhengHei Light" size="24.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="428.0" prefWidth="900.0">
          <children>
-            <AnchorPane fx:id="revenue" layoutX="69.0" layoutY="45.0" onMouseClicked="#revenue" prefHeight="150.0" prefWidth="270.0" style="-fx-background-color: #DDDDDD;">
+            <AnchorPane styleClass="AnchBtn" fx:id="revenue" layoutX="69.0" layoutY="45.0" onMouseClicked="#revenue" prefHeight="150.0" prefWidth="270.0"  >
                <children>
                   <Text fill="#0074d9" layoutX="78.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenue">
                      <font>
@@ -55,7 +50,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="orders" layoutX="381.0" layoutY="45.0" onMouseClicked="#orders" prefHeight="150.0" prefWidth="270.0" style="-fx-background-color: #DDDDDD;">
+            <AnchorPane styleClass="AnchBtn" fx:id="orders" layoutX="381.0" layoutY="45.0" onMouseClicked="#orders" prefHeight="150.0" prefWidth="270.0"  >
                <children>
                   <Text fill="#0074d9" layoutX="90.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders">
                      <font>
@@ -69,7 +64,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="complains" layoutX="69.0" layoutY="234.0" onMouseClicked="#complains" prefHeight="150.0" prefWidth="270.0" style="-fx-background-color: #DDDDDD;">
+            <AnchorPane styleClass="AnchBtn" fx:id="complains" layoutX="69.0" layoutY="234.0" onMouseClicked="#complains" prefHeight="150.0" prefWidth="270.0"  >
                <children>
                   <Text fill="#0074d9" layoutX="58.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Complains">
                      <font>
@@ -83,7 +78,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="satisfaction" layoutX="381.0" layoutY="234.0" onMouseClicked="#satisfaction" prefHeight="150.0" prefWidth="270.0" style="-fx-background-color: #DDDDDD;">
+            <AnchorPane styleClass="AnchBtn" fx:id="satisfaction" layoutX="381.0" layoutY="234.0" onMouseClicked="#satisfaction" prefHeight="150.0" prefWidth="270.0"  >
                <children>
                   <Text fill="#0074d9" layoutX="59.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Satisfaction">
                      <font>
