@@ -10,31 +10,26 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UpdateDealsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UpdateDealsController">
    <children>
       <AnchorPane prefHeight="166.0" prefWidth="900.0" style="-fx-background-color: #0074D9;">
          <children>
-            <ImageView layoutX="21.0" layoutY="19.0">
+            <ImageView layoutX="365.0" layoutY="3.0">
                <image>
-                  <Image url="images/logo.png" />
+                  <Image url="images/zerliLogo.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="140.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
+            <Text fill="WHITE" layoutX="415.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli" wrappingWidth="75.00000894069672">
                <font>
-                  <Font size="52.0" />
+                  <Font name="Century Gothic" size="36.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="140.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower shop">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage deals" wrappingWidth="350.06597900390625">
+            <Text styleClass="titleText" fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Deals" wrappingWidth="350.06597900390625">
                <font>
                   <Font size="38.0" />
                </font>
             </Text>
-            <ImageView fx:id="menu" layoutX="846.0" layoutY="19.0" onMouseClicked="#onMenuClick">
+            <ImageView styleClass="imgBtn" fx:id="menu" layoutX="846.0" layoutY="19.0" onMouseClicked="#onMenuClick">
                <image>
                   <Image url="images/lines-menu.png" />
                </image>
@@ -45,13 +40,13 @@
          <children>
             <AnchorPane prefHeight="442.0" prefWidth="315.0" style="-fx-background-color: #DDDDDD;">
                <children>
-                  <Text fill="#111111" layoutX="78.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add deal">
+                  <Text styleClass="titleText2" fill="#111111" layoutX="78.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add deal">
                      <font>
                         <Font size="40.0" />
                      </font>
                   </Text>
                   <Button fx:id="btnAdd" layoutX="116.0" layoutY="179.0" mnemonicParsing="false" onAction="#onbtnAdd" prefHeight="34.0" prefWidth="84.0" text="Add" />
-                  <ImageView fx:id="deleteButton" accessibleText="delete selected row" layoutX="16.0" layoutY="396.0" onMouseClicked="#deleteSelectedRow">
+                  <ImageView styleClass="imgBtn" fx:id="deleteButton" accessibleText="delete selected row" layoutX="16.0" layoutY="396.0" onMouseClicked="#deleteSelectedRow">
                      <image>
                         <Image url="images/delete.png" />
                      </image>

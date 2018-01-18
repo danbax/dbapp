@@ -98,13 +98,13 @@ public class OrderHistoryController extends GUIcontroller  {
 			Order o = OrdersTable.getSelectionModel().getSelectedItem();
 			if(o.getStatus().equals("canceled"))
 			{
-				refundText.setText("Already canceled");
+				refundText.setText("Already canceled!");
 				refund.setOpacity(0);
 			}
 				
 			if(o.getStatus().equals("delivered"))
 			{
-				refundText.setText("Already delivered");
+				refundText.setText("Already delivered!");
 				refund.setOpacity(0);
 			}
 				
@@ -112,7 +112,7 @@ public class OrderHistoryController extends GUIcontroller  {
 			{
 			// calculate refund
 				float refundC = o.calculateRefund();
-				refundText.setText("Refund: " + refundC);
+				refundText.setText("Canceled! Your refund: " + refundC);
 				refund.setOpacity(1);
 			}
 			

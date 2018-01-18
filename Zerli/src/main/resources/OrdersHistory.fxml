@@ -13,27 +13,22 @@
    <children>
       <AnchorPane prefHeight="166.0" prefWidth="900.0" style="-fx-background-color: #0074D9;">
          <children>
-            <ImageView layoutX="21.0" layoutY="19.0">
+            <ImageView layoutX="365.0" layoutY="3.0">
                <image>
-                  <Image url="images/logo.png" />
+                  <Image url="images/zerliLogo.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="140.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
+            <Text fill="WHITE" layoutX="415.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli" wrappingWidth="75.00000894069672">
                <font>
-                  <Font size="52.0" />
+                  <Font name="Century Gothic" size="36.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="140.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower shop">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order history" wrappingWidth="350.06597900390625">
+            <Text styleClass="titleText" fill="WHITE" layoutX="14.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order History" wrappingWidth="350.06597900390625">
                <font>
                   <Font size="38.0" />
                </font>
             </Text>
-            <ImageView fx:id="menu" layoutX="846.0" layoutY="19.0" onMouseClicked="#onMenuClick">
+            <ImageView styleClass="imgBtn" fx:id="menu" layoutX="846.0" layoutY="19.0" onMouseClicked="#onMenuClick">
                <image>
                   <Image url="images/lines-menu.png" />
                </image>
@@ -42,20 +37,20 @@
       </AnchorPane>
       <AnchorPane prefHeight="428.0" prefWidth="900.0">
          <children>
-            <AnchorPane prefHeight="442.0" prefWidth="315.0" style="-fx-background-color: #DDDDDD;">
+            <AnchorPane prefHeight="442.0" prefWidth="315.0" style="-fx-background-color: #ffffff;">
                <children>
-                  <ImageView fx:id="cancel" layoutX="14.0" layoutY="364.0" onMousePressed="#onCancel">
+                  <ImageView fx:id="cancel" layoutX="14.0" layoutY="364.0" onMousePressed="#onCancel" styleClass="imgBtn" >
                      <image>
                         <Image url="images/cancel.png" />
                      </image>
                   </ImageView>
-                  <Text layoutX="87.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="cancel" wrappingWidth="141.3367156982422">
+                  <Text styleClass="titleText4" layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose an order to cancel, cancel it by the button in the bottom left" wrappingWidth="240.3367156982422">
                      <font>
                         <Font size="47.0" />
                      </font>
                   </Text>
-                  <Text fx:id="refundText" layoutX="16.0" layoutY="108.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How much money you will get" wrappingWidth="282.93671798706055" />
-                  <Button fx:id="refund" layoutX="103.0" layoutY="166.0" mnemonicParsing="false" onAction="#onGetRefund" opacity="0.0" text="Cancel">
+                  <Text styleClass="errTxt" fx:id="refundText" layoutX="16.0" layoutY="357.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How much money you will get" wrappingWidth="282.93671798706055" />
+                  <Button fx:id="refund" layoutX="20.0" layoutY="200.0" mnemonicParsing="false" onAction="#onGetRefund" opacity="0.0" text="Cancel">
                      <font>
                         <Font size="25.0" />
                      </font>

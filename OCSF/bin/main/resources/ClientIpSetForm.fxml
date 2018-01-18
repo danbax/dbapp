@@ -11,10 +11,10 @@
 
 <VBox prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ClientIpSetController">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #DDDDDD;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
          <children>
-            <AnchorPane prefHeight="150.0" prefWidth="700.0" style="-fx-background-color: #0074D9;" />
-            <AnchorPane layoutX="150.0" layoutY="45.0" prefHeight="378.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+            <AnchorPane prefHeight="150.0" prefWidth="700.0" style="-fx-background-color: #ffffff;" />
+            <AnchorPane layoutX="150.0" layoutY="45.0" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: white; -fx-background-radius: 10; ">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

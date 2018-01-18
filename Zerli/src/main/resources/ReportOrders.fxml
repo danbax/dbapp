@@ -16,27 +16,22 @@
    <children>
       <AnchorPane prefHeight="166.0" prefWidth="900.0" style="-fx-background-color: #0074D9;">
          <children>
-            <ImageView layoutX="21.0" layoutY="19.0">
+            <ImageView layoutX="365.0" layoutY="3.0">
                <image>
-                  <Image url="images/logo.png" />
+                  <Image url="images/zerliLogo.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="140.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli">
+            <Text fill="WHITE" layoutX="415.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zerli" wrappingWidth="75.00000894069672">
                <font>
-                  <Font size="52.0" />
+                  <Font name="Century Gothic" size="36.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="140.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Flower shop">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="549.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders report" wrappingWidth="350.06597900390625">
+            <Text styleClass="titleText" fill="WHITE" layoutX="15.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders report" wrappingWidth="350.06597900390625">
                <font>
                   <Font size="38.0" />
                </font>
             </Text>
-            <ImageView fx:id="menu" layoutX="846.0" layoutY="19.0" onMouseClicked="#onMenuClick">
+            <ImageView styleClass="imgBtn" fx:id="menu" layoutX="846.0" layoutY="19.0" onMouseClicked="#onMenuClick">
                <image>
                   <Image url="images/lines-menu.png" />
                </image>
@@ -45,7 +40,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="428.0" prefWidth="900.0">
          <children>
-            <AnchorPane prefHeight="442.0" prefWidth="530.0" style="-fx-background-color: #DDDDDD;">
+            <AnchorPane prefHeight="442.0" prefWidth="530.0" style="-fx-background-color: #f2f2f2;">
                <children>
                   <Text fx:id="dateTXT" fill="#111111" layoutX="24.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders" wrappingWidth="199.70863342285156">
                      <font>
