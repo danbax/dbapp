@@ -1,2 +1,3 @@
 # dbapp
-G18Zerli
+flowers shop 
+Implementation language: Java
